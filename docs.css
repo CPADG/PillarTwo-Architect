@@ -69,9 +69,11 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
 .docs-steps li{margin-bottom:14px; line-height:1.7}
 .docs-steps li::marker{font-weight:700; color:#2563eb}
 .docs-steps li code{background:rgba(99,102,241,.08); color:#3730a3; padding:1px 5px; border-radius:4px; font-size:.92em}
-/* about 부과규정 카드 뒤 footer — 용어집 링크 안내 */
-.docs-cp-foot{margin-top:14px; font-size:13px; color:#64748b}
+/* about 과세규정 카드 뒤 footer — 용어집 링크 안내 */
+.docs-cp-foot{margin-top:28px; font-size:13px; color:#64748b}
 .docs-cp-foot a{color:#4338ca; text-decoration:underline}
+/* heading 안 영문 표기 — 한·일 헤딩과 톤 차이를 줘서 부제처럼 보이게 */
+.docs-h-en{font-size:.55em; color:#94a3b8; font-weight:500; letter-spacing:.3px; margin-left:8px; vertical-align:middle}
 
 /* Feature cards */
 .docs-cards{

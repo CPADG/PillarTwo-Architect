@@ -72,8 +72,8 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
 /* about 과세규정 카드 뒤 footer — 주요 용어 섹션으로의 안내.
    카드와 충분한 시각적 분리: 큰 margin + 옅은 박스 스타일. */
 .docs-cp-foot{
-  margin:56px 0 0;
-  padding:16px 20px;
+  margin:80px 0 0;
+  padding:18px 22px;
   background:rgba(99,102,241,.05);
   border-left:3px solid rgba(99,102,241,.35);
   border-radius:8px;

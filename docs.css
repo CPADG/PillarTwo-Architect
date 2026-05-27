@@ -126,7 +126,7 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
 
 /* Feature cards */
 .docs-cards{
-  display:grid; gap:28px 14px; margin-top:8px;
+  display:grid; gap:40px 14px; margin-top:8px;
   grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
 }
 .docs-card{
@@ -267,7 +267,7 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
 #key-terms .gloss-toolbar{margin-bottom:8px}
 
 .gloss-grid{
-  display:grid; gap:14px;
+  display:grid; gap:28px 14px;
   grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
 }
 .gloss-card{

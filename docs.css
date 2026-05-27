@@ -82,7 +82,7 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
 }
 .docs-cp-foot a{color:#4338ca; text-decoration:underline; font-weight:500}
 /* heading 안 영문 표기 — 한·일 헤딩과 톤 차이를 줘서 부제처럼 보이게 */
-.docs-h-en{font-size:.55em; color:#94a3b8; font-weight:500; letter-spacing:.3px; margin-left:8px; vertical-align:middle}
+.docs-h-en{font-size:.68em; color:#94a3b8; font-weight:500; letter-spacing:.3px; margin-left:6px; vertical-align:middle}
 /* 본문 inline에서 PillarTwo Architect 로고 톤 — h2 gradient text-fill 위에서도
    브랜드 컬러가 정상 표출되도록 -webkit-text-fill-color 명시 */
 .pt-brand{display:inline-flex; align-items:baseline; gap:6px; vertical-align:baseline; margin-right:2px}
@@ -126,12 +126,13 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
 
 /* Feature cards */
 .docs-cards{
-  display:grid; gap:40px 14px; margin-top:8px;
+  display:grid; gap:24px 14px; margin-top:8px;
   grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
 }
 .docs-card{
-  padding:18px 18px; background:#fff;
+  padding:22px 20px; background:#fff;
   border:1px solid rgba(99,102,241,.18); border-radius:12px;
+  box-shadow:0 1px 3px rgba(15,23,42,.04), 0 4px 12px rgba(15,23,42,.05);
   transition:border-color .15s, box-shadow .15s, transform .15s;
   position:relative; overflow:hidden;
 }

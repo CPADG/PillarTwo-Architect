@@ -2906,7 +2906,7 @@ function _filterIIRChainsViaOtherParents(chains, parentId, ceId){
 // _animateBudget: 현재 호출 단위에서 spawn 시도된 누적 정령 path 수 (각 호출자가 incr).
 let _spiritBudget=0;
 const SPIRIT_BUDGET_MAX=25;            // 단일 시각화 사이클당 최대 spirit-path 수
-const SPIRIT_ZOOM_MIN=0.60;            // 이 줌 이하에선 정령 비활성 (60% 미만 충분히 작음)
+const SPIRIT_ZOOM_MIN=0.75;            // 이 줌 미만에선 정령 비활성 (성능 보호)
 function _spiritsAllowed(){
   // zoom 너무 낮거나 budget 초과 시 false
   return zoom>=SPIRIT_ZOOM_MIN && _spiritBudget<SPIRIT_BUDGET_MAX;
@@ -4393,17 +4393,17 @@ function renderPayerBlock(groups,entityName){
       const links=g.payers.map(p=>{
         const nm=nodes.get(p.payerId)?.name||'?';
         return `<button class="entity-link" data-action="select-node" data-node-id="${p.payerId}">${_escHtml(nm)}</button>`;
-      }).join('');
+      }).join('<span class="payer-sep">·</span>');
       const noteHtml=g.note?`<div class="payer-note">${g.note}</div>`:'';
       contentHtml=`<div class="payer-inline-list">${links}</div>${noteHtml}`;
     } else {
       const rows=g.payers.map(p=>{
         const nm=nodes.get(p.payerId)?.name||'?';
-        const ratioHtml=p.ratio!=null?`<span class="payer-leader"></span><span class="payer-ratio">${fmtPct(p.ratio*100)}</span>`:'';
+        const ratioHtml=p.ratio!=null?`<span class="payer-ratio">${fmtPct(p.ratio*100)}</span>`:'';
         return `<div class="payer-row"><button class="entity-link" data-action="select-node" data-node-id="${p.payerId}">${_escHtml(nm)}</button>${ratioHtml}</div>`;
-      }).join('');
+      }).join('<span class="payer-sep">·</span>');
       const noteHtml=g.note?`<div class="payer-note">${g.note}</div>`:'';
-      contentHtml=rows+noteHtml;
+      contentHtml=`<div class="payer-inline-list">${rows}</div>${noteHtml}`;
     }
     const iirAttr=g.mechanism==='IIR'?' data-iir="1"':'';
     return `<div class="payer-group ep-hoverable" data-payer-ids="${payerIds}"${iirAttr}>${mechCol}<div class="payer-content-col">${contentHtml}</div></div>`;
@@ -4678,6 +4678,9 @@ function pushOverlaps(dragId){
 viewport.addEventListener('mousedown',ev=>{
   if(ev.button===1||ev.button===0){
     ev.preventDefault(); isPanning=true; _canvasPanMoved=false;
+    // 진행 중 viewport 애니메이션 취소 — 패닝 중 rAF가 panX/Y를 덮어쓰면
+    // ppx와 panX 사이 디싱크가 누적되어 첫 mousemove에서 점프함.
+    _cancelViewportAnims();
     psx=ev.clientX; psy=ev.clientY; ppx=panX; ppy=panY;
     viewport.style.cursor='grabbing';
   }
@@ -5137,6 +5140,16 @@ function _snapAndRelease(){
   applyXform();
   canvas.style.willChange='auto';
 }
+// 진행 중인 모든 viewport 애니메이션 rAF 취소 (pan/fit/zoom/wheel)
+// — 사용자 인터랙션(패닝·드래그) 또는 파일 로드 직전 호출하여
+//   stale rAF가 panX/Y/zoom을 덮어쓰는 것을 방지.
+function _cancelViewportAnims(){
+  if(_panRaf){cancelAnimationFrame(_panRaf);_panRaf=null;}
+  if(_fitRaf){cancelAnimationFrame(_fitRaf);_fitRaf=null;}
+  if(_zoomRaf){cancelAnimationFrame(_zoomRaf);_zoomRaf=null;}
+  if(_wheelRaf){cancelAnimationFrame(_wheelRaf);_wheelRaf=null;}
+  canvas.style.willChange='auto';
+}
 let _panRaf=null;
 function smoothPan(tx,ty,dur=320){
   if(_panRaf){cancelAnimationFrame(_panRaf);_panRaf=null;}
@@ -5569,6 +5582,9 @@ async function saveProject(){
 }
 
 function _resetState(){
+  // 진행 중 viewport 애니메이션 취소 — _fitRaf/_panRaf 등이 살아 있으면
+  // 직후 설정되는 panX/Y/zoom이 곧바로 덮어써져 파일의 저장 viewport가 사라짐.
+  if(typeof _cancelViewportAnims==='function') _cancelViewportAnims();
   nodes.clear(); edges.clear();
   canvas.querySelectorAll('.node').forEach(el=>el.remove());
   nodeSeq=1; edgeSeq=1;

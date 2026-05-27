@@ -45,10 +45,7 @@
 </script>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<!-- Google AdSense — 사이트 소유권 인증 및 광고 게재 -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4072860752348068" crossorigin="anonymous"></script>
-<!-- Google Analytics 4 — Consent Mode v2: gtag.js는 항상 로드, 동의 상태에 따라 식별 데이터 수집 제어 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6PVJVMJ4VR"></script>
+<!-- Google AdSense / GA4 — Consent Mode v2 초기화 (인라인은 즉시 실행, 무거운 외부 스크립트는 페이지 load 후 주입) -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -60,9 +57,11 @@
   });
   gtag('js', new Date());
   gtag('config', 'G-6PVJVMJ4VR');
-  // 이전 방문에서 동의한 경우 즉시 'granted'로 업데이트
   window._GA4_ID='G-6PVJVMJ4VR';
   window._CLARITY_ID='wxs56js5jb';
+  // adsbygoogle queue 미리 초기화 — adsbygoogle.js가 늦게 로드돼도 광고 슬롯 push 호환
+  (window.adsbygoogle = window.adsbygoogle || []);
+  // 이전 방문에서 동의한 경우 즉시 'granted'로 업데이트
   try{
     if(localStorage.getItem('p2a.consent.analytics')==='1'){
       gtag('consent','update',{analytics_storage:'granted'});
@@ -71,6 +70,26 @@
       }
     }
   }catch(e){}
+  // 무거운 외부 스크립트(AdSense·GTM)는 LCP·TBT를 보호하기 위해
+  // window.load 발생 후 추가 지연을 두고 비동기 주입.
+  // — 이렇게 해도 dataLayer 큐와 adsbygoogle 큐가 보존돼 정상 동작.
+  function _injectAds(){
+    if(window._adsInjected) return; window._adsInjected=true;
+    const a=document.createElement('script');
+    a.async=true; a.crossOrigin='anonymous';
+    a.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4072860752348068';
+    document.head.appendChild(a);
+    const g=document.createElement('script');
+    g.async=true;
+    g.src='https://www.googletagmanager.com/gtag/js?id=G-6PVJVMJ4VR';
+    document.head.appendChild(g);
+  }
+  // 사용자 인터랙션이 먼저 일어나면 즉시 주입(광고 시점 보호), 아니면 load 후 600ms 뒤
+  ['pointerdown','keydown','scroll'].forEach(ev=>{
+    window.addEventListener(ev, _injectAds, {once:true, passive:true});
+  });
+  if(document.readyState==='complete'){ setTimeout(_injectAds,600); }
+  else { window.addEventListener('load', ()=>setTimeout(_injectAds,600), {once:true}); }
 </script>
 </head>
 <script src="translations.js"></script>

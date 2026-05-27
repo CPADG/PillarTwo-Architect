@@ -40,7 +40,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 .zoom-ctrl-val{font-size:13px;font-weight:500;color:var(--text);min-width:42px;display:flex;align-items:center;justify-content:center;border-left:1px solid var(--border);border-right:1px solid var(--border);cursor:pointer;transition:background .15s,color .15s;user-select:none;padding:6px 4px;line-height:1}
 .zoom-ctrl-val:hover{background:var(--bg);color:var(--primary)}
 .lang-sel{display:flex;align-items:stretch;border:1px solid var(--border);border-radius:6px;overflow:hidden;background:var(--surface)}
-.lang-btn{padding:6px 8px;display:flex;align-items:center;font-size:13px;font-weight:600;background:none;border:none;cursor:pointer;color:var(--muted);transition:all .15s;letter-spacing:.3px;border-right:1px solid var(--border);line-height:1}
+.lang-btn{padding:6px 8px;display:flex;align-items:center;font-size:13px;font-weight:600;background:none;border:none;cursor:pointer;color:var(--muted);transition:background .15s;letter-spacing:.3px;border-right:1px solid var(--border);line-height:1}
 .lang-btn:last-child{border-right:none}
 .lang-btn:hover:not(.active){background:var(--bg);color:var(--text)}
 .lang-btn.active{background:var(--primary);color:#fff;cursor:default}
@@ -175,14 +175,26 @@ body.has-hscroll #globe-minimap-wrap.map-pip-panel{bottom:26px}
 @keyframes hintCtaBlink{0%,100%{opacity:.55}50%{opacity:1}}
 .hint-illust .hint-node-pt{position:absolute;width:8px;height:8px;border-radius:50%;
   box-shadow:0 0 0 1.5px #fff;
-  animation:hintPtPulse 1.6s ease-in-out infinite}
+  animation:hintPtDot 1.6s ease-in-out infinite}
+/* 펄스 링: 합성 가능한 transform·opacity만 사용 — box-shadow 애니메이션 회피 */
+.hint-illust .hint-node-pt::before{content:'';position:absolute;inset:-1px;
+  border-radius:50%;background:rgba(99,102,241,.45);
+  animation:hintPtRing 1.6s ease-in-out infinite;
+  z-index:-1;pointer-events:none}
 .hint-illust .hint-pt-tl{top:-4px;left:-4px;background:radial-gradient(circle,#60a5fa 0%,#2563eb 70%)}
 .hint-illust .hint-pt-tr{top:-4px;right:-4px;background:radial-gradient(circle,#60a5fa 0%,#2563eb 70%);animation-delay:.2s}
+.hint-illust .hint-pt-tr::before{animation-delay:.2s}
 .hint-illust .hint-pt-bl{bottom:-4px;left:-4px;background:radial-gradient(circle,#818cf8 0%,#4f46e5 70%);animation-delay:.4s}
+.hint-illust .hint-pt-bl::before{animation-delay:.4s}
 .hint-illust .hint-pt-br{bottom:-4px;right:-4px;background:radial-gradient(circle,#818cf8 0%,#4f46e5 70%);animation-delay:.6s}
-@keyframes hintPtPulse{
-  0%,100%{transform:scale(1);box-shadow:0 0 0 1.5px #fff, 0 0 0 0 rgba(99,102,241,.45)}
-  50%{transform:scale(1.15);box-shadow:0 0 0 1.5px #fff, 0 0 0 4px rgba(99,102,241,.0)}
+.hint-illust .hint-pt-br::before{animation-delay:.6s}
+@keyframes hintPtDot{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.15)}
+}
+@keyframes hintPtRing{
+  0%,100%{transform:scale(1);opacity:.5}
+  50%{transform:scale(2.6);opacity:0}
 }
 /* 라인 단위 4 코너 — 설명(회색) + | + 짧은 라벨. desc/label 모두 nowrap (상자 안에서 줄바꿈 금지) */
 .hint-illust .hint-corner{display:flex;align-items:center;gap:6px;cursor:default;font-weight:500;white-space:nowrap}
@@ -219,12 +231,17 @@ body.has-hscroll #globe-minimap-wrap.map-pip-panel{bottom:26px}
 #btn-demo-case.is-active .btn-demo-close{display:none}
 #btn-demo-case.is-active{background:rgba(220,252,231,.92);border-color:rgba(74,222,128,.7);color:#15803d;pointer-events:none;cursor:default}
 #btn-demo-case.is-active svg{opacity:1;color:#16a34a}
-/* 최초 상태(분석 전·active 아님): 가상 사례 칩 살짝 강조 펄스로 첫 액션 유도 */
-#btn-demo-case:not(.is-active){animation:demoBtnPulse 2.4s ease-in-out infinite}
-#btn-demo-case:not(.is-active):hover{animation:none}
+/* 최초 상태(분석 전·active 아님): 가상 사례 칩 살짝 강조 펄스로 첫 액션 유도
+   — 합성 친화: 의사요소를 scale·opacity로 부풀려 외곽 링 효과 표현 (box-shadow 애니메이션 회피) */
+#btn-demo-case:not(.is-active){position:relative}
+#btn-demo-case:not(.is-active)::after{content:'';position:absolute;inset:-1px;
+  border-radius:99px;border:2px solid rgba(37,99,235,.5);
+  pointer-events:none;
+  animation:demoBtnPulse 2.4s ease-in-out infinite}
+#btn-demo-case:not(.is-active):hover::after{animation:none;opacity:0}
 @keyframes demoBtnPulse{
-  0%,100%{box-shadow:0 1px 4px rgba(15,23,42,.06), 0 0 0 0 rgba(37,99,235,0)}
-  50%{box-shadow:0 1px 4px rgba(15,23,42,.06), 0 0 0 5px rgba(37,99,235,.10)}
+  0%,100%{transform:scale(1);opacity:0}
+  50%{transform:scale(1.04);opacity:.5}
 }
 /* 복잡 모드 활성 시 — 가상 사례 칩 숨김. flex 컨테이너라 advanced 칩이 자동으로 왼쪽 자리 */
 body.demo-advanced-mode #btn-demo-case{display:none}
@@ -866,7 +883,7 @@ body.no-flow-spirits .iir-spirit{display:none}
 .rdp-iir-badge.show{display:block}
 /* ─── 세계지도 미니맵 ─────────────────────────────────────────────── */
 #globe-minimap-wrap{position:fixed;z-index:180;overflow:hidden;background:#dde8f0;
-  transition:width .32s ease,height .32s ease,bottom .32s ease,right .32s ease,border-radius .32s ease}
+  transition:width .32s ease,height .32s ease,border-radius .32s ease}
 #globe-minimap-wrap.map-pip-clear{bottom:16px;right:16px;width:268px;height:206px;border-radius:10px;
   box-shadow:0 4px 24px rgba(0,0,0,.2)}
 #globe-minimap-wrap.map-pip-panel{bottom:16px;right:340px;width:268px;height:206px;border-radius:10px;

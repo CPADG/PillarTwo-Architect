@@ -875,17 +875,23 @@ body.no-flow-spirits .iir-spirit{display:none}
 /* ── 지도 하단 푸터 바 ───────────────────────────────────────── */
 #map-footer{position:absolute;left:0;right:0;bottom:0;height:52px;background:#fff;
   border-top:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column;
-  align-items:center;justify-content:center;padding:4px 10px;gap:3px;z-index:1001}
-.mf-links{display:flex;align-items:center;gap:0;white-space:nowrap}
-.mf-btn{display:inline-flex;align-items:center;gap:3px;font-size:10.5px;font-weight:600;
-  padding:2px 6px;border-radius:4px;border:none;background:none;
-  color:#475569;cursor:pointer;transition:color .12s,background .12s;line-height:1.4}
-.mf-btn:hover{color:var(--primary);background:var(--primary-lt)}
-.mf-btn svg{width:10px;height:10px;flex-shrink:0;opacity:.7}
-.mf-btn:hover svg{opacity:1}
-.mf-btn.mf-ph{color:#94a3b8;cursor:default;pointer-events:none}
-.mf-dot{font-size:10px;color:#cbd5e1;user-select:none;line-height:1}
-.mf-ver{font-size:9px;color:#94a3b8;font-weight:400;letter-spacing:.1px;user-select:none;white-space:nowrap}
+  align-items:center;justify-content:center;padding:6px 12px 5px;gap:3px;z-index:1001}
+/* 1열: 네비게이션 4개 + 우측 끝 contact 아이콘 (밀집감 ↓) */
+.mf-row{display:flex;align-items:center;gap:4px;width:100%;justify-content:center;position:relative}
+.mf-link{font-size:10.5px;font-weight:500;color:#64748b;
+  padding:3px 6px;border-radius:5px;text-decoration:none;
+  cursor:pointer;transition:color .12s,background .12s;line-height:1.4;
+  border:none;background:none;font-family:inherit;letter-spacing:.1px}
+.mf-link:hover{color:#4f46e5;background:rgba(99,102,241,.08)}
+.mf-link-btn{cursor:pointer}
+.mf-sep{display:inline-block;width:1px;height:9px;background:#e2e8f0;flex-shrink:0}
+/* contact는 우측 끝 아이콘 only — 시각 hierarchy 분리 */
+.mf-icon-btn{position:absolute;right:0;display:inline-flex;align-items:center;justify-content:center;
+  width:22px;height:22px;border:none;background:transparent;cursor:pointer;
+  color:#94a3b8;border-radius:5px;transition:color .12s,background .12s;padding:0}
+.mf-icon-btn:hover{color:#4f46e5;background:rgba(99,102,241,.08)}
+.mf-icon-btn svg{width:12px;height:12px}
+.mf-ver{font-size:9px;color:#94a3b8;font-weight:400;letter-spacing:.15px;user-select:none;white-space:nowrap}
 .map-hd{position:absolute;top:0;left:0;right:0;height:28px;z-index:1000;display:flex;align-items:center;
   padding:0 8px;gap:5px;background:rgba(255,255,255,.88);backdrop-filter:blur(4px);
   border-bottom:1px solid rgba(0,0,0,.07);font-size:10px;font-weight:700;color:#334155;letter-spacing:.2px}

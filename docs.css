@@ -89,6 +89,7 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
   font-size:.88em; font-weight:600; letter-spacing:.1px;
   vertical-align:baseline;
   box-shadow:0 1px 2px rgba(37,99,235,.28);
+  margin:0 3px;
 }
 .btn-inline-mock::before{
   content:""; display:inline-block; width:11px; height:11px; flex-shrink:0;
@@ -105,6 +106,7 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
   color:#1d4ed8; -webkit-text-fill-color:#1d4ed8;
   vertical-align:baseline;
   box-shadow:0 1px 3px rgba(15,23,42,.05);
+  margin:0 3px;
 }
 .chip-inline-mock::before{
   content:""; display:inline-block; width:11px; height:11px; flex-shrink:0;

@@ -19,17 +19,11 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
   backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid rgba(99,102,241,.14);
 }
-.docs-brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:#1e293b}
-.docs-brand-mark{
-  display:inline-flex; align-items:center; justify-content:center;
-  width:28px; height:28px;
-}
-.docs-brand-mark svg{width:24px; height:24px}
-.docs-brand-name{
-  font-weight:700; font-size:14px; letter-spacing:.2px;
-  background:linear-gradient(135deg,#1e40af,#4f46e5);
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-}
+.docs-brand{display:inline-flex; align-items:center; text-decoration:none; color:#0f172a; line-height:1.05}
+.docs-brand-pillar{flex-shrink:0; opacity:.9; margin-right:9px}
+.docs-brand-name{font-size:18px; font-weight:800; color:#0f172a; letter-spacing:-.5px; white-space:nowrap}
+.docs-brand-name em{color:#4f46e5; font-style:normal}
+.docs-brand-sub{color:#94a3b8; font-weight:600; font-size:15px; letter-spacing:-.1px; white-space:nowrap; flex-shrink:0; margin-left:6px}
 .docs-nav-links{display:flex; gap:6px}
 .docs-nav-links a{
   padding:7px 13px; border-radius:8px;
@@ -267,7 +261,7 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
 /* Responsive */
 @media (max-width:640px){
   .docs-nav{padding:12px 16px}
-  .docs-brand-name{display:none}
+  .docs-brand-name, .docs-brand-sub{display:none}
   .docs-main{padding:32px 18px 64px}
   .docs-hero h1{font-size:26px}
   .docs-lead{font-size:14.5px}

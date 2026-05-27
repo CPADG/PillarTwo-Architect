@@ -50,14 +50,18 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
 .docs-section h2{
   margin:0 0 16px; font-size:20px; font-weight:700;
   color:#1e3a8a;
-  padding-bottom:8px;
+  padding-bottom:10px;
   border-bottom:1px solid rgba(99,102,241,.18);
   position:relative;
-}
-.docs-section h2::after{
-  content:""; position:absolute; left:0; bottom:-1px; height:2px; width:48px;
-  background:linear-gradient(90deg,#2563eb,#4f46e5);
-  border-radius:2px;
+  /* 얇은 구분선(border-bottom)은 full-width 유지.
+     굵은 강조는 text-decoration underline으로 제목 텍스트 너비만큼.
+     offset을 padding과 맞춰서 굵은 선이 얇은 구분선과 같은 위치에 겹치도록. */
+  text-decoration:underline;
+  text-decoration-color:#4f46e5;
+  text-decoration-thickness:2.5px;
+  text-underline-offset:13px;
+  -webkit-text-decoration-color:#4f46e5;
+  text-decoration-skip-ink:none;
 }
 .docs-section p{margin:0 0 12px; color:#334155; font-size:14.5px}
 
@@ -70,10 +74,16 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
 .docs-steps li::marker{font-weight:700; color:#2563eb}
 .docs-steps li code{background:rgba(99,102,241,.08); color:#3730a3; padding:1px 5px; border-radius:4px; font-size:.92em}
 /* about 과세규정 카드 뒤 footer — 용어집 링크 안내 */
-.docs-cp-foot{margin-top:28px; font-size:13px; color:#64748b}
+.docs-cp-foot{margin-top:44px; font-size:13px; color:#64748b}
 .docs-cp-foot a{color:#4338ca; text-decoration:underline}
 /* heading 안 영문 표기 — 한·일 헤딩과 톤 차이를 줘서 부제처럼 보이게 */
 .docs-h-en{font-size:.55em; color:#94a3b8; font-weight:500; letter-spacing:.3px; margin-left:8px; vertical-align:middle}
+/* 본문 inline에서 PillarTwo Architect 로고 톤 — h2 gradient text-fill 위에서도
+   브랜드 컬러가 정상 표출되도록 -webkit-text-fill-color 명시 */
+.pt-brand{display:inline-flex; align-items:baseline; gap:6px; vertical-align:baseline; margin-right:2px}
+.pt-brand .pt-name{font-weight:800; color:#0f172a; letter-spacing:-.5px; -webkit-text-fill-color:#0f172a}
+.pt-brand .pt-name em{color:#2563eb; font-style:normal; -webkit-text-fill-color:#2563eb}
+.pt-brand .pt-arch{color:#94a3b8; font-weight:600; font-size:.78em; letter-spacing:-.1px; -webkit-text-fill-color:#94a3b8}
 
 /* Feature cards */
 .docs-cards{

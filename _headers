@@ -27,3 +27,5 @@
   Cache-Control: public, max-age=0, must-revalidate
 /iir-db.js
   Cache-Control: public, max-age=0, must-revalidate
+/app.min.js
+  Cache-Control: public, max-age=0, must-revalidate

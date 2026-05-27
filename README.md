@@ -46,7 +46,7 @@ What would otherwise be a multi-day desk-research exercise becomes a few minutes
 
 ## Background
 
-Built by a practitioner specialising in Pillar Two implementation, the engine codifies the GloBE Model Rules, the OECD Commentary, and Administrative Guidance — together with each adopting jurisdiction's domestic implementation — into a deterministic analysis pipeline. The aim is to keep the rigorous logic of professional review while removing the spreadsheet overhead.
+Built by a Pillar Two expert, the engine codifies the GloBE Model Rules, the OECD Commentary, and Administrative Guidance — together with each adopting jurisdiction's domestic implementation — into a deterministic analysis pipeline. The aim is analytical depth that matches and exceeds expert review, without the spreadsheet overhead.
 
 Results are reference outputs based on user inputs and the encoded ruleset. Always have a seasoned Pillar Two specialist review the output before applying it in practice.
 

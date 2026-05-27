@@ -878,9 +878,9 @@ body.no-flow-spirits .iir-spirit{display:none}
   border-top:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column;
   align-items:center;justify-content:center;padding:6px 12px 5px;gap:3px;z-index:1001}
 /* 1열: 네비게이션 링크 + contact 아이콘이 한 라인에 자연 배치 — 언어 전환 시 너비 변화에 따라 함께 움직임 */
-.mf-row{display:flex;align-items:center;gap:5px;width:100%;justify-content:center;flex-wrap:nowrap}
+.mf-row{display:flex;align-items:center;gap:2px;width:100%;justify-content:center;flex-wrap:nowrap}
 .mf-link{font-size:10.5px;font-weight:500;color:#64748b;
-  padding:3px 7px;border-radius:5px;text-decoration:none;
+  padding:3px 4px;border-radius:5px;text-decoration:none;
   cursor:pointer;transition:color .12s,background .12s;line-height:1.4;
   border:none;background:none;font-family:inherit;letter-spacing:.1px;
   white-space:nowrap;flex-shrink:0}

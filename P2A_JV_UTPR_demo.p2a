@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "savedAt": "2026-05-27T00:00:00.000Z",
+  "referenceDate": "2024-12-31",
+  "canvas": { "panX": 80, "panY": 40, "zoom": 0.9 },
+  "nodeSeq": 6,
+  "edgeSeq": 5,
+  "nodes": [
+    { "id": 1, "name": "HQ",                      "country": "KR", "entityType": "general", "globe": {}, "x": 560, "y": 80  },
+    { "id": 2, "name": "Korean Subsidiary",       "country": "KR", "entityType": "general", "globe": {}, "x": 280, "y": 280 },
+    { "id": 3, "name": "Joint Venture (Bermuda)", "country": "BM", "entityType": "general", "globe": {}, "x": 840, "y": 280 },
+    { "id": 4, "name": "JV Subsidiary (Bermuda)", "country": "BM", "entityType": "general", "globe": {}, "x": 700, "y": 480 },
+    { "id": 5, "name": "JV Subsidiary (Germany)", "country": "DE", "entityType": "general", "globe": {}, "x": 980, "y": 480 }
+  ],
+  "edges": [
+    { "id": 1, "from": 1, "to": 2, "pct": 100, "type": "consolidated" },
+    { "id": 2, "from": 1, "to": 3, "pct": 50,  "type": "equity"       },
+    { "id": 3, "from": 3, "to": 4, "pct": 100, "type": "consolidated" },
+    { "id": 4, "from": 3, "to": 5, "pct": 100, "type": "consolidated" }
+  ],
+  "countryGlobeSettings": [
+    ["DE", { "hasUTPR": true }]
+  ]
+}

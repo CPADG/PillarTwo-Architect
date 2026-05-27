@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pillartwo-architect.pages.dev/sitemap.xml

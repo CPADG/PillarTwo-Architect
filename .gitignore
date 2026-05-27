@@ -1,0 +1,5 @@
+# 빌드 원본 — minified 버전만 배포 (globe-engine.min.js)
+globe-engine.js
+
+# Node modules (esbuild 등 빌드 도구는 dev-only, push에 포함 안 함)
+node_modules/

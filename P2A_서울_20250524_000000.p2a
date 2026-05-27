@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "savedAt": "2025-05-24T00:00:00.000Z",
+  "referenceDate": "2024-12-31",
+  "canvas": { "panX": 96, "panY": 40, "zoom": 0.8 },
+  "nodeSeq": 15,
+  "edgeSeq": 14,
+  "nodes": [
+    { "id": 1,  "name": "Seoul",   "country": "KR", "entityType": "general", "globe": {}, "x": 540,  "y": 80  },
+    { "id": 2,  "name": "New York", "country": "US", "entityType": "general", "globe": {}, "x": 310,  "y": 260 },
+    { "id": 3,  "name": "Busan",   "country": "KR", "entityType": "general", "globe": {}, "x": 540,  "y": 260 },
+    { "id": 4,  "name": "Chicago", "country": "US", "entityType": "general", "globe": {}, "x": 770,  "y": 260 },
+    { "id": 5,  "name": "Osaka",   "country": "JP", "entityType": "general", "globe": {}, "x": 80,   "y": 440 },
+    { "id": 6,  "name": "Tokyo",   "country": "JP", "entityType": "general", "globe": {}, "x": 310,  "y": 440 },
+    { "id": 7,  "name": "Nagoya",  "country": "JP", "entityType": "general", "globe": {}, "x": 540,  "y": 440 },
+    { "id": 8,  "name": "Incheon", "country": "KR", "entityType": "general", "globe": {}, "x": 770,  "y": 440 },
+    { "id": 9,  "name": "Texas",   "country": "US", "entityType": "general", "globe": {}, "x": 1000, "y": 440 },
+    { "id": 10, "name": "Daegu",   "country": "KR", "entityType": "general", "globe": {}, "x": 80,   "y": 620 },
+    { "id": 11, "name": "Daejeon", "country": "KR", "entityType": "general", "globe": {}, "x": 310,  "y": 620 },
+    { "id": 12, "name": "Kyoto",   "country": "JP", "entityType": "general", "globe": {}, "x": 540,  "y": 620 },
+    { "id": 13, "name": "Sapporo", "country": "JP", "entityType": "general", "globe": {}, "x": 770,  "y": 620 },
+    { "id": 14, "name": "Houston", "country": "US", "entityType": "general", "globe": {}, "x": 1000, "y": 620 }
+  ],
+  "edges": [
+    { "id": 1,  "from": 1, "to": 2,  "pct": 70,  "type": "consolidated" },
+    { "id": 2,  "from": 1, "to": 3,  "pct": 80,  "type": "consolidated" },
+    { "id": 3,  "from": 1, "to": 4,  "pct": 90,  "type": "consolidated" },
+    { "id": 4,  "from": 2, "to": 5,  "pct": 100, "type": "consolidated" },
+    { "id": 5,  "from": 2, "to": 6,  "pct": 60,  "type": "consolidated" },
+    { "id": 6,  "from": 3, "to": 7,  "pct": 60,  "type": "equity"       },
+    { "id": 7,  "from": 4, "to": 8,  "pct": 80,  "type": "consolidated" },
+    { "id": 8,  "from": 4, "to": 9,  "pct": 60,  "type": "equity"       },
+    { "id": 9,  "from": 6, "to": 10, "pct": 60,  "type": "consolidated" },
+    { "id": 10, "from": 6, "to": 11, "pct": 80,  "type": "consolidated" },
+    { "id": 11, "from": 6, "to": 12, "pct": 50,  "type": "consolidated" },
+    { "id": 12, "from": 8, "to": 13, "pct": 100, "type": "consolidated" },
+    { "id": 13, "from": 9, "to": 14, "pct": 50,  "type": "consolidated" }
+  ]
+}

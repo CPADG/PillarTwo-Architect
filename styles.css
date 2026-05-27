@@ -876,21 +876,22 @@ body.no-flow-spirits .iir-spirit{display:none}
 #map-footer{position:absolute;left:0;right:0;bottom:0;height:52px;background:#fff;
   border-top:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column;
   align-items:center;justify-content:center;padding:6px 12px 5px;gap:3px;z-index:1001}
-/* 1열: 네비게이션 4개 + 우측 끝 contact 아이콘 (밀집감 ↓) */
-.mf-row{display:flex;align-items:center;gap:4px;width:100%;justify-content:center;position:relative}
+/* 1열: 네비게이션 링크 + contact 아이콘이 한 라인에 자연 배치 — 언어 전환 시 너비 변화에 따라 함께 움직임 */
+.mf-row{display:flex;align-items:center;gap:5px;width:100%;justify-content:center}
 .mf-link{font-size:10.5px;font-weight:500;color:#64748b;
-  padding:3px 6px;border-radius:5px;text-decoration:none;
+  padding:3px 7px;border-radius:5px;text-decoration:none;
   cursor:pointer;transition:color .12s,background .12s;line-height:1.4;
   border:none;background:none;font-family:inherit;letter-spacing:.1px}
 .mf-link:hover{color:#4f46e5;background:rgba(99,102,241,.08)}
 .mf-link-btn{cursor:pointer}
 .mf-sep{display:inline-block;width:1px;height:9px;background:#e2e8f0;flex-shrink:0}
-/* contact는 우측 끝 아이콘 only — 시각 hierarchy 분리 */
-.mf-icon-btn{position:absolute;right:0;display:inline-flex;align-items:center;justify-content:center;
-  width:22px;height:22px;border:none;background:transparent;cursor:pointer;
-  color:#94a3b8;border-radius:5px;transition:color .12s,background .12s;padding:0}
+/* contact 아이콘 — 다른 링크와 같은 라인 높이로 정렬 (수평 균형) */
+.mf-icon-btn{display:inline-flex;align-items:center;justify-content:center;
+  width:20px;height:20px;border:none;background:transparent;cursor:pointer;
+  color:#94a3b8;border-radius:5px;transition:color .12s,background .12s;padding:0;
+  flex-shrink:0}
 .mf-icon-btn:hover{color:#4f46e5;background:rgba(99,102,241,.08)}
-.mf-icon-btn svg{width:12px;height:12px}
+.mf-icon-btn svg{width:12px;height:12px;display:block}
 .mf-ver{font-size:9px;color:#94a3b8;font-weight:400;letter-spacing:.15px;user-select:none;white-space:nowrap}
 .map-hd{position:absolute;top:0;left:0;right:0;height:28px;z-index:1000;display:flex;align-items:center;
   padding:0 8px;gap:5px;background:rgba(255,255,255,.88);backdrop-filter:blur(4px);

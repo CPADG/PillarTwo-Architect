@@ -5140,10 +5140,15 @@ function _snapAndRelease(){
   applyXform();
   canvas.style.willChange='auto';
 }
-// 진행 중인 모든 viewport 애니메이션 rAF 취소 (pan/fit/zoom/wheel)
-// — 사용자 인터랙션(패닝·드래그) 또는 파일 로드 직전 호출하여
-//   stale rAF가 panX/Y/zoom을 덮어쓰는 것을 방지.
+// 진행 중인 모든 viewport 애니메이션 취소 + 세대 카운터 증가.
+// — 사용자 인터랙션(패닝·드래그) 또는 파일 로드 직전 호출.
+// — 직접 rAF뿐 아니라 autoLayout 등이 deferred 스케줄(setTimeout/rAF)로
+//   later에 호출하는 smoothFitView까지 차단하기 위해 _viewportAnimGen 증가.
+//   각 deferred 콜백은 시작 시점의 gen을 캡처했다가 현재 gen과 불일치하면
+//   abort하는 식으로 사용자 입력 우선권을 보장.
+let _viewportAnimGen=0;
 function _cancelViewportAnims(){
+  _viewportAnimGen++;
   if(_panRaf){cancelAnimationFrame(_panRaf);_panRaf=null;}
   if(_fitRaf){cancelAnimationFrame(_fitRaf);_fitRaf=null;}
   if(_zoomRaf){cancelAnimationFrame(_zoomRaf);_zoomRaf=null;}
@@ -6100,10 +6105,15 @@ function autoLayout(){
   const svgL=document.getElementById('svg-layer'),svgLb=document.getElementById('svg-labels');
   svgL.style.opacity='0'; svgLb.style.opacity='0';
   const DUR=340;
+  // autoLayout 시작 시점의 세대 캡처 — 이후 rAF/setTimeout 콜백은 이 gen이
+  // 그대로일 때만 진행. 사용자 패닝 등 인터랙션이 발생하면
+  // _cancelViewportAnims()가 _viewportAnimGen을 증가시켜 자동으로 abort됨.
+  const _alGen=_viewportAnimGen;
   canvas.querySelectorAll('.node').forEach(el=>{
     el.style.transition=`left ${DUR}ms cubic-bezier(.25,.46,.45,.94),top ${DUR}ms cubic-bezier(.25,.46,.45,.94)`;
   });
   requestAnimationFrame(()=>{
+    if(_viewportAnimGen!==_alGen) return; // 사용자 인터랙션 발생 — 추가 fitView 중단
     nodes.forEach((n,id)=>{
       const p=postPos.get(id); n.x=p.x; n.y=p.y;
       const el=document.getElementById('nd-'+id);
@@ -6127,6 +6137,7 @@ function autoLayout(){
       });
       smoothFitView(fitPanX,fitPanY,fz,DUR);
       setTimeout(()=>{
+        if(_viewportAnimGen!==_alGen) return; // 사용자 인터랙션으로 abort
         const TZ=0.6;
         const upeCx=upe.x+NW/2;
         // UPE가 가로 중앙 + 화면 상단 80px 위치에 오도록
@@ -6139,9 +6150,10 @@ function autoLayout(){
     }
   });
   setTimeout(()=>{
+    // transition/opacity 복구는 사용자 인터랙션과 무관 — gen 체크 없이 항상 수행
     canvas.querySelectorAll('.node').forEach(el=>el.style.transition='');
     svgL.style.opacity=''; svgLb.style.opacity='';
-    render();
+    if(_viewportAnimGen===_alGen) render();
   },DUR+30);
 }
 

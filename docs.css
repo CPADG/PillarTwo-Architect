@@ -22,7 +22,7 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
 .docs-brand{display:inline-flex; align-items:center; text-decoration:none; color:#0f172a; line-height:1.05}
 .docs-brand-pillar{flex-shrink:0; opacity:.9; margin-right:9px}
 .docs-brand-name{font-size:18px; font-weight:800; color:#0f172a; letter-spacing:-.5px; white-space:nowrap}
-.docs-brand-name em{color:#4f46e5; font-style:normal}
+.docs-brand-name em{color:#2563eb; font-style:normal}
 .docs-brand-sub{color:#94a3b8; font-weight:600; font-size:15px; letter-spacing:-.1px; white-space:nowrap; flex-shrink:0; margin-left:6px}
 .docs-nav-links{display:flex; gap:6px}
 .docs-nav-links a{
@@ -43,7 +43,7 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
   background:linear-gradient(120deg,#1e40af 0%,#4338ca 45%,#6366f1 100%);
   -webkit-background-clip:text; background-clip:text; color:transparent;
 }
-.docs-lead{font-size:16px; color:#475569; line-height:1.65; margin:0; max-width:680px}
+.docs-lead{font-size:16px; color:#475569; line-height:1.65; margin:0}
 
 /* Section */
 .docs-section{margin-bottom:40px}

@@ -339,9 +339,9 @@ body.demo-advanced-mode #btn-demo-case{display:none}
   animation:consentSlideIn .35s ease both}
 @keyframes consentSlideIn{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
 #consent-banner .consent-text{flex:1;min-width:0}
-#consent-banner .consent-text strong{display:block;color:#fff;font-size:13px;margin-bottom:3px}
-#consent-banner .consent-text span{color:#cbd5e1}
-#consent-banner .consent-text span strong{color:#e0e7ff;font-weight:600}
+#consent-banner .consent-text > strong{display:block;color:#fff;font-size:13px;margin-bottom:3px}
+#consent-banner .consent-text > span{color:#cbd5e1}
+#consent-banner .consent-text .nowrap{white-space:nowrap}
 #consent-banner .consent-link{background:none;border:none;color:#93c5fd;cursor:pointer;font-size:12px;padding:0;margin-left:4px;text-decoration:underline;font-family:inherit}
 #consent-banner .consent-link:hover{color:#bfdbfe}
 #consent-banner .consent-actions{display:flex;gap:8px;flex-shrink:0}

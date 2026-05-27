@@ -44,7 +44,9 @@
 }
 </script>
 <link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<!-- Leaflet CSS — 비차단 로드 (print/onload swap 트릭) -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'"/>
+<noscript><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/></noscript>
 <!-- Google AdSense / GA4 — Consent Mode v2 초기화 (인라인은 즉시 실행, 무거운 외부 스크립트는 페이지 load 후 주입) -->
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -95,8 +97,26 @@
 <script src="translations.js"></script>
 <script src="globe-engine.min.js"></script>
 <script src="iir-db.js"></script>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
+<!-- Leaflet / topojson은 미니맵 전용 — LCP 보호를 위해 페이지 load 후 동적 주입.
+     주입 완료 시점에 initMinimap() 재호출(현재 호출은 window.L 가드로 no-op 처리됨). -->
+<script>
+  window._loadMinimapDeps=function(){
+    if(window._minimapDepsLoaded) return; window._minimapDepsLoaded=true;
+    const l=document.createElement('script');
+    l.src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    l.async=true;
+    l.onload=function(){
+      const t=document.createElement('script');
+      t.src='https://unpkg.com/topojson-client@3/dist/topojson-client.min.js';
+      t.async=true;
+      t.onload=function(){
+        if(typeof initMinimap==='function') initMinimap();
+      };
+      document.head.appendChild(t);
+    };
+    document.head.appendChild(l);
+  };
+</script>
 <body>
 
 <div id="toolbar">
@@ -419,8 +439,8 @@
 <!-- 쿠키·분석 동의 배너 — 첫 방문 시 표시, 선택 후 localStorage 저장 -->
 <div id="consent-banner" style="display:none">
   <div class="consent-text">
-    <strong data-i18n="consent.title">분석 쿠키 사용 안내</strong>
-    <span data-i18n-html="consent.body">서비스 개선을 위해 <strong>익명 사용 통계(Google Analytics · Microsoft Clarity)</strong>를 수집할 수 있습니다. 기업명 등 사용자가 입력한 데이터는 수집되지 않습니다.</span>
+    <strong data-i18n="consent.title">쿠키 사용 안내</strong>
+    <span data-i18n-html="consent.body">서비스 개선을 위해 익명 사용 통계(<span class="nowrap">Google&nbsp;Analytics</span> · <span class="nowrap">Microsoft&nbsp;Clarity</span>)를 수집할 수 있습니다. 기업명 등 사용자가 입력한 데이터는 수집되지 않습니다.</span>
     <button class="consent-link" id="consent-policy" data-i18n="consent.policy_link">자세히 보기</button>
   </div>
   <div class="consent-actions">
@@ -8983,7 +9003,18 @@ function minimapReset(){
   _minimap.flyTo(_MAP_KR,_MAP_KR_ZOOM,{duration:0.55});
 }
 
-initMinimap();
+// 미니맵 의존성(Leaflet·topojson)은 페이지 load 후 또는 사용자 첫 인터랙션 시 비동기 로드.
+// _loadMinimapDeps()가 두 스크립트를 순차 inject 후 initMinimap()을 호출.
+if(typeof _loadMinimapDeps==='function'){
+  if(document.readyState==='complete'){ setTimeout(_loadMinimapDeps,400); }
+  else { window.addEventListener('load', ()=>setTimeout(_loadMinimapDeps,400), {once:true}); }
+  ['pointerdown','keydown','scroll'].forEach(ev=>{
+    window.addEventListener(ev, _loadMinimapDeps, {once:true, passive:true});
+  });
+} else {
+  // 안전망: 헤더 부트로더가 누락된 경우 즉시 초기화 시도 (window.L 가드로 no-op 가능)
+  initMinimap();
+}
 
 </script>
 </body>

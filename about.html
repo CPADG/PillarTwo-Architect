@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PillarTwo Architect 소개 — 글로벌최저한세 솔루션 · Pillar Two Solution · グローバル・ミニマム課税ソリューション</title>
-<meta name="description" content="PillarTwo Architect 서비스 소개 — OECD Pillar Two 모델규정과 각국 도입 법령에 기반한 다국적기업그룹 구조 시뮬레이션 도구. About PillarTwo Architect — Pillar Two structure simulation tool based on OECD Model Rules. PillarTwo Architectのご紹介 — OECD Pillar Twoモデル規定と各国法令に基づく多国籍企業グループ構造シミュレーション。">
+<title>Pillar Two — 글로벌최저한세 제도 안내 · Global Minimum Tax · グローバル・ミニマム課税</title>
+<meta name="description" content="OECD/G20 Inclusive Framework Pillar Two 제도 — 적용 대상, IIR · UTPR · QDMTT 부과 규정, 각국 도입 현황, PillarTwo Architect의 역할과 한계.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://pillartwo.app/about">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PillarTwo Architect 소개 · About · ご紹介">
+<meta property="og:title" content="Pillar Two — Global Minimum Tax · 글로벌최저한세">
 <meta property="og:url" content="https://pillartwo.app/about">
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="docs.css">
@@ -23,8 +23,8 @@
   </a>
   <div class="docs-nav-links">
     <a href="./" data-i18n="docs.nav.home">← 아키텍트로 돌아가기</a>
-    <a href="overview.html" data-i18n="docs.nav.overview">개요</a>
-    <a href="about.html" class="active" data-i18n="docs.nav.about">소개</a>
+    <a href="overview.html" data-i18n="docs.nav.overview">소개</a>
+    <a href="about.html" class="active" data-i18n="docs.nav.about">Pillar Two</a>
     <a href="glossary.html" data-i18n="docs.nav.glossary">용어 사전</a>
   </div>
 </nav>
@@ -32,72 +32,59 @@
 <main class="docs-main">
 
   <header class="docs-hero">
-    <h1 data-i18n="about.title">PillarTwo Architect 소개</h1>
-    <p class="docs-lead" data-i18n="about.lead">다국적기업그룹의 Pillar Two 구조를 시각적으로 설계하고, IIR · UTPR · QDMTT 납부의무와 추가세액의 흐름을 즉시 분석합니다.</p>
+    <h1 data-i18n="about.title">Pillar Two — 글로벌최저한세</h1>
+    <p class="docs-lead" data-i18n="about.lead">OECD/G20 BEPS Inclusive Framework가 합의한 글로벌최저한세 제도. 다국적기업그룹의 국가별 실효세율을 최저 15%로 유지하도록 요구합니다.</p>
   </header>
 
   <section class="docs-section">
-    <h2 data-i18n="about.what.h">무엇을 하는 서비스인가</h2>
-    <p data-i18n="about.what.p1">PillarTwo Architect는 OECD Pillar Two 모델규정(GloBE Rules), 주석서(Commentary) 및 행정지침(Administrative Guidance)과 각국 도입 법령에 기반하여, 다국적기업그룹(MNE Group)의 글로벌최저한세 구조와 글로벌최저한세 납부의무를 시뮬레이션하는 웹 서비스입니다.</p>
-    <p data-i18n="about.what.p2">기업 정보·소유지분비율·국가별 과세규정 도입 현황·세이프하버 적용 여부 등을 입력하면, 정교한 계산을 통해 다음 사항을 자동으로 판정합니다:</p>
+    <h2 data-i18n="about.regime.h">제도 개요</h2>
+    <p data-i18n="about.regime.p1">Pillar Two는 다국적기업그룹의 조세회피와 국가 간 조세 경쟁을 억제하기 위해 OECD/G20 포괄적 이행체계(Inclusive Framework)가 2021년 합의한 글로벌최저한세 제도입니다. 핵심 규정인 GloBE Rules(Global Anti-Base Erosion Rules)는 모델규정·주석서·행정지침으로 구성되며, 각국은 이를 자국 법령으로 도입함으로써 적용됩니다.</p>
     <ul class="docs-list">
-      <li data-i18n="about.what.b1">구성기업(Constituent Entity) 식별 — 공동기업(Joint Venture) 등 분리</li>
-      <li data-i18n="about.what.b2">모기업 분류: 최종모기업(UPE) · 부분소유모기업(POPE) · 중간모기업(IPE)</li>
-      <li data-i18n="about.what.b3">납부의무 매핑: 소득산입규칙(IIR) · 소득산입보완규칙(UTPR) · 적격소재국추가세(QDMTT)</li>
-      <li data-i18n="about.what.b4">추가세액(Top-up Tax) 흐름 시각화 및 잔여 UTPR 배분</li>
+      <li data-i18n-html="about.regime.b1"><strong>적용 대상:</strong> 직전 4개 사업연도 중 2개 이상에서 연결매출액 7억 5천만 유로 이상인 다국적기업그룹(MNE Group)</li>
+      <li data-i18n-html="about.regime.b2"><strong>판정 기준:</strong> 국가별 실효세율(Effective Tax Rate)이 15% 미만이면 그 차이만큼 추가세액(Top-up Tax) 부과</li>
+      <li data-i18n-html="about.regime.b3"><strong>적용 단위:</strong> 동일 소재지국 내 구성기업의 조정대상조세와 GloBE 소득을 합산하여 산정</li>
     </ul>
   </section>
 
   <section class="docs-section">
-    <h2 data-i18n="about.who.h">누구를 위한 서비스인가</h2>
+    <h2 data-i18n="about.cp.h">부과 규정 (Charging Provisions)</h2>
+    <p data-i18n="about.cp.intro">Pillar Two는 세 가지 부과 규정으로 추가세액을 징수합니다. 각 규정은 적용 우선순위와 부과 주체가 다르며, 어떤 규정이 적용되는지는 그룹의 소유구조와 각 국가의 도입 현황에 따라 결정됩니다.</p>
+    <div class="docs-cards">
+      <div class="docs-card">
+        <h3 data-i18n="about.cp.iir.h">IIR — 소득산입규칙</h3>
+        <p data-i18n="about.cp.iir.p">Income Inclusion Rule. 최종모기업(UPE) 또는 중간모기업(IPE·POPE)이 미달과세된 자회사의 추가세액을 자국에서 신고·납부. 모기업 소재국이 IIR을 도입했을 때 최우선 적용.</p>
+      </div>
+      <div class="docs-card">
+        <h3 data-i18n="about.cp.utpr.h">UTPR — 소득산입보완규칙</h3>
+        <p data-i18n="about.cp.utpr.p">Undertaxed Profits Rule. IIR로 흡수되지 않는 잔여 추가세액을 그룹 내 다른 구성기업이 분담. IIR이 적용되지 않거나 UPE가 미도입국에 있을 때의 보완 장치.</p>
+      </div>
+      <div class="docs-card">
+        <h3 data-i18n="about.cp.qdmtt.h">QDMTT — 적격소재국추가세</h3>
+        <p data-i18n="about.cp.qdmtt.p">Qualified Domestic Minimum Top-up Tax. 미달과세된 구성기업의 소재국이 자국 법령으로 추가세액을 우선 부과. QDMTT 도입국의 추가세액은 IIR·UTPR보다 먼저 적용되어 국외 유출을 방지.</p>
+      </div>
+    </div>
+    <p class="docs-cp-foot" data-i18n-html="about.cp.foot">각 용어의 정확한 정의·예외·세부 적용 요건은 <a href="glossary.html">용어 사전</a>을 참조하세요.</p>
+  </section>
+
+  <section class="docs-section">
+    <h2 data-i18n="about.adoption.h">각국 도입 현황의 영향</h2>
+    <p data-i18n="about.adoption.p1">Pillar Two는 각국이 국내 법령으로 도입해야 비로소 적용됩니다. 도입 시점과 세부 규정이 국가마다 다르며, IIR·UTPR·QDMTT 도입 여부도 국가별로 상이합니다.</p>
+    <p data-i18n="about.adoption.p2">그 결과 <strong>동일한 그룹 구조라도 적용되는 부과 규정과 납부의무가 각국 도입 현황에 따라 달라집니다.</strong> 이것이 Pillar Two 분석을 까다롭게 만드는 핵심이며, PillarTwo Architect가 해결하려는 부분입니다.</p>
+  </section>
+
+  <section class="docs-section">
+    <h2 data-i18n="about.tool.h">PillarTwo Architect의 역할</h2>
+    <p data-i18n="about.tool.p">위 제도를 코드화한 결정론적 분석 엔진으로, 사용자가 입력한 그룹 구조 · 소유지분 · 국가별 도입 설정을 바탕으로 구성기업 · 공동기업 · 모기업 분류와 IIR · UTPR · QDMTT 납부의무를 자동 판정합니다. 서비스가 무엇을 어떻게 하는지에 대한 자세한 안내는 <a href="overview.html" data-i18n-keep>소개 페이지</a>에서 확인하세요.</p>
+  </section>
+
+  <section class="docs-section">
+    <h2 data-i18n="about.who.h">누구를 위한 도구인가</h2>
     <ul class="docs-list">
       <li data-i18n="about.who.b1">다국적기업그룹 소속 기업 세무 실무자</li>
       <li data-i18n="about.who.b2">외부 자문 전문가 (회계법인 · 법무법인)</li>
       <li data-i18n="about.who.b3">Pillar Two 도입 영향 분석을 수행하는 학계 · 연구자</li>
       <li data-i18n="about.who.b4">글로벌최저한세를 학습하는 학생 · 실무 입문자</li>
     </ul>
-  </section>
-
-  <section class="docs-section">
-    <h2 data-i18n="about.features.h">핵심 기능</h2>
-    <div class="docs-cards">
-      <div class="docs-card">
-        <h3 data-i18n="about.features.f1.h">시각적 구조 설계</h3>
-        <p data-i18n="about.features.f1.p">더블클릭으로 기업 추가, 드래그로 소유지분 연결. 자동 레이아웃으로 복잡한 구조도 즉시 정리.</p>
-      </div>
-      <div class="docs-card">
-        <h3 data-i18n="about.features.f2.h">자동 분석 엔진</h3>
-        <p data-i18n="about.features.f2.p">소유지분 연결을 기반으로 한 직간접소유지분비율 계산, 순환출자 자동 처리, 다단계 판정 로직.</p>
-      </div>
-      <div class="docs-card">
-        <h3 data-i18n="about.features.f3.h">실시간 인터랙티브 분석</h3>
-        <p data-i18n="about.features.f3.p">기업·소유지분·과세규정을 수정하고 분석을 실행하는 즉시 결과 재계산. 조직재편이나 지배구조 변경의 영향을 클릭 한 번으로 바로 확인.</p>
-      </div>
-      <div class="docs-card">
-        <h3 data-i18n="about.features.f7.h">P2A 파일 기반 관리</h3>
-        <p data-i18n="about.features.f7.p">아키텍트 전용 분석 기초 파일(.p2a)로 저장하고 다시 불러올 수 있어, 회계연도별 · 구조 변경 시점별 아키텍처를 체계적이고 지속적으로 관리.</p>
-      </div>
-      <div class="docs-card">
-        <h3 data-i18n="about.features.f9.h">로컬 전용 · 서버 무관</h3>
-        <p data-i18n="about.features.f9.p">P2A 파일은 사용자의 컴퓨터에만 저장되며 어떠한 서버로도 전송되지 않음. 입력한 기업 정보 · 소유지분 · 회계정보는 클라이언트(브라우저)에서만 처리되어 보안 걱정 없이 사용 가능.</p>
-      </div>
-      <div class="docs-card">
-        <h3 data-i18n="about.features.f8.h">기업별 맞춤 인사이트</h3>
-        <p data-i18n="about.features.f8.p">캔버스에서 궁금한 기업을 클릭하면 해당 기업에 맞춰 추가세액 흐름 · 납부의무 · 소유지분관계 즉시 강조. 부드러운 애니메이션으로 관계를 한눈에 파악.</p>
-      </div>
-      <div class="docs-card">
-        <h3 data-i18n="about.features.f4.h">직관적 시각화</h3>
-        <p data-i18n="about.features.f4.p">추가세액 흐름, 합산단위, 납부주체를 일목요연하게 시각화.</p>
-      </div>
-      <div class="docs-card">
-        <h3 data-i18n="about.features.f5.h">다국어 지원</h3>
-        <p data-i18n="about.features.f5.p">한국어 · English · 日本語. OECD 모델규정과 각국 공식 용어를 반영.</p>
-      </div>
-      <div class="docs-card">
-        <h3 data-i18n="about.features.f6.h">암호화 저장</h3>
-        <p data-i18n="about.features.f6.p">분석한 아키텍처를 AES-GCM 256-bit 비밀번호 보호 파일로 저장 가능.</p>
-      </div>
-    </div>
   </section>
 
   <section class="docs-section">
@@ -122,6 +109,7 @@
   <section class="docs-section docs-cta">
     <a href="./" class="docs-btn primary" data-i18n="about.cta.tool">아키텍트 사용하기 →</a>
     <a href="glossary.html" class="docs-btn ghost" data-i18n="about.cta.glossary">용어 사전 보기</a>
+    <a href="overview.html" class="docs-btn ghost" data-i18n="about.cta.overview">서비스 소개</a>
   </section>
 
 </main>
@@ -132,9 +120,9 @@
     <span class="docs-footer-sep">·</span>
     <a href="./" data-i18n="docs.nav.home">← 아키텍트로 돌아가기</a>
     <span class="docs-footer-sep">·</span>
-    <a href="overview.html" data-i18n="docs.nav.overview">개요</a>
+    <a href="overview.html" data-i18n="docs.nav.overview">소개</a>
     <span class="docs-footer-sep">·</span>
-    <a href="about.html" data-i18n="docs.nav.about">소개</a>
+    <a href="about.html" data-i18n="docs.nav.about">Pillar Two</a>
     <span class="docs-footer-sep">·</span>
     <a href="glossary.html" data-i18n="docs.nav.glossary">용어 사전</a>
   </div>
@@ -146,9 +134,8 @@
   <button class="docs-lang-btn" data-lang="ja">日本語</button>
 </div>
 
-<script src="translations.js"></script>
+<script src="translations.min.js"></script>
 <script>
-  // 페이지 첫 로드 시 — localStorage에 저장된 lang 또는 ko 기본
   (function(){
     let lang='ko';
     try{ const saved=localStorage.getItem('p2a.lang'); if(saved==='ko'||saved==='en'||saved==='ja') lang=saved; }catch(e){}

@@ -69,6 +69,9 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
 .docs-steps li{margin-bottom:14px; line-height:1.7}
 .docs-steps li::marker{font-weight:700; color:#2563eb}
 .docs-steps li code{background:rgba(99,102,241,.08); color:#3730a3; padding:1px 5px; border-radius:4px; font-size:.92em}
+/* about 부과규정 카드 뒤 footer — 용어집 링크 안내 */
+.docs-cp-foot{margin-top:14px; font-size:13px; color:#64748b}
+.docs-cp-foot a{color:#4338ca; text-decoration:underline}
 
 /* Feature cards */
 .docs-cards{

@@ -14,7 +14,7 @@ const slashStamp = `// build: ${new Date().toISOString()}\n`;
 
 // Files large or stable enough to risk hash-cache poisoning.
 // All are content-only (no parser sensitive to leading comments).
-const cssTargets = ['styles.css', 'docs.css'];
+const cssTargets = ['styles.css', 'docs.css', 'jurisdictions/jurisdictions.css'];
 const jsTargets  = ['app.min.js', 'translations.min.js', 'globe-engine.min.js', 'iir-db.min.js'];
 
 function strip(content) {

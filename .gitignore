@@ -9,3 +9,10 @@ test/
 
 # Node modules (esbuild 등 빌드 도구는 dev-only, push에 포함 안 함)
 node_modules/
+
+# 참고 자료 (jurisdictions 데이터 출처 PDF — 로컬 전용)
+*.pdf
+
+# Python cache
+__pycache__/
+scripts/__pycache__/

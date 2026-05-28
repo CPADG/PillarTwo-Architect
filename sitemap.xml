@@ -49,4 +49,414 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/overview?lang=ja"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/overview"/>
   </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/united-arab-emirates</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/united-arab-emirates?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/united-arab-emirates?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/united-arab-emirates?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/united-arab-emirates"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/austria</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/austria?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/austria?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/austria?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/austria"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/australia</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/australia?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/australia?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/australia?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/australia"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/belgium</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/belgium?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/belgium?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/belgium?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/belgium"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/brazil</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/brazil?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/brazil?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/brazil?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/brazil"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/canada</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/canada?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/canada?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/canada?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/canada"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/switzerland</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/switzerland?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/switzerland?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/switzerland?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/switzerland"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/czech-republic</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/czech-republic?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/czech-republic?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/czech-republic?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/czech-republic"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/germany</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/germany?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/germany?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/germany?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/germany"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/denmark</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/denmark?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/denmark?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/denmark?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/denmark"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/spain</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/spain?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/spain?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/spain?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/spain"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/finland</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/finland?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/finland?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/finland?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/finland"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/france</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/france?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/france?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/france?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/france"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/united-kingdom</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/united-kingdom?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/united-kingdom?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/united-kingdom?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/united-kingdom"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/greece</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/greece?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/greece?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/greece?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/greece"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/hong-kong</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/hong-kong?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/hong-kong?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/hong-kong?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/hong-kong"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/hungary</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/hungary?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/hungary?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/hungary?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/hungary"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/indonesia</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/indonesia?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/indonesia?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/indonesia?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/indonesia"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/ireland</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/ireland?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/ireland?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/ireland?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/ireland"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/italy</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/italy?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/italy?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/italy?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/italy"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/japan</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/japan?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/japan?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/japan?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/japan"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/korea</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/korea?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/korea?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/korea?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/korea"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/liechtenstein</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/liechtenstein?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/liechtenstein?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/liechtenstein?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/liechtenstein"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/luxembourg</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/luxembourg?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/luxembourg?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/luxembourg?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/luxembourg"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/malaysia</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/malaysia?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/malaysia?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/malaysia?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/malaysia"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/netherlands</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/netherlands?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/netherlands?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/netherlands?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/netherlands"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/norway</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/norway?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/norway?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/norway?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/norway"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/new-zealand</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/new-zealand?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/new-zealand?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/new-zealand?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/new-zealand"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/poland</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/poland?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/poland?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/poland?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/poland"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/portugal</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/portugal?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/portugal?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/portugal?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/portugal"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/qatar</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/qatar?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/qatar?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/qatar?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/qatar"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/romania</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/romania?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/romania?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/romania?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/romania"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/sweden</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/sweden?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/sweden?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/sweden?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/sweden"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/singapore</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/singapore?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/singapore?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/singapore?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/singapore"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/slovenia</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/slovenia?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/slovenia?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/slovenia?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/slovenia"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/thailand</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/thailand?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/thailand?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/thailand?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/thailand"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/turkey</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/turkey?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/turkey?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/turkey?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/turkey"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/united-states</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/united-states?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/united-states?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/united-states?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/united-states"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/vietnam</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/vietnam?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/vietnam?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/vietnam?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/vietnam"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/south-africa</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/south-africa?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/south-africa?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/south-africa?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/south-africa"/>
+  </url>
 </urlset>

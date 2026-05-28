@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — 페이지를 찾을 수 없습니다 · PillarTwo Architect</title>
+<meta name="description" content="요청하신 페이지를 찾을 수 없습니다.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2563eb">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="docs.css">
+<style>
+  body.docs-body{min-height:100vh; display:flex; flex-direction:column}
+  .err-wrap{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:48px 24px; text-align:center}
+  .err-code{
+    font-size:128px; font-weight:800; letter-spacing:-4px; line-height:1; margin:0;
+    background:linear-gradient(120deg,#1e40af 0%,#4338ca 45%,#6366f1 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .err-title{margin:12px 0 4px; font-size:24px; font-weight:700; color:#1e3a8a}
+  .err-msg{margin:0 0 28px; font-size:15px; color:#64748b; max-width:480px; line-height:1.65}
+  .err-actions{display:flex; gap:10px; flex-wrap:wrap; justify-content:center}
+</style>
+</head>
+<body class="docs-body">
+
+<nav class="docs-nav">
+  <a class="docs-brand" href="/">
+    <svg class="docs-brand-pillar" width="19" height="22" viewBox="0 0 19 22" aria-hidden="true"><rect x="0" y="0" width="9" height="2" rx=".5" fill="#2563eb"/><rect x="2.5" y="2.5" width="4" height="13.5" fill="#2563eb"/><rect x="1" y="16.5" width="7" height="1.5" rx=".3" fill="#2563eb"/><rect x="0" y="18.5" width="9" height="3" rx=".5" fill="#2563eb"/><rect x="10" y="0" width="9" height="2" rx=".5" fill="#4f46e5"/><rect x="12.5" y="2.5" width="4" height="13.5" fill="#4f46e5"/><rect x="11" y="16.5" width="7" height="1.5" rx=".3" fill="#4f46e5"/><rect x="10" y="18.5" width="9" height="3" rx=".5" fill="#4f46e5"/></svg>
+    <span class="docs-brand-name">Pillar<em>Two</em></span>
+    <span class="docs-brand-sub">Architect</span>
+  </a>
+</nav>
+
+<main class="err-wrap">
+  <p class="err-code">404</p>
+  <h1 class="err-title" data-i18n="err.404.title">페이지를 찾을 수 없습니다</h1>
+  <p class="err-msg" data-i18n="err.404.msg">요청하신 주소에 해당하는 페이지가 없습니다. URL을 다시 확인해 주시거나 아래 링크로 이동해 주세요.</p>
+  <div class="err-actions">
+    <a href="/" class="docs-btn primary" data-i18n="err.404.home">아키텍트로 이동 →</a>
+    <a href="/overview" class="docs-btn ghost" data-i18n="docs.nav.overview">서비스 소개</a>
+    <a href="/about" class="docs-btn ghost" data-i18n="docs.nav.about">Pillar Two</a>
+  </div>
+</main>
+
+<footer class="docs-footer">
+  <div class="docs-footer-inner">
+    <span data-i18n="docs.footer.copyright">© PillarTwo Architect</span>
+  </div>
+</footer>
+
+<script src="translations.min.js"></script>
+<script>
+  (function(){
+    let lang='ko';
+    try{ const s=localStorage.getItem('p2a.lang'); if(s==='ko'||s==='en'||s==='ja') lang=s; }catch(e){}
+    if(typeof setLang==='function') setLang(lang);
+  })();
+</script>
+</body>
+</html>

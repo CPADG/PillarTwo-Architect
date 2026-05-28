@@ -1,0 +1,15 @@
+{
+  "name": "PillarTwo Architect",
+  "short_name": "PillarTwo",
+  "description": "Pillar Two (Global Minimum Tax) analysis in minutes — design MNE group structures and analyse IIR · UTPR · QDMTT obligations interactively.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fafbff",
+  "theme_color": "#2563eb",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

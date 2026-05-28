@@ -167,6 +167,171 @@ COUNTRIES = {
         ],
     },
 
+    'AU': {
+        'slug': 'australia',
+        'name_ko': '호주',
+        'name_en': 'Australia',
+        'name_ja': 'オーストラリア',
+        'flag_cc': 'au',
+        'iir':   {'date': '2024-01-01', 'qualified': True},
+        'utpr':  {'date': '2025-01-01', 'qualified': False},
+        'qdmtt': {'date': '2024-01-01', 'qualified': True},
+        'lead': (
+            '호주는 <strong>Taxation (Multinational – Global and Domestic Minimum Tax) Act 2024</strong> '
+            '및 동 Imposition Act로 OECD Pillar Two를 도입했습니다. IIR과 QDMTT는 2024-01-01, UTPR은 '
+            '1년 지연되어 2025-01-01 이후 개시 사업연도부터 시행되고 있습니다.'
+        ),
+        'domestic_laws': [
+            ('<strong>Taxation (Multinational – Global and Domestic Minimum Tax) Act 2024 (Assessment Act)</strong>', 'IIR·UTPR·QDMTT 본 규정'),
+            ('<strong>Taxation (Multinational – Global and Domestic Minimum Tax) Imposition Act 2024</strong>', '추가세액 부과 근거'),
+            ('<strong>Treasury Laws Amendment (Multinational – Global and Domestic Minimum Tax) Act 2024</strong>', '관련 법률 개정 (시행 및 기술적 사항)'),
+            ('UTPR', '1년 지연되어 2025-01-01 이후 개시 사업연도부터 시행'),
+        ],
+        'insights': [
+            ('호주에 모기업', '호주에 모기업을 둔 다국적기업그룹은 2024-01-01 이후 개시 사업연도부터 IIR 의무를 부담합니다. 자회사 소재지국의 ETR이 15% 미만인 경우, 모기업 등의 소재지국(호주)에서 IIR에 따른 추가세액을 신고·납부해야 합니다.'),
+            ('호주에 자회사', '호주에 자회사를 둔 다국적기업그룹은 2024-01-01 이후 개시 사업연도부터 호주 QDMTT 적용 대상입니다. QDMTT Safe Harbour 적용 요건을 충족하면 모기업 등의 소재지국에서의 IIR/UTPR 계산이 면제될 수 있습니다.'),
+            ('회계연도 7월 개시 관행', '호주 기업의 표준 회계연도는 7월 1일 개시가 일반적입니다. 1월·4월 개시 회계연도를 사용하는 다른 국가의 모기업·자회사와 그룹 단위로 분석할 때 적용 회계연도 매핑에 주의가 필요합니다.'),
+        ],
+        'recent': [
+            ('2024-12', 'Pillar Two 본 법률 일괄 통과 — Assessment Act + Imposition Act + 관련 개정 (2024-01-01 소급 시행)'),
+        ],
+        'sources': [
+            ('Australian Taxation Office (ATO)', 'Pillar Two 안내 및 가이드', 'https://www.ato.gov.au/'),
+            ('Federal Register of Legislation', '호주 연방 법령 — Taxation (Multinational – Global and Domestic Minimum Tax) Act 2024', 'https://www.legislation.gov.au/'),
+        ],
+    },
+
+    'HK': {
+        'slug': 'hong-kong',
+        'name_ko': '홍콩',
+        'name_en': 'Hong Kong (China)',
+        'name_ja': '香港',
+        'flag_cc': 'hk',
+        'iir':   {'date': '2025-01-01', 'qualified': True},
+        'utpr':  {'date': None, 'qualified': False, 'note': '도입 미발표'},
+        'qdmtt': {'date': '2025-01-01', 'qualified': True, 'domestic_name': 'Hong Kong Minimum Top-up Tax (HKMTT)'},
+        'lead': (
+            '홍콩은 <strong>Inland Revenue (Amendment) (Minimum Tax for Multinational Enterprise Groups) '
+            'Ordinance 2025</strong>로 OECD Pillar Two를 도입했습니다. IIR과 QDMTT(국내 도입명: Hong Kong '
+            'Minimum Top-up Tax, HKMTT)는 2025-01-01 이후 개시 사업연도부터 시행되며, UTPR은 아직 별도로 '
+            '발표되지 않은 상태입니다.'
+        ),
+        'domestic_laws': [
+            ('<strong>Inland Revenue (Amendment) (Minimum Tax for Multinational Enterprise Groups) Ordinance 2025</strong>', '2025-06-06 제정. IIR + HKMTT(QDMTT 상당) 일괄 도입'),
+            ('UTPR', '도입 미발표'),
+        ],
+        'insights': [
+            ('홍콩에 모기업', '홍콩에 모기업을 둔 다국적기업그룹은 2025-01-01 이후 개시 사업연도부터 IIR 의무를 부담합니다.'),
+            ('홍콩에 자회사', '홍콩에 자회사를 둔 다국적기업그룹은 2025-01-01 이후 개시 사업연도부터 HKMTT(QDMTT) 적용 대상입니다. QDMTT Safe Harbour 적용 요건을 충족하면 모기업 등의 소재지국에서의 IIR/UTPR 계산이 면제될 수 있습니다. 홍콩의 표준 법인세율(16.5%)과 영역원천주의(territorial taxation) 영향으로 자회사 ETR이 15% 미만이 되는 경우가 적지 않으므로 사전 모델링 가치가 큽니다.'),
+            ('APAC 금융 hub 특성', '홍콩은 APAC 지역의 금융·홀딩 기능이 집중된 관할권으로, Pillar Two 분석 시 홍콩 영역원천주의 세제와의 상호작용을 별도로 검토할 필요가 있습니다.'),
+        ],
+        'recent': [
+            ('2025-06-06', 'Inland Revenue (Amendment) Ordinance 2025 제정 — IIR + HKMTT 일괄 도입 (2025-01-01 시행)'),
+        ],
+        'sources': [
+            ('Inland Revenue Department (IRD)', 'Pillar Two 안내', 'https://www.ird.gov.hk/'),
+            ('Hong Kong e-Legislation', '홍콩 법령 데이터베이스 — Inland Revenue (Amendment) Ordinance 2025', 'https://www.elegislation.gov.hk/'),
+        ],
+    },
+
+    'IE': {
+        'slug': 'ireland',
+        'name_ko': '아일랜드',
+        'name_en': 'Ireland',
+        'name_ja': 'アイルランド',
+        'flag_cc': 'ie',
+        'iir':   {'date': '2023-12-31', 'qualified': True},
+        'utpr':  {'date': '2024-12-31', 'qualified': False},
+        'qdmtt': {'date': '2023-12-31', 'qualified': True, 'domestic_name': 'Qualified Domestic Top-up Tax (QDTT)'},
+        'lead': (
+            '아일랜드는 <strong>Taxes Consolidation Act 1997 Part 4A</strong>로 EU Directive 2022/2523을 '
+            '자국 법령으로 도입했습니다. IIR과 QDMTT(국내 도입명: Qualified Domestic Top-up Tax, QDTT)는 '
+            '2023-12-31, UTPR은 2024-12-31 이후 개시 사업연도부터 시행되고 있습니다.'
+        ),
+        'domestic_laws': [
+            ('<strong>Taxes Consolidation Act 1997, Part 4A</strong>', 'EU Directive 2022/2523 transposition. 2023-12-18 제정'),
+            ('IIR · QDTT(QDMTT)', '2023-12-31 이후 개시 사업연도부터 시행'),
+            ('UTPR', '2024-12-31 이후 개시 사업연도부터 시행'),
+        ],
+        'insights': [
+            ('아일랜드에 모기업', '아일랜드에 모기업(특히 글로벌 IT·제약 그룹의 EMEA 본부)을 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 IIR 의무를 부담합니다.'),
+            ('아일랜드에 자회사', '아일랜드에 자회사를 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 아일랜드 QDTT(QDMTT) 적용 대상입니다. QDMTT Safe Harbour 적용 요건을 충족하면 모기업 등의 소재지국에서의 IIR/UTPR 계산이 면제될 수 있습니다. 아일랜드 표준 법인세율(12.5%)이 글로벌최저한세율(15%) 미만이므로 자회사 ETR이 임계치 하회하는 사례가 많아 사전 모델링이 특히 중요합니다.'),
+            ('Tech·Pharma 헤드쿼터 hub 특성', '아일랜드는 글로벌 IT·제약 기업의 본부·IP 보유 기능이 집중된 관할권입니다. Pillar Two 분석 시 아일랜드의 R&D 세액공제, IP regime 등과의 상호작용을 별도로 검토할 필요가 있습니다.'),
+        ],
+        'recent': [
+            ('2023-12-18', 'Taxes Consolidation Act 1997 Part 4A 제정 — IIR · QDTT 시행'),
+        ],
+        'sources': [
+            ('Revenue Commissioners', '아일랜드 국세청 Pillar Two 안내', 'https://www.revenue.ie/'),
+            ('Irish Statute Book', '아일랜드 법령 데이터베이스 — Taxes Consolidation Act 1997', 'https://www.irishstatutebook.ie/'),
+        ],
+    },
+
+    'LU': {
+        'slug': 'luxembourg',
+        'name_ko': '룩셈부르크',
+        'name_en': 'Luxembourg',
+        'name_ja': 'ルクセンブルク',
+        'flag_cc': 'lu',
+        'iir':   {'date': '2023-12-31', 'qualified': True},
+        'utpr':  {'date': '2024-12-31', 'qualified': False},
+        'qdmtt': {'date': '2023-12-31', 'qualified': True},
+        'lead': (
+            '룩셈부르크는 <strong>Loi du 22 décembre 2023</strong>로 EU Directive 2022/2523을 자국 '
+            '법령으로 도입했습니다. IIR과 QDMTT는 2023-12-31, UTPR은 2024-12-31 이후 개시 사업연도부터 '
+            '시행되고 있습니다.'
+        ),
+        'domestic_laws': [
+            ('<strong>Loi du 22 décembre 2023</strong>', "Relative à l'imposition minimale effective en vue de la transposition de la directive (UE) 2022/2523. 2023-12-20 채택"),
+            ('IIR · QDMTT', '2023-12-31 이후 개시 사업연도부터 시행'),
+            ('UTPR', '2024-12-31 이후 개시 사업연도부터 시행'),
+        ],
+        'insights': [
+            ('룩셈부르크에 모기업', '룩셈부르크에 모기업(특히 EU 지주회사 hub로 활용되는 SOPARFI 등)을 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 IIR 의무를 부담합니다.'),
+            ('룩셈부르크에 자회사', '룩셈부르크에 자회사·금융 vehicle을 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 룩셈부르크 QDMTT 적용 대상입니다. QDMTT Safe Harbour 적용 요건을 충족하면 모기업 등의 소재지국에서의 IIR/UTPR 계산이 면제될 수 있습니다.'),
+            ('EU 지주회사 hub 특성', '룩셈부르크는 EU 지주회사·투자펀드·증권화 vehicle 등의 hub로 활용되는 관할권입니다. Pillar Two 분석 시 SOPARFI·SICAR·SICAV 등 vehicle 유형별 적용 가능성과 함께 룩셈부르크의 IP regime 등과의 상호작용을 별도로 검토할 필요가 있습니다.'),
+        ],
+        'recent': [
+            ('2023-12-22', 'Loi du 22 décembre 2023 공포 — IIR · QDMTT 시행'),
+        ],
+        'sources': [
+            ('Administration des contributions directes (ACD)', '룩셈부르크 직접세청 Pillar Two 안내', 'https://impotsdirects.public.lu/'),
+            ('Legilux', '룩셈부르크 공식 법령 데이터베이스', 'https://legilux.public.lu/'),
+        ],
+    },
+
+    'BE': {
+        'slug': 'belgium',
+        'name_ko': '벨기에',
+        'name_en': 'Belgium',
+        'name_ja': 'ベルギー',
+        'flag_cc': 'be',
+        'iir':   {'date': '2023-12-31', 'qualified': True},
+        'utpr':  {'date': '2024-12-31', 'qualified': False},
+        'qdmtt': {'date': '2023-12-31', 'qualified': True},
+        'lead': (
+            "벨기에는 2023-12-14 가결된 <strong>Loi du 19 décembre 2023 / Wet van 19 december 2023</strong> "
+            "(다국적기업그룹·대규모 국내그룹에 대한 최저세 도입 법률)로 EU Directive 2022/2523을 자국 법령으로 "
+            "도입했습니다. IIR과 QDMTT는 2023-12-31, UTPR은 2024-12-31 이후 개시 사업연도부터 시행되고 있습니다."
+        ),
+        'domestic_laws': [
+            ("<strong>Loi du 19 décembre 2023 / Wet van 19 december 2023</strong>", "다국적기업그룹 및 대규모 국내그룹에 대한 최저세 도입 — EU Directive 2022/2523 transposition. 2023-12-14 가결, Belgisch Staatsblad 공포"),
+            ('IIR · QDMTT', '2023-12-31 이후 개시 사업연도부터 시행'),
+            ('UTPR', '2024-12-31 이후 개시 사업연도부터 시행'),
+        ],
+        'insights': [
+            ('벨기에에 모기업', '벨기에에 모기업을 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 IIR 의무를 부담합니다.'),
+            ('벨기에에 자회사', '벨기에에 자회사를 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 벨기에 QDMTT 적용 대상입니다. QDMTT Safe Harbour 적용 요건을 충족하면 모기업 등의 소재지국에서의 IIR/UTPR 계산이 면제될 수 있습니다.'),
+        ],
+        'recent': [
+            ('2023-12-14', '벨기에 의회 가결, Belgisch Staatsblad 공포 — IIR · QDMTT 시행'),
+        ],
+        'sources': [
+            ('Service Public Fédéral Finances (SPF Finances, 벨기에 연방재무부)', 'Pillar Two 안내', 'https://finance.belgium.be/'),
+            ('Belgisch Staatsblad / Moniteur belge', '벨기에 공식 관보', 'https://www.ejustice.just.fgov.be/'),
+        ],
+    },
+
     'SG': {
         'slug': 'singapore',
         'name_ko': '싱가포르',

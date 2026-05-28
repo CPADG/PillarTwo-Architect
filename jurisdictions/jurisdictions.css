@@ -138,6 +138,60 @@
   letter-spacing:.1px;
 }
 
+/* ── 특수 케이스 카드 (US SbS Regime 등 IIR/UTPR/QDMTT 표준 패턴이 아닌 경우) ── */
+.jr-special-card{
+  margin:24px 0 12px;
+  padding:24px 28px;
+  background:linear-gradient(135deg, rgba(219,234,254,.55) 0%, rgba(238,242,255,.5) 100%);
+  border:1.5px solid rgba(79,70,229,.4);
+  border-radius:16px;
+  box-shadow:0 1px 3px rgba(37,99,235,.04), 0 6px 18px rgba(37,99,235,.1);
+  position:relative;
+  overflow:hidden;
+}
+.jr-special-card::before{
+  content:""; position:absolute; left:0; top:0; bottom:0; width:4px;
+  background:linear-gradient(180deg, #2563eb, #4f46e5);
+}
+.jr-special-head{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; margin-bottom:8px;
+}
+.jr-special-label{
+  font-size:15px; font-weight:700;
+  color:#3730a3;
+  letter-spacing:.3px;
+}
+.jr-special-tag{
+  display:inline-block;
+  padding:3px 10px; border-radius:99px;
+  font-size:11px; font-weight:600; letter-spacing:.4px;
+  color:#fff;
+  background:linear-gradient(135deg, #2563eb, #4f46e5);
+  box-shadow:0 2px 5px rgba(37,99,235,.3);
+}
+.jr-special-date{
+  display:block;
+  font-size:36px; font-weight:800;
+  font-family: ui-monospace, "SF Mono", "Menlo", Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing:-1px;
+  line-height:1.05;
+  margin:6px 0 12px;
+  background:linear-gradient(135deg, #1e3a8a 0%, #4338ca 60%, #6366f1 100%);
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent; color:transparent;
+}
+.jr-special-detail{
+  font-size:13px; color:#475569;
+  line-height:1.55;
+  padding-top:12px;
+  border-top:1px dashed rgba(99,102,241,.25);
+}
+
+/* 미도입 badge — 회색 톤 */
+.jr-badge-none{background:rgba(148,163,184,.15); color:#475569; border:1px solid rgba(148,163,184,.35)}
+
 @media (max-width:640px){
   .jr-timeline{flex-direction:column}
   .jr-tl-box{width:100%}
@@ -182,7 +236,6 @@
 .jr-badge-ok{background:rgba(16,163,74,.12); color:#15803d; border:1px solid rgba(16,163,74,.3)}
 .jr-badge-new{background:rgba(37,99,235,.12); color:#1d4ed8; border:1px solid rgba(37,99,235,.3)}
 .jr-badge-pending{background:rgba(234,179,8,.15); color:#a16207; border:1px solid rgba(234,179,8,.35)}
-.jr-badge-none{background:rgba(148,163,184,.18); color:#64748b; border:1px solid rgba(148,163,184,.35)}
 
 .jr-tag{
   display:inline-block;
@@ -190,6 +243,11 @@
   font-size:11px; color:#6366f1;
   background:rgba(99,102,241,.08);
   letter-spacing:.1px; vertical-align:middle;
+}
+/* 평가/심사 진행 중 — 노란 톤으로 차별화 */
+.jr-tag-pending{
+  color:#a16207;
+  background:rgba(234,179,8,.12);
 }
 
 /* 법령 리스트 — 약간 mono 느낌 */

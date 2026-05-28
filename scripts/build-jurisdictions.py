@@ -1682,6 +1682,7 @@ def render_page_intl(cc, data, lang):
 <title>{title}</title>
 <meta name="description" content="{meta_desc}">
 <meta name="robots" content="index, follow">
+<meta name="google-site-verification" content="rQYKQnmBYz8AMGRPY_z3f3-J4WnsK9coA5uGdNlwqM0" />
 <meta name="naver-site-verification" content="03dcd7169d0affc69d6ebf2e0a2af01dd5694073" />
 <meta name="naver-site-verification" content="b15c8fd7be4aab298a81448b4c4e346fc613d30a" />
 <meta name="msvalidate.01" content="6A8E8C5200BA75B1CA538C9A34736338" />
@@ -2034,6 +2035,7 @@ def render_page(cc, data):
 <title>Pillar Two in {name_ko} — {name_en} | PillarTwo Architect</title>
 <meta name="description" content="{name_ko}의 Pillar Two(글로벌최저한세) 도입 현황. IIR · UTPR · QDMTT 시행일, 도입 법령, 실무 시사점 정리.">
 <meta name="robots" content="index, follow">
+<meta name="google-site-verification" content="rQYKQnmBYz8AMGRPY_z3f3-J4WnsK9coA5uGdNlwqM0" />
 <meta name="naver-site-verification" content="03dcd7169d0affc69d6ebf2e0a2af01dd5694073" />
 <meta name="naver-site-verification" content="b15c8fd7be4aab298a81448b4c4e346fc613d30a" />
 <meta name="msvalidate.01" content="6A8E8C5200BA75B1CA538C9A34736338" />
@@ -2363,6 +2365,7 @@ def build_index(lang='ko'):
 <title>국가별 Pillar Two 도입 현황 — 40개국 | PillarTwo Architect</title>
 <meta name="description" content="OECD Pillar Two(글로벌최저한세) 도입국 40개국의 IIR · UTPR · QDMTT 시행일·도입 법령·OECD 적격 상태를 한눈에. 국가별 페이지로 빠르게 이동.">
 <meta name="robots" content="index, follow">
+<meta name="google-site-verification" content="rQYKQnmBYz8AMGRPY_z3f3-J4WnsK9coA5uGdNlwqM0" />
 <meta name="naver-site-verification" content="03dcd7169d0affc69d6ebf2e0a2af01dd5694073" />
 <meta name="naver-site-verification" content="b15c8fd7be4aab298a81448b4c4e346fc613d30a" />
 <meta name="msvalidate.01" content="6A8E8C5200BA75B1CA538C9A34736338" />

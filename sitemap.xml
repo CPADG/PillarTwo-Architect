@@ -459,4 +459,24 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/south-africa?lang=ja"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/south-africa"/>
   </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/en/korea</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/korea"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/en/korea"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/ja/korea"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/korea"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/jurisdictions/ja/korea</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/korea"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/en/korea"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/ja/korea"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/korea"/>
+  </url>
 </urlset>

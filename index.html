@@ -126,7 +126,7 @@
 </script>
 <body>
 
-<div id="toolbar">
+<header id="toolbar">
   <div class="logo">
     <svg class="logo-pillar" width="19" height="22" viewBox="0 0 19 22"><rect x="0" y="0" width="9" height="2" rx=".5" fill="#2563eb"/><rect x="2.5" y="2.5" width="4" height="13.5" fill="#2563eb"/><rect x="1" y="16.5" width="7" height="1.5" rx=".3" fill="#2563eb"/><rect x="0" y="18.5" width="9" height="3" rx=".5" fill="#2563eb"/><rect x="10" y="0" width="9" height="2" rx=".5" fill="#4f46e5"/><rect x="12.5" y="2.5" width="4" height="13.5" fill="#4f46e5"/><rect x="11" y="16.5" width="7" height="1.5" rx=".3" fill="#4f46e5"/><rect x="10" y="18.5" width="9" height="3" rx=".5" fill="#4f46e5"/></svg>
     <span class="logo-name">Pillar<em>Two</em></span>
@@ -175,10 +175,10 @@
       <button class="lang-btn" id="lang-ja" title="日本語">JP</button>
     </div>
   </div>
-</div>
+</header>
 
 <div id="main-area">
-<div id="viewport">
+<main id="viewport">
   <div id="canvas">
     <svg id="svg-layer" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -250,10 +250,10 @@
   </div>
   <!-- 캔버스 하단 가로 스크롤바 — 캔버스 폭이 viewport 초과 시 자동 표시 -->
   <div id="canvas-hscroll" style="display:none"><div id="canvas-hscroll-thumb"></div></div>
-</div>
+</main>
 
 <!-- Side panel: entity info & Pillar Two analysis output -->
-<div id="side-panel">
+<aside id="side-panel">
   <div class="panel-header">
     <span class="panel-title" id="panel-title" data-i18n="panel.entity_title">기업 정보</span>
     <button class="panel-close" id="panel-close" data-i18n-title="panel.close.title" title="닫기">✕</button>
@@ -268,7 +268,7 @@
       <span data-i18n-html="panel.stale.sub_html">분석을 다시 실행하면<br>최신 정보가 반영됩니다.</span>
     </div>
   </div>
-</div>
+</aside>
 </div><!-- /#main-area -->
 
 <input type="file" id="file-load-input" accept=".p2a" style="display:none">

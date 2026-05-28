@@ -1835,7 +1835,6 @@ def render_page_intl(cc, data, lang):
     <a href="/" class="docs-btn primary">{t('cta.btn.start', lang)}</a>
     <a href="/overview.html" class="docs-btn ghost">{t('cta.btn.overview', lang)}</a>
     <a href="/about.html" class="docs-btn ghost">{t('cta.btn.about', lang)}</a>
-    <a href="/glossary" class="docs-btn ghost">{t('cta.btn.glossary', lang)}</a>
   </section>
 
   <section class="docs-section jr-sources">
@@ -2185,7 +2184,6 @@ def render_page(cc, data):
     <a href="/" class="docs-btn primary">분석 시작 →</a>
     <a href="/overview.html" class="docs-btn ghost" data-i18n="docs.nav.overview">Pillar Two</a>
     <a href="/about.html" class="docs-btn ghost" data-i18n="docs.nav.about">서비스 소개</a>
-    <a href="/glossary" class="docs-btn ghost" data-i18n="docs.nav.glossary">용어 사전</a>
   </section>
 
   <section class="docs-section jr-sources">

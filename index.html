@@ -657,12 +657,12 @@ window.sentryOnLoad = function () {
     <!-- Popup -->
     <div id="rdw-popup" class="rdw-popup">
       <div class="rdp-header">
-        <button class="rdp-nav" id="rdp-prev" data-pe-tip="이전 달">◁</button>
+        <button class="rdp-nav" id="rdp-prev" data-i18n-tip="rdp.prev_month" data-pe-tip="이전 달">◁</button>
         <div class="rdp-selecs">
           <select class="rdp-sel" id="rdp-year"></select>
           <select class="rdp-sel" id="rdp-month"></select>
         </div>
-        <button class="rdp-nav" id="rdp-next" data-pe-tip="다음 달">▷</button>
+        <button class="rdp-nav" id="rdp-next" data-i18n-tip="rdp.next_month" data-pe-tip="다음 달">▷</button>
       </div>
       <div id="rdp-grid" class="rdp-grid"></div>
       <div class="rdp-footer">
@@ -743,7 +743,10 @@ window.minimapReset = function() {
     svg.setAttribute('draggable', 'false');
     mini.appendChild(svg);
 
-    let R = Math.min(w, h) * 0.44;
+    let baseR = Math.min(w, h) * 0.44;
+    let R = baseR;
+    let zoomFactor = 1;
+    const ZOOM_MIN = 1, ZOOM_MAX = 4;
     const proj = d3.geoOrthographic().scale(R).translate([w/2, h/2]).clipAngle(90);
     let rot = [-127.8, -36.5];   // Korea-centered (lng, lat 음수)
     proj.rotate(rot);
@@ -1303,6 +1306,73 @@ window.minimapReset = function() {
       });
     }
 
+    // ─── 휠 줌 — 마우스가 미니맵 영역 안에 있을 때만 일시 활성 ───
+    // 커서 위치 앵커링: invert로 줌 전/후 같은 lat/lng를 같은 픽셀에 유지 → 작은 국가 정밀 선택
+    // 영역 벗어나면 부드럽게 1× 복귀 + 자전 재개
+    let _zoomResetRaf = null;
+    function applyZoom(newZoom, cursorPx) {
+      newZoom = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, newZoom));
+      if (newZoom === zoomFactor) return;
+      let beforeLngLat = null;
+      if (cursorPx) beforeLngLat = proj.invert(cursorPx);
+      zoomFactor = newZoom;
+      R = baseR * zoomFactor;
+      proj.scale(R);
+      if (cursorPx && beforeLngLat && !isNaN(beforeLngLat[0])) {
+        const after = proj.invert(cursorPx);
+        if (after && !isNaN(after[0])) {
+          rot[0] -= (after[0] - beforeLngLat[0]);
+          rot[1] -= (after[1] - beforeLngLat[1]);
+          // theta(rot[1]) 너무 기울지 않게 클램프
+          rot[1] = Math.max(-80, Math.min(80, rot[1]));
+          proj.rotate(rot);
+        }
+      }
+      render(true); updateTooltip(); updatePulse();
+      lastInt = performance.now();   // 줌 중엔 자전 정지
+      // 줌인 시 외곽 ring + sphere body 모두 숨김 (확대된 path와 겹침 방지)
+      const isZoomed = zoomFactor > 1.001;
+      wrap?.classList.toggle('is-zoomed', isZoomed);
+      if (sph) sph.style.opacity = isZoomed ? '0' : '';
+    }
+    svg.addEventListener('wheel', e => {
+      e.preventDefault();
+      if (_zoomResetRaf) { cancelAnimationFrame(_zoomResetRaf); _zoomResetRaf = null; }
+      const r = svg.getBoundingClientRect();
+      const cursorPx = [e.clientX - r.left, e.clientY - r.top];
+      const factor = e.deltaY < 0 ? 1.15 : (1 / 1.15);
+      applyZoom(zoomFactor * factor, cursorPx);
+    }, { passive: false });
+    // 영역 벗어나면 1×로 부드럽게 복귀
+    function startResetZoom() {
+      if (zoomFactor === 1) return;
+      if (_zoomResetRaf) cancelAnimationFrame(_zoomResetRaf);
+      const startZ = zoomFactor;
+      const t0 = performance.now(), DUR = 400;
+      function step(now) {
+        const t = Math.min(1, (now - t0) / DUR);
+        const e = 1 - Math.pow(1 - t, 3);
+        zoomFactor = startZ + (1 - startZ) * e;
+        R = baseR * zoomFactor;
+        proj.scale(R);
+        render(true); updateTooltip(); updatePulse();
+        const isZ = zoomFactor > 1.001;
+        wrap?.classList.toggle('is-zoomed', isZ);
+        if (sph) sph.style.opacity = isZ ? '0' : '';
+        if (t < 1) _zoomResetRaf = requestAnimationFrame(step);
+        else {
+          _zoomResetRaf = null; zoomFactor = 1; R = baseR; proj.scale(R); render(true);
+          wrap?.classList.remove('is-zoomed');
+          if (sph) sph.style.opacity = '';
+        }
+      }
+      _zoomResetRaf = requestAnimationFrame(step);
+    }
+    wrap?.addEventListener('mouseleave', startResetZoom);
+    wrap?.addEventListener('mouseenter', () => {
+      if (_zoomResetRaf) { cancelAnimationFrame(_zoomResetRaf); _zoomResetRaf = null; }
+    });
+
     // ─── 툴바 버튼 토글 — 그 패널이 이미 열려있을 때만 닫기 ───
     // 판정 기준: 버튼의 .panel-active class (app.js의 panelMode와 동기화됨)
     // → entity 패널 보고 있을 때 btn-globe 클릭하면 정상적으로 AU 패널로 전환됨
@@ -1327,11 +1397,12 @@ window.minimapReset = function() {
         svg.setAttribute('width', nw);
         svg.setAttribute('height', nh);
         svg.setAttribute('viewBox', `0 0 ${nw} ${nh}`);
-        R = Math.min(nw, nh) * 0.44;
+        baseR = Math.min(nw, nh) * 0.44;
+        R = baseR * zoomFactor;
         proj.scale(R).translate([nw/2, nh/2]);
         sph.setAttribute('cx', nw/2);
         sph.setAttribute('cy', nh/2);
-        sph.setAttribute('r', R);
+        sph.setAttribute('r', baseR);   // sphere 본체는 줌 영향 안 받음 (외곽 ring 고정)
         render(true);   // 크기 변경 시엔 강제 렌더
         updateTooltip();
         updatePulse();
@@ -1341,32 +1412,36 @@ window.minimapReset = function() {
     // 유휴 자동 회전 + 드래그 (lastInt는 상단에서 이미 선언됨)
     let dragging = false;
     (function tick() {
-      // collapsed 상태면 보이지 않으므로 회전·렌더 skip (자전 CPU 비용 0으로)
+      // collapsed 상태면 보이지 않으므로 회전·렌더 skip
       if (wrap?.classList.contains('is-collapsed')) {
         requestAnimationFrame(tick);
         return;
       }
+      // 줌 상태(zoomFactor !== 1)에선 자전 안 함 — 부자연스러운 회전 방지
       // 드래그·호버·활성화 중엔 자동회전 금지 — 그 외엔 1.5s 휴지 후 천천히 회전
-      if (!dragging && !hoveredFeat && !activatedFeat
+      if (!dragging && !hoveredFeat && !activatedFeat && zoomFactor === 1
           && performance.now() - lastInt > 1500) {
         rot[0] = (rot[0] - 0.18) % 360;
         update();
       }
       requestAnimationFrame(tick);
     })();
-    let startX = null, startRot = null, _downX = null, _downY = null;
+    let startX = null, startY = null, startRot = null, _downX = null, _downY = null;
     const CLICK_THRESHOLD = 4;   // 이 거리 미만 이동은 click으로 간주
     svg.addEventListener('pointerdown', e => {
       e.preventDefault();                 // 브라우저 기본 드래그·선택 비활성화 (빨간 금지 커서 방지)
       _downX = e.clientX; _downY = e.clientY;
-      startX = e.clientX; startRot = [...rot]; dragging = true;
+      startX = e.clientX; startY = e.clientY; startRot = [...rot]; dragging = true;
       lastInt = performance.now(); svg.style.cursor = 'grabbing';
       svg.setPointerCapture(e.pointerId);
     });
     svg.addEventListener('dragstart', e => e.preventDefault());
     svg.addEventListener('pointermove', e => {
       if (startX === null) return;
-      rot[0] = startRot[0] + (e.clientX - startX) * 0.5;
+      // 가로(경도) + 세로(위도) 모두 패닝 가능. 줌인 시 줌 배율에 반비례하는 속도(정밀 제어)
+      const speedFactor = 1 / Math.max(1, zoomFactor);
+      rot[0] = startRot[0] + (e.clientX - startX) * 0.5 * speedFactor;
+      rot[1] = Math.max(-80, Math.min(80, startRot[1] - (e.clientY - startY) * 0.5 * speedFactor));
       update(); lastInt = performance.now();
     });
     const endDrag = e => {

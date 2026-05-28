@@ -511,8 +511,23 @@ body.no-flow-spirits .iir-spirit{display:none}
 /* ── IIR flow arrows ── */
 @keyframes iirFadeIn{from{opacity:0}to{opacity:1}}
 #iir-flow-svg>*{animation:iirFadeIn .18s ease both}
-/* ── Analyze button pulse ── */
-@keyframes btnAnalyzePulse{0%,100%{box-shadow:0 0 0 0 rgba(37,99,235,.45),0 0 0 0 rgba(37,99,235,0),0 0 0 0 rgba(37,99,235,0)}55%{box-shadow:0 0 0 6px rgba(37,99,235,0),0 32px 90px 34px rgba(37,99,235,.55),0 0 56px 18px rgba(96,165,250,.5)}}
+/* ── Analyze button pulse ── 방사형 그래디언트: 블루 중심, 가장자리에서만 인디고 hint */
+@keyframes btnAnalyzePulse{
+  0%,100%{
+    box-shadow:
+      0 0 0 0 rgba(37,99,235,.50),
+      0 0 0 0 rgba(37,99,235,0),
+      0 0 0 0 rgba(59,130,246,0),
+      0 0 0 0 rgba(79,70,229,0)
+  }
+  50%{
+    box-shadow:
+      0 0 0 6px rgba(37,99,235,0),         /* ripple ring 확장하며 페이드 */
+      0 4px 32px 4px rgba(37,99,235,.78),       /* inner brand blue */
+      0 8px 70px 22px rgba(59,130,246,.58),     /* mid blue-500 */
+      0 12px 102px 38px rgba(79,70,229,.24)     /* 가장 바깥 인디고 hint */
+  }
+}
 #btn-analyze.needs-analysis{animation:btnAnalyzePulse 1.5s ease-in-out infinite;border-color:var(--primary)}
 .spinner-check{width:42px;height:42px;background:#22c55e;border-radius:50%;display:none;align-items:center;justify-content:center;transform:scale(0);transition:transform .28s cubic-bezier(.175,.885,.32,1.275)}
 .spinner-check.has-pending{background:#f59e0b}
@@ -555,7 +570,11 @@ body.no-flow-spirits .iir-spirit{display:none}
      · scrollbar가 minimap 뒤로 안 내려감 (스크롤 ✓)
      · 콘텐츠가 minimap 뒤로 안 가려짐 (가림 ✓)
      · minimap이 248px 영역을 정확히 채우므로 시각적 빈 여백 0 (여백 ✓) */
-#side-panel.open .panel-body{padding-bottom:0;margin-bottom:248px;scroll-padding-bottom:24px}
+/* margin-bottom = docked minimap 높이(404px) → 패널 콘텐츠 하단이 globe 영역 바로 위에 안착, 겹침 없음 */
+#side-panel.open .panel-body{padding-bottom:0;margin-bottom:404px;scroll-padding-bottom:24px;
+  transition:margin-bottom .32s ease}
+/* Globe 콜랩스 상태에선 globe 영역이 80px로 줄어들므로 margin도 80px로 맞춤 */
+body.globe-collapsed #side-panel.open .panel-body{margin-bottom:80px}
 .panel-section{margin-bottom:18px}
 .panel-section-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;display:flex;align-items:center;gap:6px}
 .panel-row{display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid var(--border);font-size:13px}
@@ -573,6 +592,9 @@ body.no-flow-spirits .iir-spirit{display:none}
 .agg-unit-meta{margin-top:5px;font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px}
 /* Country-grouped AU layout */
 .au-country-group{position:relative;display:flex;align-items:stretch;margin-bottom:8px;border:1px solid var(--border);border-radius:6px;overflow:hidden;background:var(--surface);transition:border-color .15s,box-shadow .15s}
+/* 합산단위 패널 마지막 항목의 trailing margin 제거 — 불필요한 하단 여백 해소 */
+.au-country-group:last-child{margin-bottom:0}
+.panel-section:last-child{margin-bottom:0}
 .au-country-group.collapsed{min-height:46px}
 .au-country-sidebar{position:absolute;top:0;bottom:0;left:0;width:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px 5px;background:var(--bg);border-right:1px solid var(--border);gap:0;cursor:pointer;transition:background .15s,border-color .15s,padding .2s;z-index:1;overflow:hidden}
 .au-country-sidebar::before{content:'';position:absolute;inset:0;background-image:var(--flag-bg,none);background-size:cover;background-position:center;background-repeat:no-repeat;opacity:.045;filter:saturate(.55);pointer-events:none;z-index:0}
@@ -580,7 +602,8 @@ body.no-flow-spirits .iir-spirit{display:none}
 .au-country-content{flex:1;display:flex;flex-direction:column;min-width:0;margin-left:62px;background:var(--surface)}
 .au-country-group.collapsed .au-country-sidebar{padding:4px 5px}
 .au-country-group.collapsed .au-country-sidebar .cc-chip-inline{margin-bottom:2px;font-size:10.5px;padding:1px 5px}
-.au-country-group.collapsed .au-sidebar-meta{-webkit-line-clamp:1;font-size:9.5px}
+.au-country-group.collapsed .au-sidebar-name{-webkit-line-clamp:1;font-size:9.5px}
+.au-country-group.collapsed .au-sidebar-cnt{font-size:9.5px}
 .au-grid-wrap{min-height:0}
 .au-country-group.collapsed .au-items-wrap,.au-country-group:not(.collapsed) .au-compact-wrap{display:none}
 .au-country-items-compact{padding:13px 32px 13px 12px;display:flex;flex-wrap:wrap;gap:5px 4px;align-items:center;align-content:center;font-size:12px;line-height:1.5;min-width:0;overflow:hidden}
@@ -596,8 +619,12 @@ body.no-flow-spirits .iir-spirit{display:none}
 .panel-section-title:has(.au-collapse-all-btn){position:sticky;top:-14px;background:var(--surface);z-index:5;padding:4px 0 6px;margin-top:-4px}
 .au-collapse-all-btn:hover{background:var(--bg);border-color:#cbd5e1;color:var(--text)}
 .au-country-sidebar .cc-chip-inline{margin-bottom:5px}
-.au-sidebar-meta{font-size:10px;color:var(--muted);font-weight:600;text-align:center;line-height:1.35;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.au-sidebar-meta .au-sidebar-cnt{font-weight:500;white-space:nowrap}
+/* 메타는 flex column → 이름과 카운트를 별도 행에 두어 이름이 길어도 카운트는 항상 보임 */
+.au-sidebar-meta{font-size:10px;color:var(--muted);font-weight:600;text-align:center;line-height:1.35;
+  display:flex;flex-direction:column;align-items:center;gap:1px;min-width:0;width:100%}
+/* 이름은 줄클램프(최대 2줄) + 컨테이너 폭 안에서 wrap */
+.au-sidebar-name{overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-width:100%}
+.au-sidebar-meta .au-sidebar-cnt{font-weight:500;white-space:nowrap;flex-shrink:0}
 .au-country-items{display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden}
 .au-country-group .agg-unit-item{margin-bottom:0;border:none;border-radius:0;border-bottom:1px solid var(--border);background:var(--surface)}
 .au-country-group .agg-unit-item:last-child{border-bottom:none}
@@ -885,16 +912,50 @@ body.no-flow-spirits .iir-spirit{display:none}
 .rdp-footer-btns{display:flex;gap:6px;justify-content:flex-end}
 .rdp-iir-badge{font-size:10.5px;color:var(--muted);background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:2px 7px;display:none;text-align:center}
 .rdp-iir-badge.show{display:block}
-/* ─── 세계지도 미니맵 ─────────────────────────────────────────────── */
-#globe-minimap-wrap{position:fixed;z-index:180;overflow:hidden;background:#dde8f0;
+/* ─── 세계지도 미니맵 (Cobe — WebGL 도트 글로브) ───────────────── */
+#globe-minimap-wrap{position:fixed;z-index:180;overflow:hidden;background:#ffffff;
   transition:width .32s ease,height .32s ease,border-radius .32s ease}
-#globe-minimap-wrap.map-pip-clear{bottom:16px;right:16px;width:268px;height:206px;border-radius:10px;
+/* 정원 globe와 균형 — globe 영역(width × (height-28-52))이 거의 정사각이 되게 wrap 세로 ↑ */
+#globe-minimap-wrap.map-pip-clear{bottom:16px;right:16px;width:268px;height:348px;border-radius:10px;
   box-shadow:0 4px 24px rgba(0,0,0,.2)}
-#globe-minimap-wrap.map-pip-panel{bottom:16px;right:340px;width:268px;height:206px;border-radius:10px;
+#globe-minimap-wrap.map-pip-panel{bottom:16px;right:340px;width:268px;height:348px;border-radius:10px;
   box-shadow:0 4px 24px rgba(0,0,0,.2)}
-#globe-minimap-wrap.map-docked{bottom:0;right:0;width:324px;height:248px;border-radius:0;
-  border-top:1px solid var(--border);box-shadow:0 -2px 8px rgba(0,0,0,.06)}
-#globe-minimap{position:absolute;top:28px;left:0;right:0;bottom:52px}
+/* docked 모드는 사이드 패널 아래로 붙음 — 패널의 border-left와 연속되도록 동일 left border 추가 */
+#globe-minimap-wrap.map-docked{bottom:0;right:0;width:324px;height:404px;border-radius:0;
+  border-top:1px solid var(--border);border-left:1px solid var(--border);
+  box-shadow:0 -2px 8px rgba(0,0,0,.06)}
+/* 콜랩스 상태 — wrap height 80px(헤더 28 + 푸터 52)로 축소.
+   wrap은 bottom 고정 + overflow:hidden이라 SVG는 wrap height 트랜지션 따라 자연스럽게
+   footer(stationary, z-index 1001) 뒤로 sunk → display:none 강제 종료 없이 시각적 심리스. */
+#globe-minimap-wrap.is-collapsed{height:80px!important}
+#globe-collapse-btn{margin-left:auto;width:18px;height:18px;display:flex;align-items:center;justify-content:center;
+  background:none;border:none;color:#64748b;cursor:pointer;padding:0;border-radius:4px;flex-shrink:0;
+  transition:background .12s,color .12s,transform .25s ease}
+#globe-collapse-btn:hover{background:rgba(15,23,42,.06);color:#1e293b}
+#globe-collapse-btn svg{width:14px;height:14px}
+#globe-minimap-wrap.is-collapsed #globe-collapse-btn{transform:rotate(180deg)}
+/* 컨테이너 배경은 흰색만 — 그래디언트는 ::after의 box-shadow로 sphere 가장자리에 집중시킴 */
+#globe-minimap{position:absolute;top:28px;left:0;right:0;bottom:52px;background:#fff}
+/* 글로브 가장자리 강조 — 얇은 ring + symmetric soft glow (참고 이미지 스타일) */
+#globe-minimap::after{content:'';position:absolute;top:50%;left:50%;height:88%;aspect-ratio:1/1;
+  transform:translate(-50%,-50%);border-radius:50%;
+  border:1px solid rgba(148,163,204,.24);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.7) inset,             /* sphere 안쪽 1px 흰 highlight */
+    0 0 18px rgba(96,165,250,.22),                    /* symmetric 푸른 halo */
+    0 0 4px rgba(59,130,246,.12),                     /* 더 가깝게 한 번 더 */
+    0 6px 14px -4px rgba(59,130,246,.10);             /* 살짝 아래로 떨어지는 부드러운 그림자 */
+  pointer-events:none;z-index:3}
+#globe-minimap-canvas{display:block;width:100%;height:100%;cursor:default;position:relative;z-index:1}
+/* 글로브 마커 hover/선택 툴팁 */
+.globe-tooltip{position:absolute;background:rgba(15,23,42,.94);color:#fff;
+  padding:5px 9px;border-radius:6px;font-size:10.5px;line-height:1.35;
+  pointer-events:none;z-index:10;box-shadow:0 4px 14px rgba(0,0,0,.3);
+  white-space:nowrap;transform:translate(-50%,-100%);margin-top:-10px;
+  opacity:0;transition:opacity .15s ease;text-align:center}
+.globe-tooltip.visible{opacity:1}
+.globe-tooltip .globe-tt-name{font-weight:700;letter-spacing:.1px}
+.globe-tooltip .globe-tt-cnt{font-weight:400;color:#cbd5e1;font-size:9.5px;margin-top:1px}
 /* ── 지도 하단 푸터 바 ───────────────────────────────────────── */
 #map-footer{position:absolute;left:0;right:0;bottom:0;height:52px;background:#fff;
   border-top:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column;
@@ -918,12 +979,22 @@ body.no-flow-spirits .iir-spirit{display:none}
 .mf-icon-btn svg{width:12px;height:12px;display:block}
 .mf-ver{font-size:9px;color:#94a3b8;font-weight:400;letter-spacing:.15px;user-select:none;white-space:nowrap}
 .map-hd{position:absolute;top:0;left:0;right:0;height:28px;z-index:1000;display:flex;align-items:center;
-  padding:0 8px;gap:5px;background:rgba(255,255,255,.88);backdrop-filter:blur(4px);
+  padding:0 8px;gap:6px;background:rgba(255,255,255,.88);backdrop-filter:blur(4px);
   border-bottom:1px solid rgba(0,0,0,.07);font-size:10px;font-weight:700;color:#334155;letter-spacing:.2px}
 .map-hd-icon{width:11px;height:11px;opacity:.5;flex-shrink:0}
-.map-hd-label{flex:1}
-#map-hd-country{font-size:10px;font-weight:700;color:#1e3a5f;letter-spacing:.1px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:flex;align-items:center;gap:4px}
-#map-hd-country .map-hd-cnt{font-weight:400;color:#64748b;font-size:9.5px;letter-spacing:0;flex-shrink:0}
+.map-hd-label{font-size:11.5px;letter-spacing:.1px;flex-shrink:0}
+/* Globe 제목과 contextual info 사이 세로 구분선 — info가 있을 때만 표시 */
+.map-hd:has(#map-hd-country:not(:empty)) .map-hd-label{
+  padding-right:8px;margin-right:2px;border-right:1px solid rgba(15,23,42,.12)}
+/* 미니맵 헤더의 AU 칩은 좁은 28px 공간에 맞게 더 콤팩트하게 */
+.map-hd .au-badge{padding:0 5px;font-size:9.5px;font-weight:600;border-radius:5px;height:15px;line-height:15px;letter-spacing:.1px}
+/* 미니맵 헤더 전용 — 콤팩트 국가코드 칩 (cc-chip-inline 기본보다 더 작게) */
+.map-hd .cc-chip-inline{padding:0 5px;font-size:9.5px;font-weight:700;border-radius:5px;height:15px;line-height:15px;letter-spacing:.3px}
+/* 핀 아이콘 — 클릭으로 고정된 상태 표시 (브랜드 인디고) */
+.map-hd-pin{width:10px;height:10px;color:#4f46e5;flex-shrink:0;opacity:.95}
+#map-hd-country{gap:4px}
+#map-hd-country{font-size:10px;font-weight:700;color:#1e3a5f;letter-spacing:.1px;flex:1 1 auto;min-width:0;overflow:hidden;display:flex;align-items:center;gap:4px}
+/* 이름 span은 가용 공간 채우면서 ellipsis 잘림. cnt는 오른쪽에 고정. */
+#map-hd-country .map-hd-name{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#map-hd-country .map-hd-cnt{font-weight:400;color:#64748b;font-size:9.5px;letter-spacing:0;flex-shrink:0;margin-left:auto;white-space:nowrap}
 .au-sidebar-cnt{font-size:10px;color:var(--muted);font-weight:500;text-align:center}
-.leaflet-container{font-size:11px}
-.leaflet-control-attribution{display:none!important}

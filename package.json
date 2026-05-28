@@ -5,7 +5,9 @@
   "description": "PillarTwo Architect — 글로벌최저한세 분석·시각화 웹 서비스",
   "scripts": {
     "build": "esbuild globe-engine.js --bundle --minify --target=es2020 --format=iife --drop:console --drop:debugger --legal-comments=none --charset=utf8 --outfile=globe-engine.min.js",
-    "build:watch": "esbuild globe-engine.js --bundle --minify --target=es2020 --format=iife --drop:console --drop:debugger --legal-comments=none --charset=utf8 --outfile=globe-engine.min.js --watch"
+    "build:watch": "esbuild globe-engine.js --bundle --minify --target=es2020 --format=iife --drop:console --drop:debugger --legal-comments=none --charset=utf8 --outfile=globe-engine.min.js --watch",
+    "build:app": "esbuild app.js --minify --target=es2020 --legal-comments=none --charset=utf8 --outfile=app.min.js",
+    "build:app:watch": "esbuild app.js --minify --target=es2020 --legal-comments=none --charset=utf8 --outfile=app.min.js --watch"
   },
   "devDependencies": {
     "esbuild": "^0.24.0"

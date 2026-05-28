@@ -83,9 +83,6 @@ window.sentryOnLoad = function () {
 };
 </script>
 <link rel="stylesheet" href="styles.css">
-<!-- Leaflet CSS — 비차단 로드 (print/onload swap 트릭) -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'"/>
-<noscript><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/></noscript>
 <!-- Google AdSense / GA4 — Consent Mode v2 초기화 (인라인은 즉시 실행, 무거운 외부 스크립트는 페이지 load 후 주입) -->
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -132,35 +129,24 @@ window.sentryOnLoad = function () {
   if(document.readyState==='complete'){ setTimeout(_injectAds,600); }
   else { window.addEventListener('load', ()=>setTimeout(_injectAds,600), {once:true}); }
 </script>
-<!-- preconnect: 미니맵 타일·world-atlas JSON 사용 출처 — 연결 미리 warm up하여
-     실제 fetch 시 핸드셰이크 시간 절감 (PageSpeed preconnect 권고 대응). -->
-<link rel="preconnect" href="https://a.tile.openstreetmap.org" crossorigin>
-<link rel="preconnect" href="https://b.tile.openstreetmap.org" crossorigin>
-<link rel="preconnect" href="https://c.tile.openstreetmap.org" crossorigin>
-<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<!-- preconnect: Cobe (글로브 미니맵) CDN — 첫 인터랙션 시 import 핸드셰이크 절감 -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 </head>
 <!-- head script들: defer로 HTML 파싱과 병렬 다운로드 + DOMContentLoaded 후 순서대로 실행 → 초기 렌더 차단 제거 -->
 <script defer src="translations.min.js"></script>
 <script defer src="globe-engine.min.js"></script>
 <script defer src="iir-db.min.js"></script>
-<!-- Leaflet / topojson은 미니맵 전용 — LCP 보호를 위해 페이지 load 후 동적 주입.
-     주입 완료 시점에 initMinimap() 재호출(현재 호출은 window.L 가드로 no-op 처리됨). -->
+<!-- Cobe (도트 패턴 회전 글로브) 미니맵 — LCP 보호를 위해 페이지 load 후 동적 import.
+     dynamic import()는 자동으로 모듈 컨텍스트에서 평가됨. -->
 <script>
   window._loadMinimapDeps=function(){
     if(window._minimapDepsLoaded) return; window._minimapDepsLoaded=true;
-    const l=document.createElement('script');
-    l.src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-    l.async=true;
-    l.onload=function(){
-      const t=document.createElement('script');
-      t.src='https://unpkg.com/topojson-client@3/dist/topojson-client.min.js';
-      t.async=true;
-      t.onload=function(){
+    import('https://cdn.jsdelivr.net/npm/cobe@0.6.4/+esm')
+      .then(m=>{
+        window.createGlobe = m.default || m;
         if(typeof initMinimap==='function') initMinimap();
-      };
-      document.head.appendChild(t);
-    };
-    document.head.appendChild(l);
+      })
+      .catch(()=>{ window._minimapDepsLoaded=false; });
   };
 </script>
 <body>
@@ -203,15 +189,15 @@ window.sentryOnLoad = function () {
     <div class="sep"></div>
     <div class="zoom-ctrl">
       <span class="ctrl-prefix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg></span>
-      <button class="zoom-ctrl-btn" id="btn-zo" data-i18n-title="zoom.out.title" data-i18n-aria="zoom.out.title" title="축소" aria-label="축소"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="8" x2="13" y2="8"/></svg></button>
-      <span class="zoom-ctrl-val" id="zoom-disp" data-i18n-title="zoom.reset.title" title="클릭하여 100%로 초기화">100%</span>
-      <button class="zoom-ctrl-btn" id="btn-zi" data-i18n-title="zoom.in.title" data-i18n-aria="zoom.in.title" title="확대" aria-label="확대"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></button>
+      <button class="zoom-ctrl-btn" id="btn-zo" data-i18n-tip="zoom.out.title" data-i18n-aria="zoom.out.title" data-pe-tip="축소" aria-label="축소"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="8" x2="13" y2="8"/></svg></button>
+      <span class="zoom-ctrl-val" id="zoom-disp" data-i18n-tip="zoom.reset.title" data-pe-tip="클릭하여 100%로 초기화">100%</span>
+      <button class="zoom-ctrl-btn" id="btn-zi" data-i18n-tip="zoom.in.title" data-i18n-aria="zoom.in.title" data-pe-tip="확대" aria-label="확대"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></button>
     </div>
     <div class="lang-sel">
       <span class="ctrl-prefix" style="border-right:1px solid var(--border)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></span>
-      <button class="lang-btn" id="lang-en" title="English">EN</button>
-      <button class="lang-btn active" id="lang-ko" title="한국어">KR</button>
-      <button class="lang-btn" id="lang-ja" title="日本語">JP</button>
+      <button class="lang-btn" id="lang-en" data-pe-tip="English">EN</button>
+      <button class="lang-btn active" id="lang-ko" data-pe-tip="한국어">KR</button>
+      <button class="lang-btn" id="lang-ja" data-pe-tip="日本語">JP</button>
     </div>
   </div>
 </header>
@@ -282,7 +268,7 @@ window.sentryOnLoad = function () {
       <span data-i18n="btn.demo">가상 사례 불러오기</span>
       <span class="btn-demo-close" id="btn-demo-dismiss" role="button" tabindex="0" data-i18n-title="btn.demo.dismiss" title="힌트 숨기기" data-pe-tip="힌트 숨기기" data-i18n-tip="btn.demo.dismiss">✕</span>
     </button>
-    <button id="btn-demo-advanced" style="display:none" data-i18n-title="btn.demo_advanced.title">
+    <button id="btn-demo-advanced" style="display:none">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="12" y1="6" x2="12" y2="18"/><line x1="6" y1="12" x2="18" y2="12"/></svg>
       <span data-i18n="btn.demo_advanced">더 복잡한 아키텍처 조회</span>
     </button>
@@ -295,7 +281,7 @@ window.sentryOnLoad = function () {
 <aside id="side-panel">
   <div class="panel-header">
     <span class="panel-title" id="panel-title" data-i18n="panel.entity_title">기업 정보</span>
-    <button class="panel-close" id="panel-close" data-i18n-title="panel.close.title" title="닫기">✕</button>
+    <button class="panel-close" id="panel-close" data-i18n-tip="panel.close.title" data-pe-tip="닫기">✕</button>
   </div>
   <div class="panel-body" id="panel-body">
     <div class="panel-empty" data-i18n-html="panel.empty_html">기업을 클릭하면<br>상세 정보가 표시됩니다.</div>
@@ -316,10 +302,16 @@ window.sentryOnLoad = function () {
 <div id="globe-minimap-wrap" class="map-pip-clear">
   <div class="map-hd">
     <svg class="map-hd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-    <span class="map-hd-label" data-i18n="minimap.title">세계지도</span>
+    <span class="map-hd-label" data-i18n="minimap.title">Globe</span>
     <span id="map-hd-country"></span>
+    <button id="globe-collapse-btn" aria-label="Collapse/Expand globe view" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
   </div>
-  <div id="globe-minimap"></div>
+  <div id="globe-minimap">
+    <canvas id="globe-minimap-canvas"></canvas>
+    <div id="globe-tooltip" class="globe-tooltip"></div>
+  </div>
   <div id="map-footer">
     <div class="mf-row mf-row-nav">
       <a class="mf-link" href="overview.html" data-i18n="docs.nav.overview_short">Pillar Two</a>
@@ -330,7 +322,7 @@ window.sentryOnLoad = function () {
       <span class="mf-sep"></span>
       <button class="mf-link mf-link-btn" id="btn-privacy" data-i18n="footer.privacy_short">개인정보</button>
       <span class="mf-sep"></span>
-      <button class="mf-icon-btn" id="btn-contact" data-i18n-title="footer.contact_title" title="개발자에게 문의하기" aria-label="Contact">
+      <button class="mf-icon-btn" id="btn-contact" data-i18n-tip="footer.contact_title" data-pe-tip="개발자에게 문의하기" aria-label="Contact">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       </button>
     </div>
@@ -628,11 +620,11 @@ window.sentryOnLoad = function () {
 <div id="bottom-left-stack">
   <!-- 캔버스 빠른 액션: 최종모기업 이동 + 노드 이동 되돌리기 -->
   <div id="canvas-quick-actions">
-    <button id="btn-go-upe" class="cqa-btn" data-i18n-title="cqa.go_upe.title" title="최종 모기업으로 이동">
+    <button id="btn-go-upe" class="cqa-btn" data-i18n-tip="cqa.go_upe.title" data-pe-tip="최종모기업으로 이동">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       <span data-i18n="cqa.go_upe">상위 이동</span>
     </button>
-    <button id="btn-undo-move" class="cqa-btn" data-i18n-title="cqa.undo.title" title="마지막 노드 이동 되돌리기 (Ctrl+Z)" disabled>
+    <button id="btn-undo-move" class="cqa-btn" data-i18n-tip="cqa.undo.title" data-pe-tip="되돌리기" disabled>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 14 4 9 9 4"/><path d="M20 20v-7a4 4 0 0 0-4-4H4"/></svg>
       <span data-i18n="cqa.undo">되돌리기</span>
     </button>
@@ -641,7 +633,7 @@ window.sentryOnLoad = function () {
   <div id="globe-status-panel" style="display:none">
     <div class="gsp-header">
       <span class="gsp-title" data-i18n="gsp.title">과세규정 시행 현황</span>
-      <button class="gsp-close" id="gsp-close-btn" data-i18n-title="gsp.close.title" data-i18n-aria="gsp.close.title" title="닫기" aria-label="닫기">✕</button>
+      <button class="gsp-close" id="gsp-close-btn" data-i18n-tip="gsp.close.title" data-i18n-aria="gsp.close.title" data-pe-tip="닫기" aria-label="닫기">✕</button>
     </div>
     <div id="gsp-fy-range" class="gsp-fy-range"></div>
     <div class="gsp-warn" data-i18n="gsp.warn">⚠ 초기 설정값은 부정확할 수 있습니다. 변경 시 분석을 다시 실행해야 정확한 결과가 산출됩니다.</div>
@@ -657,7 +649,7 @@ window.sentryOnLoad = function () {
       <span class="rdw-label" data-i18n="rdw.label">최종모기업 사업연도 종료일</span>
       <div class="rdw-input-row">
         <input type="text" id="rdw-input" class="rdw-input" placeholder="YYYY-MM-DD" maxlength="10">
-        <button id="rdw-cal-btn" class="rdw-cal-btn" data-i18n-title="rdw.cal.title" title="캘린더로 선택">
+        <button id="rdw-cal-btn" class="rdw-cal-btn" data-i18n-tip="rdw.cal.title" data-pe-tip="캘린더로 선택">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         </button>
       </div>
@@ -665,12 +657,12 @@ window.sentryOnLoad = function () {
     <!-- Popup -->
     <div id="rdw-popup" class="rdw-popup">
       <div class="rdp-header">
-        <button class="rdp-nav" id="rdp-prev" title="이전 달">◁</button>
-        <div class="rdp-selects">
+        <button class="rdp-nav" id="rdp-prev" data-pe-tip="이전 달">◁</button>
+        <div class="rdp-selecs">
           <select class="rdp-sel" id="rdp-year"></select>
           <select class="rdp-sel" id="rdp-month"></select>
         </div>
-        <button class="rdp-nav" id="rdp-next" title="다음 달">▷</button>
+        <button class="rdp-nav" id="rdp-next" data-pe-tip="다음 달">▷</button>
       </div>
       <div id="rdp-grid" class="rdp-grid"></div>
       <div class="rdp-footer">
@@ -691,5 +683,725 @@ window.sentryOnLoad = function () {
 </div>
 
 <script defer src="app.min.js"></script>
+
+<!-- ═══════════════════════════ D3-geo PREVIEW START ═══════════════════════════
+     Cobe 대체 후보 평가용. Revert: 이 START 주석부터 END 주석까지 통째 삭제.
+     동작: 기존 Cobe 캔버스를 숨기고 같은 자리에 D3-geo orthographic SVG를 띄움. -->
+<style id="d3-preview-style">#globe-minimap-canvas{display:none!important}</style>
+<script type="module">
+// ── 즉시 실행: Cobe 무력화 + minimapFlyTo/Reset 오버라이드 ──
+// Cobe의 initMinimap이 매 프레임 _updateGlobeTooltip을 호출해 tooltip을 좌상단으로 보내는 문제를 막기 위해 무력화.
+// (Cobe ESM은 로드되지만 createGlobe/onRender가 호출되지 않음.)
+window.initMinimap = function(){};
+window._updateGlobeTooltip = function(){};
+// _updateMinimapHeader도 무력화 — 그렇지 않으면 minimapFlyTo가 호출될 때마다 country 헤더가
+// 우리가 setHeader로 띄운 AU/entity 라벨을 덮어쓰는 race condition 발생.
+window._updateMinimapHeader = function(){};
+
+// D3 import 대기 사이에도 패널·캔버스 노드·칩의 호버 이벤트를 놓치지 않기 위해 톱레벨에서 즉시 설치.
+let _d3Forward = null;
+let _pendingAction = null;        // D3 마운트 전 호출 큐
+const _origFlyTo = typeof window.minimapFlyTo === 'function' ? window.minimapFlyTo : null;
+const _origReset = typeof window.minimapReset === 'function' ? window.minimapReset : null;
+window.minimapFlyTo = function(cc) {
+  if (_origFlyTo) { try { _origFlyTo(cc); } catch(_){} }    // 원본 부수효과(헤더 갱신 등) 유지
+  if (!cc || cc === 'XX') return;
+  if (_d3Forward) _d3Forward('flyTo', cc);
+  else _pendingAction = { action: 'flyTo', cc };
+};
+window.minimapReset = function() {
+  if (_origReset) { try { _origReset(); } catch(_){} }
+  if (_d3Forward) _d3Forward('reset');
+  else _pendingAction = { action: 'reset' };
+};
+
+(async () => {
+  let mini = null;
+  for (let i = 0; i < 40; i++) {
+    mini = document.getElementById('globe-minimap');
+    if (mini && mini.clientWidth && mini.clientHeight) break;
+    await new Promise(r => setTimeout(r, 150));
+  }
+  if (!mini) return;
+  const w = mini.clientWidth, h = mini.clientHeight;
+  try {
+    const [d3, topo] = await Promise.all([
+      import('https://cdn.jsdelivr.net/npm/d3-geo@3/+esm'),
+      import('https://cdn.jsdelivr.net/npm/topojson-client@3/+esm')
+    ]);
+    const world = await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(r => r.json());
+    const countries = topo.feature(world, world.objects.countries);
+
+    const NS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(NS, 'svg');
+    svg.id = 'd3-globe-preview';
+    svg.setAttribute('width', w);
+    svg.setAttribute('height', h);
+    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+    Object.assign(svg.style, { position:'absolute', top:'0', left:'0', zIndex:'2',
+      cursor:'grab', userSelect:'none', touchAction:'none', webkitUserSelect:'none' });
+    svg.setAttribute('draggable', 'false');
+    mini.appendChild(svg);
+
+    let R = Math.min(w, h) * 0.44;
+    const proj = d3.geoOrthographic().scale(R).translate([w/2, h/2]).clipAngle(90);
+    let rot = [-127.8, -36.5];   // Korea-centered (lng, lat 음수)
+    proj.rotate(rot);
+    const pathGen = d3.geoPath(proj);
+
+    // Sphere 본체 (밝은 회백) — 외곽 ring은 CSS #globe-minimap::after가 담당
+    const sph = document.createElementNS(NS, 'circle');
+    sph.setAttribute('cx', w/2); sph.setAttribute('cy', h/2); sph.setAttribute('r', R);
+    sph.setAttribute('fill', '#f8fafc');
+    svg.appendChild(sph);
+
+    // 국가 path 그룹 — 한 번만 생성하고 d 속성만 업데이트 (성능 + 호버 유지)
+    const grp = document.createElementNS(NS, 'g');
+    svg.appendChild(grp);
+    // 색상 톤: 기본 / 엔티티 보유국(중간) / 호버 / 활성화
+    const FILL = '#3b82f6', FILL_OPACITY = '0.32';
+    const FILL_HAS_ENT = '#3b82f6', FILL_OPACITY_HAS_ENT = '0.62';   // MNE 그룹 소속국가
+    const FILL_HOVER = '#1d4ed8', FILL_OPACITY_HOVER = '0.92';
+    const FILL_ACTIVE = '#2563eb', FILL_OPACITY_ACTIVE = '0.85';
+    const STROKE = '#fff', STROKE_W = '0.4';
+    const tt = document.getElementById('globe-tooltip');
+    let hoveredFeat = null, hoveredPath = null;
+    let activatedFeat = null, activatedPath = null, activatedCc = null;
+    let lastInt = performance.now();
+    // 호버 모드 — 'au' | 'nd' | 'cc' | null. setActivated이 closure로 참조하므로 함수 정의 전에 초기화 필요 (TDZ 회피)
+    let hdMode = null;
+    // MNE 그룹 소속 국가 추적
+    // 분석 후: aggregateUnits 사용 (이미 isExcludedEntity + nonGloBESet 필터됨)
+    // 분석 전: nodes 직접 순회 + isNonGloBE 필터 (분석 전엔 제외기업만 잡힘)
+    let entityCountries = new Set();
+    function refreshEntityCountries() {
+      const next = new Set();
+      if (window.aggregateUnits && window.aggregateUnits.size > 0) {
+        for (const au of window.aggregateUnits.values()) {
+          if (au.country && au.country !== 'XX') next.add(au.country);
+        }
+      } else if (window.nodes) {
+        const fNonG = typeof window.isNonGloBE === 'function' ? window.isNonGloBE : null;
+        for (const n of window.nodes.values()) {
+          if (n.isTutorial || !n.country || n.country === 'XX') continue;
+          if (fNonG && fNonG(n.id)) continue;
+          next.add(n.country);
+        }
+      }
+      if (next.size !== entityCountries.size) { entityCountries = next; return true; }
+      for (const cc of next) if (!entityCountries.has(cc)) { entityCountries = next; return true; }
+      return false;
+    }
+    // path의 현재 역할(hover/activated/has-ent/default)에 맞는 스타일 적용
+    function paintPath(p, feat) {
+      if (feat === hoveredFeat) {
+        p.setAttribute('fill', FILL_HOVER);
+        p.setAttribute('fill-opacity', FILL_OPACITY_HOVER);
+      } else if (feat === activatedFeat) {
+        p.setAttribute('fill', FILL_ACTIVE);
+        p.setAttribute('fill-opacity', FILL_OPACITY_ACTIVE);
+      } else {
+        const cc = featToCc.get(feat);
+        if (cc && entityCountries.has(cc)) {
+          p.setAttribute('fill', FILL_HAS_ENT);
+          p.setAttribute('fill-opacity', FILL_OPACITY_HAS_ENT);
+        } else {
+          p.setAttribute('fill', FILL);
+          p.setAttribute('fill-opacity', FILL_OPACITY);
+        }
+      }
+    }
+    function repaintAllPaths() {
+      for (const { p, feat } of pathEls) paintPath(p, feat);
+    }
+    // 현재 표시 대상: 호버 우선, 없으면 활성화
+    function focusFeat() { return hoveredFeat || activatedFeat; }
+    function updateTooltip() {
+      if (!tt) return;
+      const f = focusFeat();
+      if (!f) { tt.classList.remove('visible'); return; }
+      if (!pathGen(f)) { tt.classList.remove('visible'); return; }
+      const c = pathGen.centroid(f);
+      if (!c || isNaN(c[0])) { tt.classList.remove('visible'); return; }
+      tt.innerHTML = `<div class="globe-tt-name">${featDisplayName(f)}</div>`;
+      tt.style.left = c[0] + 'px';
+      tt.style.top = c[1] + 'px';
+      if (!tt.classList.contains('visible')) tt.classList.add('visible');
+    }
+    function setHovered(feat, p) {
+      const prevPath = hoveredPath, prevFeat = hoveredFeat;
+      hoveredFeat = feat; hoveredPath = p;
+      if (prevPath && prevPath !== p) paintPath(prevPath, prevFeat);
+      if (p) paintPath(p, feat);
+      lastInt = performance.now();
+      updateTooltip();
+    }
+    function setActivated(feat, cc) {
+      const prevPath = activatedPath, prevFeat = activatedFeat;
+      activatedFeat = feat;
+      activatedCc = cc || null;
+      activatedPath = feat ? (featToPath.get(feat) || null) : null;
+      if (prevPath && prevPath !== activatedPath) paintPath(prevPath, prevFeat);
+      if (activatedPath) paintPath(activatedPath, feat);
+      // 활성화 상태 변경(설정/해제) 시 자동회전 타이머 리셋 — 해제 직후 바로 돌지 않게
+      lastInt = performance.now();
+      updateTooltip();
+      // 헤더 우선순위: 현재 hover > 핀(AU/entity/cc) > activated cc > clear
+      if (hdMode === 'au' || hdMode === 'nd' || hdMode === 'cc') return;   // hover 핸들러가 이미 적합한 헤더 띄움
+      const pin = getActivePin();
+      if (pin?.type === 'au') showAuHeader(pin.au);
+      else if (pin?.type === 'nd') showEntityHeader(pin.nd);
+      else if (feat && cc) showCountryHeader(cc);
+      else if (!feat) clearHeader();
+    }
+    // fly-to: rot을 목표값으로 ease-out 보간 (~700ms)
+    function flyToTarget(target) {
+      const start = [...rot];
+      const dur = 700, t0 = performance.now();
+      function step(now) {
+        const t = Math.min(1, (now - t0) / dur);
+        const e = 1 - Math.pow(1 - t, 3);   // easeOutCubic
+        rot[0] = start[0] + (target[0] - start[0]) * e;
+        rot[1] = start[1] + (target[1] - start[1]) * e;
+        update();
+        lastInt = performance.now();
+        if (t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    function flyToLatLng(lat, lng) { flyToTarget([-lng, -lat]); }
+    function flyToFeature(feat) {
+      const c = d3.geoCentroid(feat);
+      if (c && !isNaN(c[0])) flyToTarget([-c[0], -c[1]]);
+    }
+    // 역방향 활성화 — globe 국가 클릭 → 그 국가 CE 강조
+    //   분석 전: nodes에서 직접 조회 (isExcludedEntity 필터)
+    //   분석 후: aggregateUnits에서 조회 (CE 필터된 멤버)
+    //   즉시 applyPanelHover로 캔버스 dim + 가능하면 AU 패널 카드 click으로 핀까지 처리.
+    function _membersForCc(cc) {
+      const set = new Set();
+      if (window.aggregateUnits && window.aggregateUnits.size > 0) {
+        for (const au of window.aggregateUnits.values()) {
+          if (au.country !== cc) continue;
+          const m = au.members;
+          if (m?.forEach) m.forEach(id => set.add(id));
+          else if (Array.isArray(m)) m.forEach(id => set.add(id));
+        }
+        if (set.size) return set;
+      }
+      if (window.nodes) {
+        // isNonGloBE: 제외기업(pre/post 모두) + 분석 후 비대상까지 필터
+        const fNonG = typeof window.isNonGloBE === 'function' ? window.isNonGloBE : null;
+        for (const n of window.nodes.values()) {
+          if (n.isTutorial || n.country !== cc) continue;
+          if (fNonG && fNonG(n.id)) continue;
+          set.add(n.id);
+        }
+      }
+      return set;
+    }
+    function activateCountryFromGlobe(cc) {
+      if (!cc || cc === 'XX') return;
+      const memberSet = _membersForCc(cc);
+      if (!memberSet.size) return;
+      // 즉시 캔버스 강조 — 분석 전에도 작동
+      if (typeof window.applyPanelHover === 'function') window.applyPanelHover(memberSet);
+      // AU 패널 카드 click 시뮬레이트로 핀까지 (post-analysis만 작동)
+      const findAndClick = () => {
+        const card = document.querySelector(`.au-country-sidebar[data-cc="${cc}"]`)
+                  || document.querySelector(`.au-country-group[data-cc="${cc}"] .au-country-sidebar`);
+        if (card) { card.click(); return true; }
+        return false;
+      };
+      if (findAndClick()) return;
+      const auBtn = document.getElementById('btn-globe');
+      if (auBtn && !auBtn.disabled) {
+        auBtn.click();
+        let attempts = 20;
+        const retry = () => { if (findAndClick() || --attempts <= 0) return; requestAnimationFrame(retry); };
+        requestAnimationFrame(retry);
+      }
+    }
+    const pathEls = [];
+    const featToPath = new Map();
+    for (const feat of countries.features) {
+      const p = document.createElementNS(NS, 'path');
+      p.setAttribute('fill', FILL);
+      p.setAttribute('fill-opacity', FILL_OPACITY);
+      p.setAttribute('stroke', STROKE);
+      p.setAttribute('stroke-width', STROKE_W);
+      p.style.cursor = 'pointer';
+      // 글로브 직접 호버는 강조 + 툴팁만 (fly-to는 피드백 루프 발생해서 제거). 클릭하면 fly-to.
+      p.addEventListener('mouseenter', () => setHovered(feat, p));
+      p.addEventListener('mouseleave', () => setHovered(null, null));
+      // click 이벤트는 svg pointerdown의 preventDefault 때문에 차단됨 → pointerup에서 통합 처리
+      grp.appendChild(p);
+      pathEls.push({ p, feat });
+      featToPath.set(feat, p);
+    }
+
+    // alpha-2 cc → world-atlas feature 매핑 (2-pass)
+    // pass 1: point-in-polygon (정확). 이게 성공한 cc만 featToCc에 등록.
+    // pass 2: 1차 미매칭 cc에 한해 가장 가까운 centroid (거리² < 25 = ~5° 이내일 때만).
+    //         → 110m에 없는 미니 국가(Vatican, Liechtenstein 등) 폴백.
+    //         → MP/GU 같은 태평양 미니 영토는 거리 임계 초과로 매칭 안 됨 → Japan 오염 X
+    // featToCc는 pass 1 결과만 (first-write-wins) → reverse map 정확성 보장.
+    const ccToFeature = {};
+    const featToCc = new Map();
+    if (window.COUNTRY_LATLNG) {
+      const featData = countries.features.map(f => ({
+        f, bounds: d3.geoBounds(f), centroid: d3.geoCentroid(f)
+      }));
+      const matchedPrimary = new Set();
+      // ── PASS 1: in-polygon ──
+      for (const cc in window.COUNTRY_LATLNG) {
+        const [lat, lng] = window.COUNTRY_LATLNG[cc];
+        const pt = [lng, lat];
+        for (const { f, bounds } of featData) {
+          const wraps = bounds[0][0] > bounds[1][0];
+          if (!wraps && (lng < bounds[0][0] || lng > bounds[1][0])) continue;
+          if (lat < bounds[0][1] || lat > bounds[1][1]) continue;
+          if (d3.geoContains(f, pt)) {
+            ccToFeature[cc] = f;
+            matchedPrimary.add(cc);
+            if (!featToCc.has(f)) featToCc.set(f, cc);   // first-write-wins
+            break;
+          }
+        }
+      }
+      // ── PASS 2: 미매칭 cc 폴백 (strict 임계) ──
+      for (const cc in window.COUNTRY_LATLNG) {
+        if (matchedPrimary.has(cc)) continue;
+        const [lat, lng] = window.COUNTRY_LATLNG[cc];
+        let bestDist = Infinity, bestFeat = null;
+        for (const { f, centroid: c } of featData) {
+          if (!c || isNaN(c[0])) continue;
+          const dLng = c[0] - lng, dLat = c[1] - lat;
+          const d = dLng * dLng + dLat * dLat;
+          if (d < bestDist) { bestDist = d; bestFeat = f; }
+        }
+        if (bestFeat && bestDist < 25) ccToFeature[cc] = bestFeat;   // featToCc는 건드리지 않음
+      }
+    }
+    // 표시 이름: 호버 중인 path는 path의 canonical cc, 활성화된 feat는 활성화 시 전달된 cc 우선
+    function featDisplayName(feat) {
+      if (!feat) return '';
+      // 직접 호버 중인 path → 그 feature의 canonical cc
+      if (feat === hoveredFeat) {
+        const cc = featToCc.get(feat);
+        if (cc && typeof window._ccN === 'function') return window._ccN(cc) || cc;
+      }
+      // 패널·캔버스로 활성화된 cc 우선 (폴백으로 feature를 빌렸어도 정확한 cc 표시)
+      if (feat === activatedFeat && activatedCc && typeof window._ccN === 'function') {
+        return window._ccN(activatedCc) || activatedCc;
+      }
+      // 일반 폴백 — reverse map
+      const cc = featToCc.get(feat);
+      if (cc && typeof window._ccN === 'function') return window._ccN(cc) || cc;
+      return feat.properties?.name || '';
+    }
+
+    // ─── 활성화 중심 pulsing dot — 캔버스/패널에서 국가 선택 시 시인성↑ ───
+    const pulse = document.createElementNS(NS, 'circle');
+    pulse.setAttribute('fill', '#1d4ed8');
+    pulse.setAttribute('pointer-events', 'none');
+    pulse.setAttribute('opacity', '0');
+    // 활성화 해제 시 즉시 사라지도록 transition 미적용 (keyframe만 활용)
+    svg.appendChild(pulse);
+    // CSS keyframe via inline style for the pulse animation
+    const pulseStyleId = 'd3-pulse-style';
+    if (!document.getElementById(pulseStyleId)) {
+      const style = document.createElement('style');
+      style.id = pulseStyleId;
+      style.textContent = `
+        @keyframes d3GlobePulse {
+          0%   { r: 4; opacity: .55; }
+          70%  { r: 14; opacity: 0; }
+          100% { r: 14; opacity: 0; }
+        }
+        #d3-globe-preview .pulse-ring {
+          animation: d3GlobePulse 1.6s ease-out infinite;
+        }`;
+      document.head.appendChild(style);
+    }
+    function updatePulse() {
+      if (!activatedFeat || !pathGen(activatedFeat)) {
+        pulse.setAttribute('opacity', '0');
+        pulse.classList.remove('pulse-ring');
+        return;
+      }
+      const c = pathGen.centroid(activatedFeat);
+      if (!c || isNaN(c[0])) { pulse.setAttribute('opacity', '0'); return; }
+      pulse.setAttribute('cx', c[0]);
+      pulse.setAttribute('cy', c[1]);
+      pulse.setAttribute('opacity', '1');
+      if (!pulse.classList.contains('pulse-ring')) pulse.classList.add('pulse-ring');
+    }
+
+    // ─── 캔버스·사이드 패널 → D3 globe forwarder 연결 ───
+    // DOM 기반 pin 감지 — pin 종류(au/cc/nd)와 객체까지 반환.
+    // 우선순위 (구체성 높은 순):
+    //   ① AU 패널/캔버스 AU pin → .agg-unit-item.highlighted, .au-compact-item.highlighted
+    //   ② AU 패널 국가 카드 → .au-country-group.cc-pinned
+    //   ③ QDMTT 국가 카드 → .pb-country-block.pinned
+    //   ④ IIR 부모 entity → .pb-parent.pinned
+    //   ⑤ 캔버스 entity 선택(클릭) → .node.selected
+    //   ⑥ window 변수 폴백
+    function getActivePin() {
+      const auItem = document.querySelector('.agg-unit-item.highlighted[data-au-id], .au-compact-item.highlighted[data-au-id]');
+      if (auItem && window.aggregateUnits) {
+        const au = window.aggregateUnits.get(+auItem.dataset.auId);
+        if (au?.country && au.country !== 'XX') return { type: 'au', au, cc: au.country };
+      }
+      const ccGroup = document.querySelector('.au-country-group.cc-pinned .au-country-sidebar[data-cc]');
+      if (ccGroup?.dataset.cc) return { type: 'cc', cc: ccGroup.dataset.cc };
+      const qdmtt = document.querySelector('.pb-country-block.pinned[data-cc]');
+      if (qdmtt?.dataset.cc) return { type: 'cc', cc: qdmtt.dataset.cc };
+      const iirParent = document.querySelector('.pb-parent.pinned[data-parent-id]');
+      if (iirParent && window.nodes) {
+        const nd = window.nodes.get(+iirParent.dataset.parentId);
+        if (nd?.country && nd.country !== 'XX') return { type: 'nd', nd, cc: nd.country };
+      }
+      // 캔버스 entity 선택 — selectedNodeId의 DOM 마커
+      const selectedNd = document.querySelector('.node.selected[id^="nd-"]');
+      if (selectedNd && window.nodes) {
+        const ndId = +selectedNd.id.replace(/^nd-/, '');
+        const nd = window.nodes.get(ndId);
+        if (nd && !nd.isTutorial && nd.country && nd.country !== 'XX') return { type: 'nd', nd, cc: nd.country };
+      }
+      if (window._pinnedCC && window._pinnedCC !== 'XX') return { type: 'cc', cc: window._pinnedCC };
+      if (window._pinnedPayerCC && window._pinnedPayerCC !== 'XX') return { type: 'cc', cc: window._pinnedPayerCC };
+      return null;
+    }
+    function getPinnedCc() { return getActivePin()?.cc ?? null; }
+    _d3Forward = function(action, cc) {
+      if (action === 'reset') {
+        const pinCc = getPinnedCc();
+        if (pinCc && pinCc !== 'XX' && window.COUNTRY_LATLNG?.[pinCc]) {
+          const pll = window.COUNTRY_LATLNG[pinCc];
+          flyToLatLng(pll[0], pll[1]);
+          const pf = ccToFeature[pinCc];
+          if (pf) setActivated(pf, pinCc);
+          return;
+        }
+        setActivated(null);
+        return;
+      }
+      if (action !== 'flyTo') return;
+      if (!cc || cc === 'XX' || !window.COUNTRY_LATLNG) return;
+      const ll = window.COUNTRY_LATLNG[cc];
+      if (!ll) return;
+      flyToLatLng(ll[0], ll[1]);
+      const feat = ccToFeature[cc];
+      if (feat) setActivated(feat, cc);
+    };
+    if (_pendingAction) {
+      _d3Forward(_pendingAction.action, _pendingAction.cc);
+      _pendingAction = null;
+    }
+    // 변경 감지 — rot 동일하면 path d 재할당 skip. 사이즈 변경 시엔 force=true로 강제 렌더
+    let _lastRot0 = NaN, _lastRot1 = NaN;
+    function render(force) {
+      if (!force && rot[0] === _lastRot0 && rot[1] === _lastRot1) return;
+      for (const { p, feat } of pathEls) {
+        p.setAttribute('d', pathGen(feat) || '');
+      }
+      _lastRot0 = rot[0]; _lastRot1 = rot[1];
+    }
+    function update() { proj.rotate(rot); render(); updateTooltip(); updatePulse(); }
+    update();
+    // 초기 entityCountries 적용 + 이후 1.5초마다 자동 동기화 (분석 직후 자동 반영)
+    if (refreshEntityCountries()) repaintAllPaths();
+    // 150ms 폴링 — 사용자 편집(드롭다운 변경, 신규 entity 추가 등) 즉시 반영
+    // 무변경 체크 <0.5ms, 변경 시 ~3ms → 평상시 0.3% CPU 미만, 안전
+    setInterval(() => { if (refreshEntityCountries()) repaintAllPaths(); }, 150);
+
+    // ─── Globe 헤더 contextual info — AU/entity/country 활성화 차등 ───
+    // 우선순위: entity hover > AU hover > country (panel chip 또는 fly-to 활성화)
+    const hdSlot = document.getElementById('map-hd-country');
+    function setHeader(html) { if (hdSlot) hdSlot.innerHTML = html; }
+    function clearHeader() { setHeader(''); }
+    // 핀 아이콘 SVG — 표제에 클릭 고정 상태를 시각화 (Lucide pin 아이콘 기반)
+    const PIN_SVG = '<svg class="map-hd-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>';
+    // 콤팩트 국가코드 칩 — app.js의 chipColor 헬퍼 활용해 cc-chip-inline 스타일로 렌더
+    function _ccChip(cc) {
+      if (!cc || cc === 'XX') return '';
+      if (typeof window.chipColor === 'function') {
+        const [bg, border] = window.chipColor(cc);
+        return `<span class="cc-chip-inline" style="background:${bg};border-color:${border}">${cc}</span>`;
+      }
+      return `<span class="cc-chip-inline" style="background:#64748b;border-color:#475569">${cc}</span>`;
+    }
+    const tFn = () => (typeof window.t === 'function' ? window.t : null);
+    function showAuHeader(au) {
+      const memberCnt = (au.members?.size ?? au.members?.length) ?? 0;
+      const t = tFn();
+      const cnt = t ? t('minimap.hd_nd', { nd: memberCnt }) : `${memberCnt}`;
+      const badge = (typeof window._auItemTypeBadge === 'function')
+        ? window._auItemTypeBadge(au, au.country) : '';
+      const label = au.baseLabel || '';
+      const pin = getActivePin();
+      const pinIcon = (pin?.type === 'au' && pin.au?.id === au.id) ? PIN_SVG : '';
+      const ccChip = _ccChip(au.country);
+      setHeader(`${pinIcon}${ccChip}${badge}${label ? `<span class="map-hd-name">${label}</span>` : ''}<span class="map-hd-cnt">${cnt}</span>`);
+    }
+    function showEntityHeader(nd) {
+      const name = nd.name || ('Node#' + nd.id);
+      const pin = getActivePin();
+      const pinIcon = (pin?.type === 'nd' && pin.nd?.id === nd.id) ? PIN_SVG : '';
+      const ccChip = _ccChip(nd.country);
+      setHeader(`${pinIcon}${ccChip}<span class="map-hd-name">${name}</span>`);
+    }
+    // GloBE 맥락 — computeAggregationUnits가 이미 isExcludedEntity 필터를 적용하고,
+    // 분석 후엔 nonGloBESet까지 반영해 aggregateUnits를 재구성하므로
+    // aggregateUnits의 country별 AU 수와 members 합계를 그대로 사용 = 단일 진실 소스.
+    function _countsForCc(cc) {
+      const au = window.aggregateUnits;
+      if (!au) return { auCnt: 0, ndCnt: 0 };
+      let auCnt = 0, ndCnt = 0;
+      for (const a of au.values()) {
+        if (a.country !== cc) continue;
+        auCnt++;
+        ndCnt += (a.members?.size ?? a.members?.length ?? 0);
+      }
+      return { auCnt, ndCnt };
+    }
+    function showCountryHeader(cc) {
+      if (!cc || cc === 'XX') { clearHeader(); return; }
+      const { auCnt, ndCnt } = _countsForCc(cc);
+      const t = tFn();
+      const pin = getActivePin();
+      const pinIcon = (pin?.type === 'cc' && pin.cc === cc) ? PIN_SVG : '';
+      const ccChip = _ccChip(cc);
+      if (auCnt > 0 && t)      setHeader(`${pinIcon}${ccChip}<span class="map-hd-cnt">${t('minimap.hd_detail', { au: auCnt, nd: ndCnt })}</span>`);
+      else if (ndCnt > 0 && t) setHeader(`${pinIcon}${ccChip}<span class="map-hd-cnt">${t('minimap.hd_nd', { nd: ndCnt })}</span>`);
+      else                      setHeader(`${pinIcon}${ccChip}`);   // 카운트 0이어도 칩만 표시
+    }
+    // 문서 전역 mouseover/mouseout — 패널·캔버스의 AU/entity 요소 자동 감지
+    // (hdMode는 상단에서 이미 선언됨 — TDZ 회피)
+    // entity/AU 요소 호버 시 globe flyTo + activate
+    function flyToCc(cc) {
+      if (!cc || cc === 'XX' || !window.COUNTRY_LATLNG) return;
+      const ll = window.COUNTRY_LATLNG[cc];
+      if (!ll) return;
+      flyToLatLng(ll[0], ll[1]);
+      const feat = ccToFeature[cc];
+      if (feat) setActivated(feat, cc);
+    }
+    // 통합 헬퍼: event target에서 AU/entity/country 정보 추출
+    // 우선순위:
+    //   ① 패널 [data-au-id]
+    //   ② 캔버스 .au-type-chips (부모 entity node에서 AU 역추적)
+    //   ③ 캔버스 .country-chip (부모 entity의 country) — 'cc' kind
+    //   ④ 패널 [data-node-id] (entity-link 등)
+    //   ⑤ 캔버스 .node[id^="nd-"] (캔버스 기업 박스)
+    function infoFromTarget(tg) {
+      if (!tg || !tg.closest) return null;
+      const auEl = tg.closest('[data-au-id]');
+      if (auEl && window.aggregateUnits) {
+        const au = window.aggregateUnits.get(+auEl.dataset.auId);
+        if (au) return { kind: 'au', au };
+      }
+      const chipEl = tg.closest('.au-type-chips');
+      if (chipEl && window.aggregateUnits) {
+        const nodeEl = chipEl.closest('.node');
+        if (nodeEl) {
+          const ndId = +nodeEl.id.replace(/^nd-/, '');
+          for (const au of window.aggregateUnits.values()) {
+            const m = au.members;
+            const has = m?.has?.(ndId) ?? m?.includes?.(ndId);
+            if (has) return { kind: 'au', au };
+          }
+        }
+      }
+      const ccChipEl = tg.closest('.country-chip');
+      if (ccChipEl) {
+        const nodeEl = ccChipEl.closest('.node');
+        if (nodeEl && window.nodes) {
+          const nd = window.nodes.get(+nodeEl.id.replace(/^nd-/, ''));
+          if (nd?.country && nd.country !== 'XX') return { kind: 'cc', cc: nd.country };
+        }
+      }
+      const ndElPanel = tg.closest('[data-node-id]');
+      if (ndElPanel && window.nodes) {
+        const nd = window.nodes.get(+ndElPanel.dataset.nodeId);
+        if (nd) return { kind: 'nd', nd };
+      }
+      // 캔버스 entity 박스 — id="nd-XX" 패턴
+      const canvasNd = tg.closest('.node[id^="nd-"]');
+      if (canvasNd && window.nodes) {
+        const ndId = +canvasNd.id.replace(/^nd-/, '');
+        const nd = window.nodes.get(ndId);
+        if (nd && !nd.isTutorial) return { kind: 'nd', nd };
+      }
+      return null;
+    }
+    document.body.addEventListener('mouseover', e => {
+      const info = infoFromTarget(e.target);
+      if (!info) return;
+      if (info.kind === 'au') {
+        hdMode = 'au';
+        showAuHeader(info.au);
+        if (info.au.country) flyToCc(info.au.country);
+      } else if (info.kind === 'nd') {
+        hdMode = 'nd';
+        showEntityHeader(info.nd);
+        if (info.nd.country) flyToCc(info.nd.country);
+      } else if (info.kind === 'cc') {
+        hdMode = 'cc';
+        showCountryHeader(info.cc);
+        flyToCc(info.cc);
+      }
+    }, true);
+    document.body.addEventListener('mouseout', e => {
+      const info = infoFromTarget(e.target);
+      if (!info) return;
+      hdMode = null;
+      // relatedTarget이 또 다른 AU/entity면 곧 새 mouseover가 처리 → reset 스킵
+      if (infoFromTarget(e.relatedTarget)) return;
+      if (_d3Forward) _d3Forward('reset');
+    }, true);
+    // 클릭 시 pin 상태가 즉시 바뀜 → 마이크로태스크로 헤더 재렌더(핀 아이콘 표시/제거 즉시 반영)
+    document.body.addEventListener('click', e => {
+      const info = infoFromTarget(e.target);
+      if (!info && !e.target.closest?.('.pb-country-block, .au-country-sidebar, .pb-parent')) return;
+      setTimeout(() => {
+        // 현재 hover 중인 항목이 있으면 그것 재렌더 (pin 여부 새로 반영)
+        if (info?.kind === 'au') showAuHeader(info.au);
+        else if (info?.kind === 'nd') showEntityHeader(info.nd);
+        else {
+          // 호버 항목이 없는 click (예: country 카드, QDMTT) → 활성 pin 기준으로 재렌더
+          const pin = getActivePin();
+          if (pin?.type === 'au') showAuHeader(pin.au);
+          else if (pin?.type === 'nd') showEntityHeader(pin.nd);
+          else if (pin?.type === 'cc') showCountryHeader(pin.cc);
+          else if (activatedCc) showCountryHeader(activatedCc);
+        }
+      }, 0);
+    }, true);
+
+    // ─── Header collapse 토글 + body 클래스 동기화 (panel-body margin 가변 조정) ───
+    const wrap = document.getElementById('globe-minimap-wrap');
+    const cBtn = document.getElementById('globe-collapse-btn');
+    if (cBtn && wrap) {
+      const globeArea = document.getElementById('globe-minimap');
+      let hideTimer = null;
+      cBtn.addEventListener('click', () => {
+        const collapsed = wrap.classList.toggle('is-collapsed');
+        document.body.classList.toggle('globe-collapsed', collapsed);
+        if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+        if (collapsed) {
+          // wrap height 트랜지션(320ms) 완료 후에만 globe 영역 완전 숨김 — 그 전까지는 화면에서 자연스럽게 sink
+          hideTimer = setTimeout(() => {
+            if (wrap.classList.contains('is-collapsed') && globeArea) {
+              globeArea.style.visibility = 'hidden';
+            }
+          }, 340);
+        } else if (globeArea) {
+          globeArea.style.visibility = '';   // 펼치자마자 즉시 다시 보이도록
+        }
+      });
+    }
+
+    // ─── 툴바 버튼 토글 — 그 패널이 이미 열려있을 때만 닫기 ───
+    // 판정 기준: 버튼의 .panel-active class (app.js의 panelMode와 동기화됨)
+    // → entity 패널 보고 있을 때 btn-globe 클릭하면 정상적으로 AU 패널로 전환됨
+    const closeIfActive = (btn) => (e) => {
+      if (btn?.classList.contains('panel-active')) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        if (typeof window.closeSidePanel === 'function') window.closeSidePanel();
+      }
+      // 비활성 상태면 원본 핸들러가 그대로 실행 → 다른 패널에서 이 패널로 전환
+    };
+    const _auBtn = document.getElementById('btn-globe');
+    const _payerBtn = document.getElementById('btn-payer');
+    _auBtn?.addEventListener('click', closeIfActive(_auBtn), true);
+    _payerBtn?.addEventListener('click', closeIfActive(_payerBtn), true);
+
+    // 컨테이너 크기 변경 추적 — pip ↔ docked 전환 시 SVG/projection/sphere 동기화
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(() => {
+        const nw = mini.clientWidth, nh = mini.clientHeight;
+        if (!nw || !nh) return;
+        svg.setAttribute('width', nw);
+        svg.setAttribute('height', nh);
+        svg.setAttribute('viewBox', `0 0 ${nw} ${nh}`);
+        R = Math.min(nw, nh) * 0.44;
+        proj.scale(R).translate([nw/2, nh/2]);
+        sph.setAttribute('cx', nw/2);
+        sph.setAttribute('cy', nh/2);
+        sph.setAttribute('r', R);
+        render(true);   // 크기 변경 시엔 강제 렌더
+        updateTooltip();
+        updatePulse();
+      }).observe(mini);
+    }
+
+    // 유휴 자동 회전 + 드래그 (lastInt는 상단에서 이미 선언됨)
+    let dragging = false;
+    (function tick() {
+      // collapsed 상태면 보이지 않으므로 회전·렌더 skip (자전 CPU 비용 0으로)
+      if (wrap?.classList.contains('is-collapsed')) {
+        requestAnimationFrame(tick);
+        return;
+      }
+      // 드래그·호버·활성화 중엔 자동회전 금지 — 그 외엔 1.5s 휴지 후 천천히 회전
+      if (!dragging && !hoveredFeat && !activatedFeat
+          && performance.now() - lastInt > 1500) {
+        rot[0] = (rot[0] - 0.18) % 360;
+        update();
+      }
+      requestAnimationFrame(tick);
+    })();
+    let startX = null, startRot = null, _downX = null, _downY = null;
+    const CLICK_THRESHOLD = 4;   // 이 거리 미만 이동은 click으로 간주
+    svg.addEventListener('pointerdown', e => {
+      e.preventDefault();                 // 브라우저 기본 드래그·선택 비활성화 (빨간 금지 커서 방지)
+      _downX = e.clientX; _downY = e.clientY;
+      startX = e.clientX; startRot = [...rot]; dragging = true;
+      lastInt = performance.now(); svg.style.cursor = 'grabbing';
+      svg.setPointerCapture(e.pointerId);
+    });
+    svg.addEventListener('dragstart', e => e.preventDefault());
+    svg.addEventListener('pointermove', e => {
+      if (startX === null) return;
+      rot[0] = startRot[0] + (e.clientX - startX) * 0.5;
+      update(); lastInt = performance.now();
+    });
+    const endDrag = e => {
+      if (startX === null) return;
+      // 이동 거리가 임계 미만이면 click으로 판정 → 그 위치의 path에 대해 flyTo + activate
+      const isClick = _downX !== null && Math.hypot(e.clientX - _downX, e.clientY - _downY) < CLICK_THRESHOLD;
+      startX = null; dragging = false; lastInt = performance.now();
+      svg.style.cursor = 'grab';
+      try { svg.releasePointerCapture(e.pointerId); } catch(_){}
+      if (isClick) {
+        // pointer capture 중에는 elementFromPoint가 SVG만 반환하므로 release 후 호출
+        requestAnimationFrame(() => {
+          const targetEl = document.elementFromPoint(e.clientX, e.clientY);
+          const pathEl = targetEl?.closest?.('path');
+          if (!pathEl) return;
+          const entry = pathEls.find(x => x.p === pathEl);
+          if (!entry) return;
+          flyToFeature(entry.feat);
+          const cc = featToCc.get(entry.feat);
+          if (cc) activateCountryFromGlobe(cc);
+        });
+      }
+      _downX = _downY = null;
+    };
+    svg.addEventListener('pointerup', endDrag);
+    svg.addEventListener('pointercancel', endDrag);
+
+    console.log('[d3-geo preview] ready,', countries.features.length, 'countries');
+  } catch (err) {
+    console.error('[d3-geo preview] failed:', err);
+    document.getElementById('d3-preview-style')?.remove();   // Cobe 캔버스 복원
+  }
+})();
+</script>
+<!-- ═══════════════════════════ D3-geo PREVIEW END ═══════════════════════════ -->
+
 </body>
 </html>

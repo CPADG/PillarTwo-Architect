@@ -1,6 +1,6 @@
 # PillarTwo Architect
 
-**Pillar Two (GloBE Rules) simulator · MNE group structure designer · IIR · UTPR · QDMTT visualizer**
+**Pillar Two simulator · MNE group structure designer · IIR · UTPR · QDMTT visualizer**
 
 [![Live](https://img.shields.io/website?url=https%3A%2F%2Fpillartwo.app&label=pillartwo.app&style=flat-square)](https://pillartwo.app)
 [![i18n](https://img.shields.io/badge/i18n-한국어%20·%20English%20·%20日本語-2563eb?style=flat-square)](https://pillartwo.app)

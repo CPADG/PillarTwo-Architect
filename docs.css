@@ -1,4 +1,4 @@
-/* build: 2026-05-28T15:58:18.738Z */
+/* build: 2026-05-28T16:01:36.151Z */
 /* ── 문서 페이지 공통 (about / glossary) ── */
 /* styles.css의 body 기본값(height:100vh; overflow:hidden; display:flex;)이 문서 페이지에선 스크롤을 막으므로 override */
 html,body.docs-body{height:auto; overflow:auto; display:block}

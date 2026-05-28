@@ -9,7 +9,10 @@
     "build:app": "esbuild app.js --minify --target=es2020 --legal-comments=none --charset=utf8 --outfile=app.min.js",
     "build:app:watch": "esbuild app.js --minify --target=es2020 --legal-comments=none --charset=utf8 --outfile=app.min.js --watch",
     "stamp": "node scripts/stamp-version.js",
-    "cf-build": "npm run stamp"
+    "sitemap": "node scripts/update-sitemap.js",
+    "indexnow": "node scripts/indexnow-ping.js",
+    "verify:hreflang": "node scripts/verify-hreflang.js",
+    "cf-build": "npm run sitemap && npm run stamp"
   },
   "devDependencies": {
     "esbuild": "^0.24.0"

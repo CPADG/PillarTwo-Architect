@@ -1706,7 +1706,7 @@ def render_page_intl(cc, data, lang):
 {{
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Pillar Two in {country} — Adoption Status, Effective Dates, and Implications" if False else "Pillar Two in {country}",
+  "headline": "Pillar Two in {country} — Adoption Status, Effective Dates, and Implications",
   "description": "{meta_desc}",
   "image": "https://pillartwo.app/og-image.png",
   "datePublished": "2026-05-28",

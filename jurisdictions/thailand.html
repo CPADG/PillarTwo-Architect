@@ -180,7 +180,7 @@ window.sentryOnLoad = function () {
 
   <section class="docs-section">
     <h2>실무 시사점</h2>
-    <p>태국에 모기업·자회사를 둔 다국적기업그룹은 2025-01-01 이후 개시 사업연도부터 IIR · UTPR · QDMTT 모두 적용 대상입니다. QDMTT Safe Harbour 적용 요건을 충족하면 모기업 등의 소재지국에서의 IIR/UTPR 계산이 면제될 수 있습니다. 태국 BOI(Board of Investment) 인센티브 영향으로 자회사 ETR이 임계치 하회하는 경우가 있어 사전 모델링 가치가 있습니다.</p>
+    <p>태국에 모기업·자회사를 둔 다국적기업그룹은 2025-01-01 이후 개시 사업연도부터 IIR · UTPR · QDMTT 모두 적용 대상입니다. QDMTT Safe Harbour 적용 요건을 충족하면 모기업 등의 소재지국에서의 IIR/UTPR 계산이 면제될 수 있습니다. 태국 BOI(Board of Investment) 인센티브 영향으로 ETR이 15%를 하회하는 경우가 있어 사전 모델링 가치가 있습니다.</p>
   </section>
 
   <section class="docs-section">
@@ -266,6 +266,22 @@ window.sentryOnLoad = function () {
 </div>
 
 <script src="/translations.min.js"></script>
+<script>
+  (function(){
+    let lang='ko';
+    try{ const saved=localStorage.getItem('p2a.lang'); if(saved==='ko'||saved==='en'||saved==='ja') lang=saved; }catch(e){}
+    setLang(lang);
+    document.querySelectorAll('.docs-lang-btn').forEach(b=>{
+      b.classList.toggle('active', b.dataset.lang===lang);
+      b.addEventListener('click',()=>{
+        const nl=b.dataset.lang;
+        try{ localStorage.setItem('p2a.lang', nl); }catch(e){}
+        if(nl==='en') location.href='/jurisdictions/en/thailand';
+        else if(nl==='ja') location.href='/jurisdictions/ja/thailand';
+      });
+    });
+  })();
+</script>
 <script>
   (function(){
     let lang='ko';

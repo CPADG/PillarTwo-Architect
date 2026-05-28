@@ -304,6 +304,22 @@ window.sentryOnLoad = function () {
     document.querySelectorAll('.docs-lang-btn').forEach(b=>{
       b.classList.toggle('active', b.dataset.lang===lang);
       b.addEventListener('click',()=>{
+        const nl=b.dataset.lang;
+        try{ localStorage.setItem('p2a.lang', nl); }catch(e){}
+        if(nl==='en') location.href='/jurisdictions/en/united-kingdom';
+        else if(nl==='ja') location.href='/jurisdictions/ja/united-kingdom';
+      });
+    });
+  })();
+</script>
+<script>
+  (function(){
+    let lang='ko';
+    try{ const saved=localStorage.getItem('p2a.lang'); if(saved==='ko'||saved==='en'||saved==='ja') lang=saved; }catch(e){}
+    setLang(lang);
+    document.querySelectorAll('.docs-lang-btn').forEach(b=>{
+      b.classList.toggle('active', b.dataset.lang===lang);
+      b.addEventListener('click',()=>{
         setLang(b.dataset.lang);
         try{ localStorage.setItem('p2a.lang', b.dataset.lang); }catch(e){}
         document.querySelectorAll('.docs-lang-btn').forEach(x=>x.classList.toggle('active', x.dataset.lang===b.dataset.lang));

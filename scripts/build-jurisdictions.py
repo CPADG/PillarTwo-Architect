@@ -34,6 +34,36 @@ OUT_DIR = ROOT / 'jurisdictions'
 # ─────────────────────────────────────────────────────────────────
 
 COUNTRIES = {
+    # 수동 작성 페이지 (Batch 1) — 인덱스 카드 데이터만 보관. index_only=True 시 render_page 스킵
+    'KR': {
+        'slug': 'korea', 'name_ko': '대한민국', 'name_en': 'Korea', 'name_ja': '韓国', 'flag_cc': 'kr',
+        'iir':   {'date': '2024-01-01', 'qualified': True},
+        'utpr':  {'date': '2025-01-01', 'qualified': False},
+        'qdmtt': {'date': '2026-01-01', 'qualified': False},
+        'index_only': True,
+    },
+    'JP': {
+        'slug': 'japan', 'name_ko': '일본', 'name_en': 'Japan', 'name_ja': '日本', 'flag_cc': 'jp',
+        'iir':   {'date': '2024-04-01', 'qualified': True},
+        'utpr':  {'date': '2026-04-01', 'qualified': False},
+        'qdmtt': {'date': '2026-04-01', 'qualified': True},
+        'index_only': True,
+    },
+    'US': {
+        'slug': 'united-states', 'name_ko': '미국', 'name_en': 'United States', 'name_ja': 'アメリカ', 'flag_cc': 'us',
+        'iir':   {'date': None, 'qualified': False, 'note': '미도입'},
+        'utpr':  {'date': None, 'qualified': False, 'note': '미도입'},
+        'qdmtt': {'date': None, 'qualified': False, 'note': '미도입'},
+        'index_only': True,
+    },
+    'GB': {
+        'slug': 'united-kingdom', 'name_ko': '영국', 'name_en': 'United Kingdom', 'name_ja': 'イギリス', 'flag_cc': 'gb',
+        'iir':   {'date': '2023-12-31', 'qualified': True},
+        'utpr':  {'date': '2024-12-31', 'qualified': False},
+        'qdmtt': {'date': '2023-12-31', 'qualified': True},
+        'index_only': True,
+    },
+
     'DE': {
         'slug': 'germany',
         'name_ko': '독일',
@@ -1402,18 +1432,268 @@ def render_page(cc, data):
 '''
 
 
+# ─────────────────────────────────────────────────────────────────
+# Index 페이지 (/jurisdictions/) — 40국 카드 그리드 + 검색·지역 필터
+# ─────────────────────────────────────────────────────────────────
+
+REGIONS = {
+    'EU': ['AT','BE','CZ','DE','DK','ES','FI','FR','GR','HU','IE','IT','LU','NL','PL','PT','RO','SE','SI'],
+    'EFTA': ['CH','LI','NO'],
+    'UK': ['GB'],
+    'APAC': ['AU','HK','ID','JP','KR','MY','NZ','SG','TH','VN'],
+    'Americas': ['BR','CA','US'],
+    'ME·Africa': ['AE','QA','ZA'],
+    'Other': ['TR'],
+}
+
+
+def cc_to_region(cc):
+    for r, ccs in REGIONS.items():
+        if cc in ccs:
+            return r
+    return 'Other'
+
+
+def short_date(d):
+    """YYYY-MM-DD → YYYY.MM 형태"""
+    if not d:
+        return '—'
+    parts = d.split('-')
+    return f'{parts[0]}.{parts[1]}'
+
+
+def render_idx_card(cc, data):
+    slug = data['slug']
+    name_ko = data['name_ko']
+    name_en = data['name_en']
+    region = cc_to_region(cc)
+    iir = data['iir']
+    utpr = data['utpr']
+    qdmtt = data['qdmtt']
+
+    # Search keys: 한국어·영어·일본어 + cc + slug
+    keys = ' '.join([name_ko, name_en, data['name_ja'], cc, slug]).lower()
+
+    def rule_pill(label, info):
+        date = info.get('date')
+        if not date:
+            return f'<span class="jr-idx-rule jr-idx-rule-none"><span class="jr-idx-rl">{label}</span><span class="jr-idx-rd">미도입</span></span>'
+        cls = 'jr-idx-rule-ok' if info.get('qualified') else 'jr-idx-rule-pending'
+        return f'<span class="jr-idx-rule {cls}"><span class="jr-idx-rl">{label}</span><span class="jr-idx-rd">{short_date(date)}</span></span>'
+
+    pills = ''.join([
+        rule_pill('IIR', iir),
+        rule_pill('UTPR', utpr),
+        rule_pill('QDMTT', qdmtt),
+    ])
+
+    return f'''<a href="/jurisdictions/{slug}" class="jr-idx-card" data-region="{region}" data-keys="{keys}">
+        <img class="jr-idx-flag" src="https://flagcdn.com/w80/{data['flag_cc']}.png" srcset="https://flagcdn.com/w160/{data['flag_cc']}.png 2x" alt="{name_ko} 국기" loading="lazy" width="40" height="30">
+        <div class="jr-idx-body">
+          <div class="jr-idx-name">{name_ko}<span class="jr-idx-name-en">{name_en}</span></div>
+          <div class="jr-idx-rules">{pills}</div>
+        </div>
+      </a>'''
+
+
+def build_index():
+    cards = []
+    # 알파벳 순 (cc) — 보기에 안정적
+    for cc in sorted(COUNTRIES.keys()):
+        cards.append(render_idx_card(cc, COUNTRIES[cc]))
+    cards_html = '\n      '.join(cards)
+
+    chips = ''.join([
+        '<button class="jr-idx-chip is-active" data-region="all">전체</button>',
+        '<button class="jr-idx-chip" data-region="EU">EU</button>',
+        '<button class="jr-idx-chip" data-region="EFTA">EFTA</button>',
+        '<button class="jr-idx-chip" data-region="UK">영국</button>',
+        '<button class="jr-idx-chip" data-region="APAC">APAC</button>',
+        '<button class="jr-idx-chip" data-region="Americas">Americas</button>',
+        '<button class="jr-idx-chip" data-region="ME·Africa">중동·아프리카</button>',
+        '<button class="jr-idx-chip" data-region="Other">기타</button>',
+    ])
+
+    return f'''<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>국가별 Pillar Two 도입 현황 — 40개국 | PillarTwo Architect</title>
+<meta name="description" content="OECD Pillar Two(글로벌최저한세) 도입국 40개국의 IIR · UTPR · QDMTT 시행일·도입 법령·OECD 적격 상태를 한눈에. 국가별 페이지로 빠르게 이동.">
+<meta name="robots" content="index, follow">
+<meta name="naver-site-verification" content="03dcd7169d0affc69d6ebf2e0a2af01dd5694073" />
+<meta name="naver-site-verification" content="b15c8fd7be4aab298a81448b4c4e346fc613d30a" />
+<link rel="canonical" href="https://pillartwo.app/jurisdictions/">
+<link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/?lang=ko">
+<link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/?lang=en">
+<link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/?lang=ja">
+<link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/">
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {{ "@type": "ListItem", "position": 1, "name": "PillarTwo Architect", "item": "https://pillartwo.app/" }},
+    {{ "@type": "ListItem", "position": 2, "name": "Jurisdictions", "item": "https://pillartwo.app/jurisdictions/" }}
+  ]
+}}
+</script>
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "국가별 Pillar Two 도입 현황 — 40개국",
+  "description": "OECD Pillar Two(글로벌최저한세) 도입국 40개국의 IIR·UTPR·QDMTT 시행일·도입 법령·OECD 적격 상태 모음.",
+  "url": "https://pillartwo.app/jurisdictions/",
+  "inLanguage": ["ko", "en", "ja"],
+  "datePublished": "2026-05-28",
+  "dateModified": "2026-05-28"
+}}
+</script>
+<meta property="og:type" content="website">
+<meta property="og:title" content="국가별 Pillar Two 도입 현황 — 40개국">
+<meta property="og:description" content="OECD Pillar Two 도입국 40개국의 IIR · UTPR · QDMTT 시행일·도입 법령·OECD 적격 상태를 한눈에.">
+<meta property="og:url" content="https://pillartwo.app/jurisdictions/">
+<meta property="og:image" content="https://pillartwo.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="국가별 Pillar Two 도입 현황 — 40개국">
+<meta name="twitter:description" content="OECD Pillar Two 도입국 40개국의 IIR · UTPR · QDMTT 시행일·도입 법령·OECD 적격 상태를 한눈에.">
+<meta name="twitter:image" content="https://pillartwo.app/og-image.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2563eb">
+{SENTRY_HEAD}
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/docs.css">
+<link rel="stylesheet" href="/jurisdictions/jurisdictions.css">
+</head>
+<body class="docs-body">
+
+<nav class="docs-nav">
+  <a class="docs-brand" href="/">
+    {BRAND_SVG}
+    <span class="docs-brand-name">Pillar<em>Two</em></span>
+    <span class="docs-brand-sub">Architect</span>
+  </a>
+  <div class="docs-nav-links">
+    <a href="/">← 아키텍트로 돌아가기</a>
+    <a href="/overview.html">Pillar Two</a>
+    <a href="/jurisdictions/" class="active">국가별 현황</a>
+    <a href="/about.html">서비스 소개</a>
+  </div>
+</nav>
+
+<main class="docs-main">
+
+  <header class="docs-hero">
+    <h1 class="docs-h1">국가별 Pillar Two 도입 현황</h1>
+    <p class="docs-lead">
+      OECD Pillar Two(글로벌최저한세) 도입국 <strong>40개국</strong>의 IIR · UTPR · QDMTT 시행일과
+      OECD 적격 상태를 한눈에 정리했습니다. 카드를 클릭하면 해당국 상세 페이지로 이동합니다.
+    </p>
+  </header>
+
+  <section class="docs-section">
+    <div class="jr-idx-toolbar">
+      <input type="search" id="jr-idx-search" class="jr-idx-search" placeholder="국가명 검색 (한·영·일·국가코드)…" aria-label="국가명 검색">
+      <div class="jr-idx-chips">{chips}</div>
+    </div>
+
+    <div class="jr-idx-grid" id="jr-idx-grid">
+      {cards_html}
+    </div>
+    <p class="jr-idx-empty" id="jr-idx-empty" style="display:none">일치하는 국가가 없습니다.</p>
+  </section>
+
+  <section class="docs-section jr-disclaimer-section">
+    <div class="jr-disclaimer">
+      <h3>Disclaimer</h3>
+      <p>
+        본 페이지는 <strong>2026-05-28 기준</strong> OECD Inclusive Framework의 Updated Central Record
+        (2026-05-11 승인, 2026-05-01 기준) 및 각국 1차 자료를 종합해 정리한 참조 정보이며, 법률·세무 자문이
+        아닙니다. 실무 적용 전에는 반드시 가장 최신 법령·행정해석을 확인하고 자격을 갖춘 세무 전문가의 검토를 받으시기 바랍니다.
+      </p>
+      <p class="jr-meta-stamp">
+        Last verified: <time datetime="2026-05-28">2026-05-28</time>
+        · OECD Central Record dated 1 May 2026 기준
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="docs-footer">
+  <div class="docs-footer-inner">
+    <span>© PillarTwo Architect</span>
+    <span class="docs-footer-sep">·</span>
+    <a href="/">← 아키텍트로 돌아가기</a>
+    <span class="docs-footer-sep">·</span>
+    <a href="/overview.html">Pillar Two</a>
+    <span class="docs-footer-sep">·</span>
+    <a href="/glossary">용어 사전</a>
+    <span class="docs-footer-sep">·</span>
+    <a href="/about.html">서비스 소개</a>
+  </div>
+</footer>
+
+<script>
+(function(){{
+  const search = document.getElementById('jr-idx-search');
+  const chips = document.querySelectorAll('.jr-idx-chip');
+  const cards = document.querySelectorAll('.jr-idx-card');
+  const empty = document.getElementById('jr-idx-empty');
+  let activeRegion = 'all';
+  function apply(){{
+    const q = (search.value || '').toLowerCase().trim();
+    let visible = 0;
+    cards.forEach(c => {{
+      const matchRegion = activeRegion === 'all' || c.dataset.region === activeRegion;
+      const matchQ = !q || (c.dataset.keys || '').includes(q);
+      const show = matchRegion && matchQ;
+      c.style.display = show ? '' : 'none';
+      if (show) visible++;
+    }});
+    empty.style.display = visible === 0 ? 'block' : 'none';
+  }}
+  search.addEventListener('input', apply);
+  chips.forEach(ch => ch.addEventListener('click', () => {{
+    chips.forEach(x => x.classList.toggle('is-active', x === ch));
+    activeRegion = ch.dataset.region;
+    apply();
+  }}));
+}})();
+</script>
+
+</body>
+</html>
+'''
+
+
 def main():
     OUT_DIR.mkdir(exist_ok=True)
-    only = sys.argv[1:] if len(sys.argv) > 1 else list(COUNTRIES.keys())
+    args = sys.argv[1:]
+    build_idx = (not args) or ('INDEX' in args)
+    only = [a for a in args if a in COUNTRIES] if args else list(COUNTRIES.keys())
     for cc in only:
-        if cc not in COUNTRIES:
-            print(f'skip {cc} — not in data')
-            continue
         data = COUNTRIES[cc]
+        if data.get('index_only'):
+            continue  # 수동 작성 페이지 — 덮어쓰기 방지
         html = render_page(cc, data)
         path = OUT_DIR / f'{data["slug"]}.html'
         path.write_text(html, encoding='utf-8')
         print(f'wrote {path.relative_to(ROOT)} ({len(html)} chars)')
+    if build_idx:
+        idx_html = build_index()
+        idx_path = OUT_DIR / 'index.html'
+        idx_path.write_text(idx_html, encoding='utf-8')
+        print(f'wrote {idx_path.relative_to(ROOT)} ({len(idx_html)} chars)')
 
 
 if __name__ == '__main__':

@@ -189,6 +189,134 @@
   border-top:1px dashed rgba(99,102,241,.25);
 }
 
+/* ── Index 페이지 (/jurisdictions/) — 40국 카드 그리드 ── */
+.jr-idx-toolbar{
+  display:flex; flex-direction:column; gap:14px;
+  margin-bottom:28px;
+}
+.jr-idx-search{
+  width:100%;
+  padding:13px 18px;
+  font-size:15px; color:#1e293b;
+  background:#fff;
+  border:1.5px solid rgba(99,102,241,.22);
+  border-radius:12px;
+  outline:none;
+  transition:border-color .15s, box-shadow .15s;
+}
+.jr-idx-search:focus{
+  border-color:rgba(99,102,241,.55);
+  box-shadow:0 0 0 4px rgba(99,102,241,.12);
+}
+.jr-idx-chips{
+  display:flex; flex-wrap:wrap; gap:8px;
+}
+.jr-idx-chip{
+  padding:7px 14px;
+  font-size:13px; font-weight:600; letter-spacing:.1px;
+  color:#475569;
+  background:rgba(99,102,241,.04);
+  border:1px solid rgba(99,102,241,.18);
+  border-radius:99px;
+  cursor:pointer;
+  transition:background .12s, border-color .12s, color .12s;
+}
+.jr-idx-chip:hover{background:rgba(99,102,241,.1); color:#3730a3}
+.jr-idx-chip.is-active{
+  background:linear-gradient(135deg, #2563eb, #4f46e5);
+  border-color:transparent;
+  color:#fff;
+  box-shadow:0 2px 6px rgba(37,99,235,.28);
+}
+
+.jr-idx-grid{
+  display:grid; gap:14px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+.jr-idx-card{
+  display:flex; align-items:center; gap:14px;
+  padding:14px 16px;
+  background:linear-gradient(180deg, #fff 0%, rgba(248,250,252,.5) 100%);
+  border:1.5px solid rgba(99,102,241,.18);
+  border-radius:14px;
+  box-shadow:0 1px 3px rgba(37,99,235,.04), 0 4px 12px rgba(37,99,235,.05);
+  text-decoration:none;
+  transition:border-color .18s, box-shadow .18s, transform .18s;
+}
+.jr-idx-card:hover{
+  border-color:rgba(99,102,241,.45);
+  transform:translateY(-2px);
+  box-shadow:0 4px 10px rgba(37,99,235,.1), 0 12px 28px rgba(37,99,235,.12);
+}
+.jr-idx-flag{
+  width:40px; height:30px; flex-shrink:0;
+  border-radius:5px;
+  box-shadow:0 2px 5px rgba(15,23,42,.15);
+}
+.jr-idx-body{flex:1; min-width:0}
+.jr-idx-name{
+  font-size:15px; font-weight:700;
+  color:#1e3a8a;
+  letter-spacing:-.2px;
+  margin-bottom:6px;
+  display:flex; align-items:baseline; gap:8px;
+}
+.jr-idx-name-en{
+  font-size:11.5px; color:#94a3b8;
+  font-weight:500; letter-spacing:.1px;
+}
+.jr-idx-rules{
+  display:flex; gap:5px; flex-wrap:wrap;
+}
+.jr-idx-rule{
+  display:inline-flex; flex-direction:column; align-items:center;
+  padding:3px 7px;
+  border-radius:6px;
+  font-size:10px; font-weight:600; letter-spacing:.1px;
+  line-height:1.2;
+  min-width:48px;
+}
+.jr-idx-rl{
+  font-size:9px; font-weight:700; letter-spacing:.6px;
+  text-transform:uppercase;
+  opacity:.7;
+}
+.jr-idx-rd{
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+  font-size:11px;
+  margin-top:1px;
+}
+.jr-idx-rule-ok{
+  background:rgba(16,163,74,.1);
+  color:#15803d;
+  border:1px solid rgba(16,163,74,.22);
+}
+.jr-idx-rule-pending{
+  background:rgba(234,179,8,.1);
+  color:#a16207;
+  border:1px solid rgba(234,179,8,.28);
+}
+.jr-idx-rule-none{
+  background:rgba(148,163,184,.1);
+  color:#64748b;
+  border:1px solid rgba(148,163,184,.25);
+}
+.jr-idx-rule-none .jr-idx-rd{
+  font-size:9.5px;
+  font-family:inherit;
+}
+
+.jr-idx-empty{
+  text-align:center; color:#94a3b8;
+  padding:40px 0; font-size:14px;
+}
+
+@media (max-width:640px){
+  .jr-idx-grid{grid-template-columns:1fr}
+  .jr-idx-chip{padding:6px 11px; font-size:12px}
+}
+
 /* 미도입 badge — 회색 톤 */
 .jr-badge-none{background:rgba(148,163,184,.15); color:#475569; border:1px solid rgba(148,163,184,.35)}
 

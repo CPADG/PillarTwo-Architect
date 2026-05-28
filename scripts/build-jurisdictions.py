@@ -1361,7 +1361,7 @@ def render_page(cc, data):
     <a href="/" class="docs-btn primary">분석 시작 →</a>
     <a href="/overview.html" class="docs-btn ghost" data-i18n="docs.nav.overview">Pillar Two</a>
     <a href="/about.html" class="docs-btn ghost" data-i18n="docs.nav.about">서비스 소개</a>
-    <a href="/glossary.html" class="docs-btn ghost" data-i18n="docs.nav.glossary">용어 사전</a>
+    <a href="/glossary" class="docs-btn ghost" data-i18n="docs.nav.glossary">용어 사전</a>
   </section>
 
   <section class="docs-section jr-sources">
@@ -1400,7 +1400,7 @@ def render_page(cc, data):
     <span class="docs-footer-sep">·</span>
     <a href="/overview.html">Pillar Two</a>
     <span class="docs-footer-sep">·</span>
-    <a href="/glossary.html">용어 사전</a>
+    <a href="/glossary">용어 사전</a>
     <span class="docs-footer-sep">·</span>
     <a href="/about.html">서비스 소개</a>
   </div>
@@ -1489,7 +1489,7 @@ def render_idx_card(cc, data):
         rule_pill('QDMTT', qdmtt),
     ])
 
-    return f'''<a href="/jurisdictions/{slug}.html" class="jr-idx-card" data-region="{region}" data-keys="{keys}">
+    return f'''<a href="/jurisdictions/{slug}" class="jr-idx-card" data-region="{region}" data-keys="{keys}">
         <img class="jr-idx-flag" src="https://flagcdn.com/w80/{data['flag_cc']}.png" srcset="https://flagcdn.com/w160/{data['flag_cc']}.png 2x" alt="{name_ko} 국기" loading="lazy" width="40" height="30">
         <div class="jr-idx-body">
           <div class="jr-idx-name">{name_ko}<span class="jr-idx-name-en">{name_en}</span></div>
@@ -1618,7 +1618,7 @@ def build_index():
     <a href="/" class="docs-btn primary">아키텍트 사용하기 →</a>
     <a href="/overview.html" class="docs-btn ghost" data-i18n="docs.nav.overview">Pillar Two</a>
     <a href="/about.html" class="docs-btn ghost" data-i18n="docs.nav.about">서비스 소개</a>
-    <a href="/glossary.html" class="docs-btn ghost" data-i18n="docs.nav.glossary">용어 사전</a>
+    <a href="/glossary" class="docs-btn ghost" data-i18n="docs.nav.glossary">용어 사전</a>
   </section>
 
   <section class="docs-section jr-disclaimer-section">
@@ -1646,7 +1646,7 @@ def build_index():
     <span class="docs-footer-sep">·</span>
     <a href="/overview.html">Pillar Two</a>
     <span class="docs-footer-sep">·</span>
-    <a href="/glossary.html">용어 사전</a>
+    <a href="/glossary">용어 사전</a>
     <span class="docs-footer-sep">·</span>
     <a href="/about.html">서비스 소개</a>
   </div>

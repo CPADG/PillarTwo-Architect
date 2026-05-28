@@ -1,0 +1,66 @@
+name: IndexNow Ping
+
+# 코드/콘텐츠 변경이 main에 push되면 → CF Pages 배포 완료 대기 → IndexNow에 sitemap URL 일괄 ping.
+# 콘텐츠 무관한 변경(스크립트, _headers, .gitignore 등)은 paths 필터로 skip.
+# 커밋 메시지에 [skip indexnow] 포함 시 옵트아웃.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**/*.html'
+      - 'sitemap.xml'
+      - 'translations.js'
+      - 'translations.min.js'
+      - 'jurisdictions/**'
+  workflow_dispatch:
+
+concurrency:
+  group: indexnow-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ping:
+    if: "!contains(github.event.head_commit.message, '[skip indexnow]')"
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Wait for Cloudflare Pages deploy
+        env:
+          COMMIT_SHA: ${{ github.sha }}
+        run: |
+          set -e
+          SITEMAP_URL="https://pillartwo.app/sitemap.xml"
+          # 배포 직후 sitemap.xml 의 lastmod 가 today() 와 일치하는지 확인 (npm run sitemap → cf-build)
+          TODAY=$(date -u +%Y-%m-%d)
+          echo "Polling $SITEMAP_URL for <lastmod>$TODAY</lastmod> (deploy of ${COMMIT_SHA:0:7})..."
+          DEADLINE=$((SECONDS + 540))   # 9분 한도
+          while [ $SECONDS -lt $DEADLINE ]; do
+            BODY=$(curl -fsSL "${SITEMAP_URL}?_=$RANDOM" 2>/dev/null || echo "")
+            if echo "$BODY" | grep -q "<lastmod>${TODAY}</lastmod>"; then
+              URL_COUNT=$(echo "$BODY" | grep -c "<url>")
+              echo "✓ CF Pages 배포 확인됨: ${URL_COUNT} URL, lastmod=${TODAY}"
+              exit 0
+            fi
+            echo "  ... waiting (${SECONDS}s elapsed)"
+            sleep 15
+          done
+          echo "::warning::deploy poll timeout — sitemap에 today lastmod 미확인. 그래도 ping 시도."
+
+      - name: IndexNow ping
+        run: npm run indexnow
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "### IndexNow ping" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Commit: \`${{ github.sha }}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Sitemap: https://pillartwo.app/sitemap.xml" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Key verification: https://pillartwo.app/cb59f10bc3bd7077eb2049e4ef8091d5.txt" >> "$GITHUB_STEP_SUMMARY"

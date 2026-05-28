@@ -93,10 +93,17 @@
   if(document.readyState==='complete'){ setTimeout(_injectAds,600); }
   else { window.addEventListener('load', ()=>setTimeout(_injectAds,600), {once:true}); }
 </script>
+<!-- preconnect: 미니맵 타일·world-atlas JSON 사용 출처 — 연결 미리 warm up하여
+     실제 fetch 시 핸드셰이크 시간 절감 (PageSpeed preconnect 권고 대응). -->
+<link rel="preconnect" href="https://a.tile.openstreetmap.org" crossorigin>
+<link rel="preconnect" href="https://b.tile.openstreetmap.org" crossorigin>
+<link rel="preconnect" href="https://c.tile.openstreetmap.org" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 </head>
-<script src="translations.min.js"></script>
-<script src="globe-engine.min.js"></script>
-<script src="iir-db.min.js"></script>
+<!-- head script들: defer로 HTML 파싱과 병렬 다운로드 + DOMContentLoaded 후 순서대로 실행 → 초기 렌더 차단 제거 -->
+<script defer src="translations.min.js"></script>
+<script defer src="globe-engine.min.js"></script>
+<script defer src="iir-db.min.js"></script>
 <!-- Leaflet / topojson은 미니맵 전용 — LCP 보호를 위해 페이지 load 후 동적 주입.
      주입 완료 시점에 initMinimap() 재호출(현재 호출은 window.L 가드로 no-op 처리됨). -->
 <script>
@@ -644,6 +651,6 @@
   <div class="spinner-sub"></div>
 </div>
 
-<script src="app.min.js"></script>
+<script defer src="app.min.js"></script>
 </body>
 </html>

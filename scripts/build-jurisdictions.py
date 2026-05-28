@@ -223,7 +223,7 @@ COUNTRIES = {
         'insights': [
             ('홍콩에 모기업', '홍콩에 모기업을 둔 다국적기업그룹은 2025-01-01 이후 개시 사업연도부터 IIR 의무를 부담합니다.'),
             ('홍콩에 자회사', '홍콩에 자회사를 둔 다국적기업그룹은 2025-01-01 이후 개시 사업연도부터 HKMTT(QDMTT) 적용 대상입니다. QDMTT Safe Harbour 적용 요건을 충족하면 모기업 등의 소재지국에서의 IIR/UTPR 계산이 면제될 수 있습니다. 홍콩의 표준 법인세율(16.5%)과 영역원천주의(territorial taxation) 영향으로 자회사 ETR이 15% 미만이 되는 경우가 적지 않으므로 사전 모델링 가치가 큽니다.'),
-            ('APAC 금융 hub 특성', '홍콩은 APAC 지역의 금융·홀딩 기능이 집중된 관할권으로, Pillar Two 분석 시 홍콩 영역원천주의 세제와의 상호작용을 별도로 검토할 필요가 있습니다.'),
+            ('APAC 금융 hub 특성', '홍콩은 APAC 지역의 금융·홀딩 기능이 집중된 소재지국으로, Pillar Two 분석 시 홍콩 영역원천주의 세제와의 상호작용을 별도로 검토할 필요가 있습니다.'),
         ],
         'recent': [
             ('2025-06-06', 'Inland Revenue (Amendment) Ordinance 2025 제정 — IIR + HKMTT 일괄 도입 (2025-01-01 시행)'),
@@ -256,7 +256,7 @@ COUNTRIES = {
         'insights': [
             ('아일랜드에 모기업', '아일랜드에 모기업(특히 글로벌 IT·제약 그룹의 EMEA 본부)을 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 IIR 의무를 부담합니다.'),
             ('아일랜드에 자회사', '아일랜드에 자회사를 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 아일랜드 QDTT(QDMTT) 적용 대상입니다. QDMTT Safe Harbour 적용 요건을 충족하면 모기업 등의 소재지국에서의 IIR/UTPR 계산이 면제될 수 있습니다. 아일랜드 표준 법인세율(12.5%)이 글로벌최저한세율(15%) 미만이므로 자회사 ETR이 임계치 하회하는 사례가 많아 사전 모델링이 특히 중요합니다.'),
-            ('Tech·Pharma 헤드쿼터 hub 특성', '아일랜드는 글로벌 IT·제약 기업의 본부·IP 보유 기능이 집중된 관할권입니다. Pillar Two 분석 시 아일랜드의 R&D 세액공제, IP regime 등과의 상호작용을 별도로 검토할 필요가 있습니다.'),
+            ('Tech·Pharma 헤드쿼터 hub 특성', '아일랜드는 글로벌 IT·제약 기업의 본부·IP 보유 기능이 집중된 소재지국입니다. Pillar Two 분석 시 아일랜드의 R&D 세액공제, IP regime 등과의 상호작용을 별도로 검토할 필요가 있습니다.'),
         ],
         'recent': [
             ('2023-12-18', 'Taxes Consolidation Act 1997 Part 4A 제정 — IIR · QDTT 시행'),
@@ -289,7 +289,7 @@ COUNTRIES = {
         'insights': [
             ('룩셈부르크에 모기업', '룩셈부르크에 모기업(특히 EU 지주회사 hub로 활용되는 SOPARFI 등)을 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 IIR 의무를 부담합니다.'),
             ('룩셈부르크에 자회사', '룩셈부르크에 자회사·금융 vehicle을 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 룩셈부르크 QDMTT 적용 대상입니다. QDMTT Safe Harbour 적용 요건을 충족하면 모기업 등의 소재지국에서의 IIR/UTPR 계산이 면제될 수 있습니다.'),
-            ('EU 지주회사 hub 특성', '룩셈부르크는 EU 지주회사·투자펀드·증권화 vehicle 등의 hub로 활용되는 관할권입니다. Pillar Two 분석 시 SOPARFI·SICAR·SICAV 등 vehicle 유형별 적용 가능성과 함께 룩셈부르크의 IP regime 등과의 상호작용을 별도로 검토할 필요가 있습니다.'),
+            ('EU 지주회사 hub 특성', '룩셈부르크는 EU 지주회사·투자펀드·증권화 vehicle 등의 hub로 활용되는 소재지국입니다. Pillar Two 분석 시 SOPARFI·SICAR·SICAV 등 vehicle 유형별 적용 가능성과 함께 룩셈부르크의 IP regime 등과의 상호작용을 별도로 검토할 필요가 있습니다.'),
         ],
         'recent': [
             ('2023-12-22', 'Loi du 22 décembre 2023 공포 — IIR · QDMTT 시행'),
@@ -514,7 +514,7 @@ COUNTRIES = {
             ('스위스에 모기업', '스위스에 모기업을 둔 다국적기업그룹은 2025-01-01 이후 개시 사업연도부터 IIR 의무를 부담합니다.'),
             ('스위스에 자회사', '스위스에 자회사를 둔 다국적기업그룹은 이미 2024-01-01 이후 개시 사업연도부터 스위스 QDMTT 적용 대상입니다. QDMTT Safe Harbour 적용 요건을 충족하면 모기업 등의 소재지국에서의 IIR/UTPR 계산이 면제될 수 있습니다.'),
             ('QDMTT 선행 도입', '스위스는 QDMTT를 IIR보다 1년 앞서 도입했습니다. 자국 세수 확보를 우선 위한 입법 순서로, 그룹 분석 시 동일 사업연도에 두 규정이 서로 다른 시점에 적용되는 점을 유의할 필요가 있습니다.'),
-            ('헤드쿼터·금융 hub 특성', '스위스는 글로벌 본부·금융·연구 기능이 집중된 관할권으로, 칸톤(주)별로 차등화된 법인세율과 특별 인센티브 영향으로 자회사 ETR이 임계치 하회하는 사례가 발생할 수 있습니다.'),
+            ('헤드쿼터·금융 hub 특성', '스위스는 글로벌 본부·금융·연구 기능이 집중된 소재지국으로, 칸톤(주)별로 차등화된 법인세율과 특별 인센티브 영향으로 자회사 ETR이 임계치 하회하는 사례가 발생할 수 있습니다.'),
         ],
         'recent': [
             ('2023-12-22', 'RS 642.161 채택 — QDMTT 우선 시행 (2024-01-01)'),
@@ -555,6 +555,432 @@ COUNTRIES = {
         'sources': [
             ('Inland Revenue Authority of Singapore (IRAS, 싱가포르 국세청)', 'Pillar Two 안내', 'https://www.iras.gov.sg/'),
             ('Singapore Statutes Online', '싱가포르 공식 법령 데이터베이스', 'https://sso.agc.gov.sg/'),
+        ],
+    },
+
+    # ─────────────────────────────────────────────────────────────────
+    # Batch 4 — 차순위 20국 (slightly simpler narrative)
+    # ─────────────────────────────────────────────────────────────────
+
+    'VN': {
+        'slug': 'vietnam', 'name_ko': '베트남', 'name_en': 'Vietnam', 'name_ja': 'ベトナム', 'flag_cc': 'vn',
+        'iir':   {'date': '2024-01-01', 'qualified': True},
+        'utpr':  {'date': None, 'qualified': False, 'note': '도입 미발표'},
+        'qdmtt': {'date': '2024-01-01', 'qualified': True},
+        'lead': '베트남은 <strong>Nghị quyết số 107/2023/QH15</strong>(추가법인소득세 적용에 관한 국회결의)로 OECD Pillar Two의 IIR과 QDMTT를 도입했습니다. 시행일은 2024-01-01 이후 개시 사업연도입니다.',
+        'domestic_laws': [
+            ('<strong>Nghị quyết số 107/2023/QH15</strong>', 'Quốc hội (베트남 국회) 결의 — IIR + QDMTT 도입. 2023-11-29 채택, 2024-01-01 시행'),
+        ],
+        'insights': [
+            ('베트남에 모기업·자회사', '베트남에 모기업·자회사를 둔 다국적기업그룹은 2024-01-01 이후 개시 사업연도부터 베트남 IIR과 QDMTT 적용 대상입니다. QDMTT Safe Harbour 적용 요건을 충족하면 모기업 등의 소재지국에서의 IIR/UTPR 계산이 면제될 수 있습니다. 베트남 표준 법인세율(20%) 외에 다양한 세제 인센티브(첨단기술기업·경제구역 등) 영향으로 자회사 ETR이 임계치 하회하는 사례가 있어 사전 모델링 가치가 있습니다.'),
+        ],
+        'recent': [
+            ('2023-11-29', 'Nghị quyết số 107/2023/QH15 채택 — IIR · QDMTT 시행 (2024-01-01)'),
+        ],
+        'sources': [
+            ('Tổng cục Thuế (General Department of Taxation)', '베트남 국세청', 'https://www.gdt.gov.vn/'),
+            ('Bộ Tài chính', '베트남 재무부', 'https://www.mof.gov.vn/'),
+        ],
+    },
+
+    'ID': {
+        'slug': 'indonesia', 'name_ko': '인도네시아', 'name_en': 'Indonesia', 'name_ja': 'インドネシア', 'flag_cc': 'id',
+        'iir':   {'date': '2025-01-01', 'qualified': True},
+        'utpr':  {'date': '2026-01-01', 'qualified': False},
+        'qdmtt': {'date': '2025-01-01', 'qualified': True},
+        'lead': '인도네시아는 <strong>PMK 136 TAHUN 2024</strong>(국제 합의에 따른 글로벌 최저법인세 부과)로 OECD Pillar Two를 도입했습니다. IIR과 QDMTT는 2025-01-01, UTPR은 2026-01-01 이후 개시 사업연도부터 시행됩니다.',
+        'domestic_laws': [
+            ('<strong>Peraturan Menteri Keuangan (PMK) 136 TAHUN 2024</strong>', '재무부령 — IIR + QDMTT 일괄 도입'),
+            ('UTPR', '2026-01-01 이후 개시 사업연도부터 시행'),
+        ],
+        'insights': [
+            ('인도네시아에 모기업·자회사', '인도네시아에 모기업·자회사를 둔 다국적기업그룹은 2025-01-01 이후 개시 사업연도부터 IIR/QDMTT 적용 대상입니다. QDMTT Safe Harbour 적용 요건을 충족하면 모기업 등의 소재지국에서의 IIR/UTPR 계산이 면제될 수 있습니다.'),
+        ],
+        'recent': [
+            ('2024', 'PMK 136 TAHUN 2024 공포 — IIR · QDMTT 시행 (2025-01-01)'),
+        ],
+        'sources': [
+            ('Direktorat Jenderal Pajak (DJP)', '인도네시아 국세청', 'https://www.pajak.go.id/'),
+            ('Kementerian Keuangan', '인도네시아 재무부', 'https://www.kemenkeu.go.id/'),
+        ],
+    },
+
+    'MY': {
+        'slug': 'malaysia', 'name_ko': '말레이시아', 'name_en': 'Malaysia', 'name_ja': 'マレーシア', 'flag_cc': 'my',
+        'iir':   {'date': '2025-01-01', 'qualified': True},
+        'utpr':  {'date': None, 'qualified': False, 'note': '도입 미발표'},
+        'qdmtt': {'date': '2025-01-01', 'qualified': True},
+        'lead': '말레이시아는 <strong>Act 851 — Finance (No. 2) Act 2023, Section 30</strong>으로 OECD Pillar Two의 IIR과 QDMTT를 도입했습니다. 시행일은 2025-01-01 이후 개시 사업연도이며, UTPR은 아직 별도로 발표되지 않은 상태입니다.',
+        'domestic_laws': [
+            ('<strong>Act 851 — Finance (No. 2) Act 2023, Section 30</strong>', 'IIR + QDMTT 도입'),
+        ],
+        'insights': [
+            ('말레이시아에 모기업·자회사', '말레이시아에 모기업·자회사를 둔 다국적기업그룹은 2025-01-01 이후 개시 사업연도부터 IIR/QDMTT 적용 대상입니다. QDMTT Safe Harbour 적용 요건을 충족하면 모기업 등의 소재지국에서의 IIR/UTPR 계산이 면제될 수 있습니다.'),
+        ],
+        'recent': [
+            ('2023', 'Finance (No. 2) Act 2023 공포 — IIR · QDMTT 시행 (2025-01-01)'),
+        ],
+        'sources': [
+            ('Inland Revenue Board of Malaysia (LHDN)', '말레이시아 국세청', 'https://www.hasil.gov.my/'),
+            ('Ministry of Finance Malaysia', '말레이시아 재무부', 'https://www.mof.gov.my/'),
+        ],
+    },
+
+    'TH': {
+        'slug': 'thailand', 'name_ko': '태국', 'name_en': 'Thailand', 'name_ja': 'タイ', 'flag_cc': 'th',
+        'iir':   {'date': '2025-01-01', 'qualified': True},
+        'utpr':  {'date': '2025-01-01', 'qualified': False},
+        'qdmtt': {'date': '2025-01-01', 'qualified': True},
+        'lead': '태국은 <strong>พระราชกำหนดภาษีส่วนเพิ่ม พ.ศ. 2567</strong>(추가세에 관한 비상법령)로 OECD Pillar Two를 도입했습니다. IIR · UTPR · QDMTT 모두 2025-01-01 이후 개시 사업연도부터 동시에 시행됩니다.',
+        'domestic_laws': [
+            ('<strong>พระราชกำหนดภาษีส่วนเพิ่ม พ.ศ. 2567 (Top-up Tax Emergency Decree B.E. 2567)</strong>', '비상법령으로 IIR · UTPR · QDMTT 일괄 도입'),
+        ],
+        'insights': [
+            ('태국에 모기업·자회사', '태국에 모기업·자회사를 둔 다국적기업그룹은 2025-01-01 이후 개시 사업연도부터 IIR · UTPR · QDMTT 모두 적용 대상입니다. QDMTT Safe Harbour 적용 요건을 충족하면 모기업 등의 소재지국에서의 IIR/UTPR 계산이 면제될 수 있습니다. 태국 BOI(Board of Investment) 인센티브 영향으로 자회사 ETR이 임계치 하회하는 경우가 있어 사전 모델링 가치가 있습니다.'),
+        ],
+        'recent': [
+            ('2024', 'พระราชกำหนดภาษีส่วนเพิ่ม 공포 — IIR · UTPR · QDMTT 동시 시행 (2025-01-01)'),
+        ],
+        'sources': [
+            ('Revenue Department', '태국 국세청', 'https://www.rd.go.th/'),
+            ('Ministry of Finance', '태국 재무부', 'https://www.mof.go.th/'),
+        ],
+    },
+
+    'NZ': {
+        'slug': 'new-zealand', 'name_ko': '뉴질랜드', 'name_en': 'New Zealand', 'name_ja': 'ニュージーランド', 'flag_cc': 'nz',
+        'iir':   {'date': '2025-01-01', 'qualified': True},
+        'utpr':  {'date': '2025-01-01', 'qualified': False},
+        'qdmtt': {'date': '2026-01-01', 'qualified': False},
+        'lead': '뉴질랜드는 <strong>Taxation (Annual Rates for 2023–24, Multinational Tax, and Remedial Matters) Act 2024</strong>로 OECD Pillar Two를 도입했습니다. IIR과 UTPR은 2025-01-01, QDMTT는 1년 늦은 2026-01-01 이후 개시 사업연도부터 시행됩니다.',
+        'domestic_laws': [
+            ('<strong>Taxation (Annual Rates for 2023–24, Multinational Tax, and Remedial Matters) Act 2024</strong>', 'IIR · UTPR · QDMTT 도입'),
+            ('QDMTT', '1년 늦은 2026-01-01 이후 개시 사업연도부터 시행'),
+        ],
+        'insights': [
+            ('뉴질랜드에 모기업·자회사', '뉴질랜드에 모기업·자회사를 둔 다국적기업그룹은 2025-01-01 이후 개시 사업연도부터 IIR/UTPR 적용 대상이며, 2026-01-01부터는 QDMTT가 추가로 적용됩니다.'),
+        ],
+        'recent': [
+            ('2024', 'Taxation Act 2024 공포 — IIR/UTPR 2025-01-01, QDMTT 2026-01-01 시행'),
+        ],
+        'sources': [
+            ('Inland Revenue (IR)', '뉴질랜드 국세청', 'https://www.ird.govt.nz/'),
+            ('New Zealand Legislation', '뉴질랜드 법령 데이터베이스', 'https://www.legislation.govt.nz/'),
+        ],
+    },
+
+    'AT': {
+        'slug': 'austria', 'name_ko': '오스트리아', 'name_en': 'Austria', 'name_ja': 'オーストリア', 'flag_cc': 'at',
+        'iir':   {'date': '2023-12-31', 'qualified': True},
+        'utpr':  {'date': '2024-12-31', 'qualified': False},
+        'qdmtt': {'date': '2023-12-31', 'qualified': True},
+        'lead': '오스트리아는 <strong>Mindestbesteuerungsgesetz (MinBestG)</strong>로 EU Directive 2022/2523을 자국 법령으로 도입했습니다. IIR과 QDMTT는 2023-12-31, UTPR은 2024-12-31 이후 개시 사업연도부터 시행됩니다.',
+        'domestic_laws': [
+            ('<strong>Bundesgesetz zur Gewährleistung einer globalen Mindestbesteuerung für Unternehmensgruppen (Mindestbesteuerungsgesetz – MinBestG)</strong>', 'EU Directive 2022/2523 transposition'),
+        ],
+        'insights': [
+            ('오스트리아에 모기업·자회사', '오스트리아에 모기업·자회사를 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 IIR/QDMTT 적용 대상입니다. QDMTT Safe Harbour 적용 요건을 충족하면 모기업 등의 소재지국에서의 IIR/UTPR 계산이 면제될 수 있습니다.'),
+        ],
+        'recent': [
+            ('2023', 'MinBestG 공포 — IIR · QDMTT 시행'),
+        ],
+        'sources': [
+            ('Bundesministerium für Finanzen (BMF)', '오스트리아 연방재무부', 'https://www.bmf.gv.at/'),
+            ('Rechtsinformationssystem (RIS)', '오스트리아 법령 정보 시스템', 'https://www.ris.bka.gv.at/'),
+        ],
+    },
+
+    'PL': {
+        'slug': 'poland', 'name_ko': '폴란드', 'name_en': 'Poland', 'name_ja': 'ポーランド', 'flag_cc': 'pl',
+        'iir':   {'date': '2025-01-01', 'qualified': True},
+        'utpr':  {'date': '2025-01-01', 'qualified': False},
+        'qdmtt': {'date': '2025-01-01', 'qualified': True},
+        'lead': '폴란드는 <strong>Ustawa z dnia 6 listopada 2024 r.</strong>(다국적기업그룹·국내그룹의 보충세 과세에 관한 법률)로 EU Directive 2022/2523을 자국 법령으로 도입했습니다. IIR · UTPR · QDMTT 모두 2025-01-01 이후 개시 사업연도부터 동시에 시행됩니다.',
+        'domestic_laws': [
+            ('<strong>Ustawa z dnia 6 listopada 2024 r. (Dz.U. 2024 poz.1685)</strong>', 'EU Directive 2022/2523 transposition — IIR · UTPR · QDMTT 일괄 도입'),
+        ],
+        'insights': [
+            ('폴란드에 모기업·자회사', '폴란드에 모기업·자회사를 둔 다국적기업그룹은 2025-01-01 이후 개시 사업연도부터 IIR · UTPR · QDMTT 모두 적용 대상입니다.'),
+        ],
+        'recent': [
+            ('2024-11-06', '법률 채택 — IIR · UTPR · QDMTT 동시 시행 (2025-01-01)'),
+        ],
+        'sources': [
+            ('Krajowa Administracja Skarbowa (KAS)', '폴란드 국세청', 'https://www.podatki.gov.pl/'),
+            ('Internetowy System Aktów Prawnych (ISAP)', '폴란드 법령 데이터베이스', 'https://isap.sejm.gov.pl/'),
+        ],
+    },
+
+    'HU': {
+        'slug': 'hungary', 'name_ko': '헝가리', 'name_en': 'Hungary', 'name_ja': 'ハンガリー', 'flag_cc': 'hu',
+        'iir':   {'date': '2023-12-31', 'qualified': True},
+        'utpr':  {'date': '2024-12-31', 'qualified': False},
+        'qdmtt': {'date': '2023-12-31', 'qualified': True},
+        'lead': '헝가리는 <strong>2023. évi LXXXIV. Törvény</strong>(글로벌 최저 과세 보장 보충세에 관한 법률)로 EU Directive 2022/2523을 자국 법령으로 도입했습니다. IIR과 QDMTT는 2023-12-31, UTPR은 2024-12-31 이후 개시 사업연도부터 시행됩니다.',
+        'domestic_laws': [
+            ('<strong>2023. évi LXXXIV. Törvény</strong>', 'EU Directive 2022/2523 transposition'),
+        ],
+        'insights': [
+            ('헝가리에 모기업·자회사', '헝가리에 모기업·자회사를 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 IIR/QDMTT 적용 대상입니다. 헝가리 표준 법인세율(9%)이 글로벌최저한세율(15%)보다 낮으므로 자회사 ETR이 임계치 하회하는 사례가 많아 사전 모델링이 중요합니다.'),
+        ],
+        'recent': [
+            ('2023', '2023. évi LXXXIV. Törvény 채택 — IIR · QDMTT 시행'),
+        ],
+        'sources': [
+            ('Nemzeti Adó- és Vámhivatal (NAV)', '헝가리 국세청', 'https://nav.gov.hu/'),
+            ('Magyar Közlöny', '헝가리 공식 관보', 'https://magyarkozlony.hu/'),
+        ],
+    },
+
+    'CZ': {
+        'slug': 'czech-republic', 'name_ko': '체코', 'name_en': 'Czechia', 'name_ja': 'チェコ', 'flag_cc': 'cz',
+        'iir':   {'date': '2023-12-31', 'qualified': True},
+        'utpr':  {'date': '2024-12-31', 'qualified': False},
+        'qdmtt': {'date': '2023-12-31', 'qualified': True},
+        'lead': '체코는 <strong>Zákon č. 416/2023 Sb.</strong>(대규모 다국적그룹 및 국내그룹에 대한 보충세에 관한 법률)로 EU Directive 2022/2523을 자국 법령으로 도입했습니다. IIR과 QDMTT는 2023-12-31, UTPR은 2024-12-31 이후 개시 사업연도부터 시행됩니다.',
+        'domestic_laws': [
+            ('<strong>Zákon č. 416/2023 Sb.</strong>', 'O dorovnávacích daních pro velké nadnárodní skupiny a velké vnitrostátní skupiny — EU Directive 2022/2523 transposition'),
+        ],
+        'insights': [
+            ('체코에 모기업·자회사', '체코에 모기업·자회사를 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 IIR/QDMTT 적용 대상입니다.'),
+        ],
+        'recent': [
+            ('2023', 'Zákon č. 416/2023 Sb. 채택 — IIR · QDMTT 시행'),
+        ],
+        'sources': [
+            ('Finanční správa České republiky', '체코 국세청', 'https://www.financnisprava.cz/'),
+            ('Zákony pro lidi', '체코 법령 데이터베이스', 'https://www.zakonyprolidi.cz/'),
+        ],
+    },
+
+    'DK': {
+        'slug': 'denmark', 'name_ko': '덴마크', 'name_en': 'Denmark', 'name_ja': 'デンマーク', 'flag_cc': 'dk',
+        'iir':   {'date': '2023-12-31', 'qualified': True},
+        'utpr':  {'date': '2024-12-31', 'qualified': False},
+        'qdmtt': {'date': '2023-12-31', 'qualified': True},
+        'lead': '덴마크는 <strong>Minimumsbeskatningsloven (Lov nr. 1535 af 12. december 2023)</strong>로 EU Directive 2022/2523을 자국 법령으로 도입했습니다. IIR과 QDMTT는 2023-12-31, UTPR은 2024-12-31 이후 개시 사업연도부터 시행됩니다.',
+        'domestic_laws': [
+            ('<strong>Lov nr. 1535 af 12. december 2023 om en ekstraskat for visse koncernenheder (Minimumsbeskatningsloven)</strong>', 'EU Directive 2022/2523 transposition'),
+        ],
+        'insights': [
+            ('덴마크에 모기업·자회사', '덴마크에 모기업·자회사를 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 IIR/QDMTT 적용 대상입니다.'),
+        ],
+        'recent': [
+            ('2023-12-12', 'Lov nr. 1535 채택 — IIR · QDMTT 시행'),
+        ],
+        'sources': [
+            ('Skattestyrelsen', '덴마크 국세청', 'https://www.skat.dk/'),
+            ('Retsinformation', '덴마크 법령 데이터베이스', 'https://www.retsinformation.dk/'),
+        ],
+    },
+
+    'FI': {
+        'slug': 'finland', 'name_ko': '핀란드', 'name_en': 'Finland', 'name_ja': 'フィンランド', 'flag_cc': 'fi',
+        'iir':   {'date': '2023-12-31', 'qualified': True},
+        'utpr':  {'date': '2024-12-31', 'qualified': False},
+        'qdmtt': {'date': '2023-12-31', 'qualified': True},
+        'lead': '핀란드는 <strong>Laki suurten konsernien vähimmäisverosta (1308/2023)</strong>(대규모 그룹의 최저세에 관한 법률)로 EU Directive 2022/2523을 자국 법령으로 도입했습니다. IIR과 QDMTT는 2023-12-31, UTPR은 2024-12-31 이후 개시 사업연도부터 시행됩니다.',
+        'domestic_laws': [
+            ('<strong>Laki suurten konsernien vähimmäisverosta 1308/2023</strong>', 'EU Directive 2022/2523 transposition'),
+        ],
+        'insights': [
+            ('핀란드에 모기업·자회사', '핀란드에 모기업·자회사를 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 IIR/QDMTT 적용 대상입니다.'),
+        ],
+        'recent': [
+            ('2023', 'Laki 1308/2023 채택 — IIR · QDMTT 시행'),
+        ],
+        'sources': [
+            ('Verohallinto', '핀란드 국세청', 'https://www.vero.fi/'),
+            ('Finlex', '핀란드 법령 데이터베이스', 'https://www.finlex.fi/'),
+        ],
+    },
+
+    'NO': {
+        'slug': 'norway', 'name_ko': '노르웨이', 'name_en': 'Norway', 'name_ja': 'ノルウェー', 'flag_cc': 'no',
+        'iir':   {'date': '2024-01-01', 'qualified': True},
+        'utpr':  {'date': '2025-01-01', 'qualified': False},
+        'qdmtt': {'date': '2024-01-01', 'qualified': True},
+        'lead': '노르웨이는 <strong>Suppleringsskatteloven (Lov 12. januar 2024 nr. 1)</strong>(보충세에 관한 법률)로 OECD Pillar Two를 도입했습니다. IIR과 QDMTT는 2024-01-01, UTPR은 2025-01-01 이후 개시 사업연도부터 시행됩니다.',
+        'domestic_laws': [
+            ('<strong>Lov 12. januar 2024 nr. 1 om suppleringsskatt på underbeskattet inntekt i konsern (Suppleringsskatteloven)</strong>', 'EFTA 회원국 — OECD 모델규정 자체 도입'),
+        ],
+        'insights': [
+            ('노르웨이에 모기업·자회사', '노르웨이에 모기업·자회사를 둔 다국적기업그룹은 2024-01-01 이후 개시 사업연도부터 IIR/QDMTT 적용 대상입니다.'),
+        ],
+        'recent': [
+            ('2024-01-12', 'Suppleringsskatteloven 공포 — IIR · QDMTT 시행'),
+        ],
+        'sources': [
+            ('Skatteetaten', '노르웨이 국세청', 'https://www.skatteetaten.no/'),
+            ('Lovdata', '노르웨이 법령 데이터베이스', 'https://lovdata.no/'),
+        ],
+    },
+
+    'PT': {
+        'slug': 'portugal', 'name_ko': '포르투갈', 'name_en': 'Portugal', 'name_ja': 'ポルトガル', 'flag_cc': 'pt',
+        'iir':   {'date': '2024-01-01', 'qualified': True},
+        'utpr':  {'date': '2025-01-01', 'qualified': False},
+        'qdmtt': {'date': '2024-01-01', 'qualified': True},
+        'lead': '포르투갈은 <strong>Lei n.º 41/2024, de 8 de novembro</strong>으로 EU Directive 2022/2523을 자국 법령으로 도입했습니다. IIR과 QDMTT는 2024-01-01, UTPR은 2025-01-01 이후 개시 사업연도부터 시행됩니다.',
+        'domestic_laws': [
+            ('<strong>Lei n.º 41/2024, de 8 de novembro</strong>', 'EU Directive 2022/2523 transposition'),
+        ],
+        'insights': [
+            ('포르투갈에 모기업·자회사', '포르투갈에 모기업·자회사를 둔 다국적기업그룹은 2024-01-01 이후 개시 사업연도부터 IIR/QDMTT 적용 대상입니다.'),
+        ],
+        'recent': [
+            ('2024-11-08', 'Lei n.º 41/2024 공포 — IIR · QDMTT 시행'),
+        ],
+        'sources': [
+            ('Autoridade Tributária e Aduaneira (AT)', '포르투갈 국세청', 'https://www.portaldasfinancas.gov.pt/'),
+            ('Diário da República', '포르투갈 공식 관보', 'https://dre.pt/'),
+        ],
+    },
+
+    'GR': {
+        'slug': 'greece', 'name_ko': '그리스', 'name_en': 'Greece', 'name_ja': 'ギリシャ', 'flag_cc': 'gr',
+        'iir':   {'date': '2023-12-31', 'qualified': True},
+        'utpr':  {'date': '2024-12-31', 'qualified': False},
+        'qdmtt': {'date': '2023-12-31', 'qualified': True},
+        'lead': '그리스는 <strong>Νόμος 5100/2024</strong>(EU 글로벌 최저과세 디렉티브 transposition)로 EU Directive 2022/2523을 자국 법령으로 도입했습니다. IIR과 QDMTT는 2023-12-31, UTPR은 2024-12-31 이후 개시 사업연도부터 시행됩니다.',
+        'domestic_laws': [
+            ('<strong>Νόμος 5100/2024 (Law 5100/2024)</strong>', 'EU Directive 2022/2523 transposition'),
+        ],
+        'insights': [
+            ('그리스에 모기업·자회사', '그리스에 모기업·자회사를 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 IIR/QDMTT 적용 대상입니다.'),
+        ],
+        'recent': [
+            ('2024', 'Νόμος 5100/2024 공포 — IIR · QDMTT 시행'),
+        ],
+        'sources': [
+            ('Ανεξάρτητη Αρχή Δημοσίων Εσόδων (AADE)', '그리스 국세청', 'https://www.aade.gr/'),
+            ('Εθνικό Τυπογραφείο', '그리스 공식 관보', 'https://www.et.gr/'),
+        ],
+    },
+
+    'RO': {
+        'slug': 'romania', 'name_ko': '루마니아', 'name_en': 'Romania', 'name_ja': 'ルーマニア', 'flag_cc': 'ro',
+        'iir':   {'date': '2023-12-31', 'qualified': True},
+        'utpr':  {'date': '2024-12-31', 'qualified': False},
+        'qdmtt': {'date': '2023-12-31', 'qualified': True},
+        'lead': '루마니아는 <strong>Lege nr. 431/2023</strong>(다국적기업그룹 및 대규모 국내그룹의 글로벌 최저과세 보장에 관한 법률)로 EU Directive 2022/2523을 자국 법령으로 도입했습니다. IIR과 QDMTT는 2023-12-31, UTPR은 2024-12-31 이후 개시 사업연도부터 시행됩니다.',
+        'domestic_laws': [
+            ('<strong>Lege nr. 431/2023</strong>', 'EU Directive 2022/2523 transposition'),
+        ],
+        'insights': [
+            ('루마니아에 모기업·자회사', '루마니아에 모기업·자회사를 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 IIR/QDMTT 적용 대상입니다.'),
+        ],
+        'recent': [
+            ('2023', 'Lege nr. 431/2023 채택 — IIR · QDMTT 시행'),
+        ],
+        'sources': [
+            ('Agenția Națională de Administrare Fiscală (ANAF)', '루마니아 국세청', 'https://www.anaf.ro/'),
+            ('Monitorul Oficial', '루마니아 공식 관보', 'https://monitoruloficial.ro/'),
+        ],
+    },
+
+    'SI': {
+        'slug': 'slovenia', 'name_ko': '슬로베니아', 'name_en': 'Slovenia', 'name_ja': 'スロベニア', 'flag_cc': 'si',
+        'iir':   {'date': '2023-12-31', 'qualified': True},
+        'utpr':  {'date': '2024-12-31', 'qualified': False},
+        'qdmtt': {'date': '2023-12-31', 'qualified': True},
+        'lead': '슬로베니아는 <strong>Zakon o minimalnem davku (ZMD)</strong>(최저세에 관한 법률)로 EU Directive 2022/2523을 자국 법령으로 도입했습니다. IIR과 QDMTT는 2023-12-31, UTPR은 2024-12-31 이후 개시 사업연도부터 시행됩니다.',
+        'domestic_laws': [
+            ('<strong>Zakon o minimalnem davku (ZMD), Uradni list RS, št. 131/2023</strong>', 'EU Directive 2022/2523 transposition'),
+        ],
+        'insights': [
+            ('슬로베니아에 모기업·자회사', '슬로베니아에 모기업·자회사를 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 IIR/QDMTT 적용 대상입니다.'),
+        ],
+        'recent': [
+            ('2023', 'ZMD (Uradni list RS, št. 131/2023) 공포 — IIR · QDMTT 시행'),
+        ],
+        'sources': [
+            ('Finančna uprava Republike Slovenije (FURS)', '슬로베니아 국세청', 'https://www.fu.gov.si/'),
+            ('Uradni list Republike Slovenije', '슬로베니아 공식 관보', 'https://www.uradni-list.si/'),
+        ],
+    },
+
+    'TR': {
+        'slug': 'turkey', 'name_ko': '튀르키예', 'name_en': 'Türkiye', 'name_ja': 'トルコ', 'flag_cc': 'tr',
+        'iir':   {'date': '2024-01-01', 'qualified': True},
+        'utpr':  {'date': '2025-01-01', 'qualified': False},
+        'qdmtt': {'date': '2024-01-01', 'qualified': True},
+        'lead': '튀르키예는 <strong>5520 sayılı Kurumlar Vergisi Kanunu, Beşinci Kısım</strong>(법인세법 제5편 — 자국·글로벌 최저 보충 법인세)으로 OECD Pillar Two를 도입했습니다. IIR과 QDMTT는 2024-01-01, UTPR은 2025-01-01 이후 개시 사업연도부터 시행됩니다.',
+        'domestic_laws': [
+            ('<strong>Kanun Numarası 5520 (Kurumlar Vergisi Kanunu), Beşinci Kısım</strong>', '법인세법 제5편 — 자국 및 글로벌 최저 보충 법인세 도입'),
+        ],
+        'insights': [
+            ('튀르키예에 모기업·자회사', '튀르키예에 모기업·자회사를 둔 다국적기업그룹은 2024-01-01 이후 개시 사업연도부터 IIR/QDMTT 적용 대상입니다.'),
+        ],
+        'recent': [
+            ('2023', '법인세법 제5편 신설 — IIR · QDMTT 시행 (2024-01-01)'),
+        ],
+        'sources': [
+            ('Gelir İdaresi Başkanlığı (GİB)', '튀르키예 국세청', 'https://www.gib.gov.tr/'),
+            ('Resmî Gazete', '튀르키예 공식 관보', 'https://www.resmigazete.gov.tr/'),
+        ],
+    },
+
+    'ZA': {
+        'slug': 'south-africa', 'name_ko': '남아프리카공화국', 'name_en': 'South Africa', 'name_ja': '南アフリカ共和国', 'flag_cc': 'za',
+        'iir':   {'date': '2024-01-01', 'qualified': True},
+        'utpr':  {'date': None, 'qualified': False, 'note': '도입 미발표'},
+        'qdmtt': {'date': '2024-01-01', 'qualified': True},
+        'lead': '남아프리카공화국은 <strong>Global Minimum Tax Act (Act No. 46 of 2024)</strong>로 OECD Pillar Two의 IIR과 QDMTT를 도입했습니다. 시행일은 2024-01-01 이후 개시 사업연도이며, UTPR은 아직 별도로 발표되지 않은 상태입니다.',
+        'domestic_laws': [
+            ('<strong>Global Minimum Tax Act (Act No. 46 of 2024)</strong>', 'IIR + QDMTT 도입'),
+        ],
+        'insights': [
+            ('남아공에 모기업·자회사', '남아공에 모기업·자회사를 둔 다국적기업그룹은 2024-01-01 이후 개시 사업연도부터 IIR/QDMTT 적용 대상입니다.'),
+        ],
+        'recent': [
+            ('2024', 'Global Minimum Tax Act (Act No. 46 of 2024) 공포 — IIR · QDMTT 시행'),
+        ],
+        'sources': [
+            ('South African Revenue Service (SARS)', '남아공 국세청', 'https://www.sars.gov.za/'),
+            ('Government Gazette', '남아공 공식 관보', 'https://www.gov.za/'),
+        ],
+    },
+
+    'QA': {
+        'slug': 'qatar', 'name_ko': '카타르', 'name_en': 'Qatar', 'name_ja': 'カタール', 'flag_cc': 'qa',
+        'iir':   {'date': '2025-01-01', 'qualified': True},
+        'utpr':  {'date': None, 'qualified': False, 'note': '도입 미발표'},
+        'qdmtt': {'date': '2025-01-01', 'qualified': True},
+        'lead': '카타르는 <strong>Law No. 22 of 2024</strong>(소득세법 일부개정)로 OECD Pillar Two의 IIR과 QDMTT를 도입했습니다. 시행일은 2025-01-01 이후 개시 사업연도이며, UTPR은 아직 별도로 발표되지 않은 상태입니다.',
+        'domestic_laws': [
+            ('<strong>Law No. 22 of 2024</strong>', 'Amending some provisions of the Income Tax Law (Law No. 24 of 2018) — IIR + QDMTT 도입'),
+        ],
+        'insights': [
+            ('카타르에 모기업·자회사', '카타르에 모기업·자회사를 둔 다국적기업그룹은 2025-01-01 이후 개시 사업연도부터 IIR/QDMTT 적용 대상입니다. 카타르 표준 법인세율(10%)이 글로벌최저한세율(15%) 미만이므로 자회사 ETR이 임계치 하회하는 사례가 많아 사전 모델링이 중요합니다.'),
+        ],
+        'recent': [
+            ('2024', 'Law No. 22 of 2024 공포 — IIR · QDMTT 시행 (2025-01-01)'),
+        ],
+        'sources': [
+            ('General Tax Authority (GTA)', '카타르 국세청', 'https://www.gta.gov.qa/'),
+            ('Al-Meezan (National Legislator)', '카타르 공식 법령 데이터베이스', 'https://www.almeezan.qa/'),
+        ],
+    },
+
+    'LI': {
+        'slug': 'liechtenstein', 'name_ko': '리히텐슈타인', 'name_en': 'Liechtenstein', 'name_ja': 'リヒテンシュタイン', 'flag_cc': 'li',
+        'iir':   {'date': '2024-01-01', 'qualified': True},
+        'utpr':  {'date': None, 'qualified': False, 'note': '도입 미발표'},
+        'qdmtt': {'date': '2024-01-01', 'qualified': True},
+        'lead': '리히텐슈타인은 <strong>GloBE-Gesetz (Gesetz vom 10. November 2023 über die Mindestbesteuerung grosser Unternehmensgruppen)</strong>로 OECD Pillar Two의 IIR과 QDMTT를 도입했습니다. 시행일은 2024-01-01 이후 개시 사업연도입니다.',
+        'domestic_laws': [
+            ('<strong>Gesetz vom 10. November 2023 über die Mindestbesteuerung grosser Unternehmensgruppen (GloBE-Gesetz)</strong>', 'IIR + QDMTT 도입. EFTA·EEA 회원국으로 OECD 모델규정 자체 도입'),
+        ],
+        'insights': [
+            ('리히텐슈타인에 모기업·자회사', '리히텐슈타인에 모기업·자회사를 둔 다국적기업그룹은 2024-01-01 이후 개시 사업연도부터 IIR/QDMTT 적용 대상입니다. 리히텐슈타인 표준 법인세율(12.5%)이 글로벌최저한세율(15%) 미만이므로 자회사 ETR이 임계치 하회하는 사례가 많아 사전 모델링이 중요합니다.'),
+        ],
+        'recent': [
+            ('2023-11-10', 'GloBE-Gesetz 공포 — IIR · QDMTT 시행 (2024-01-01)'),
+        ],
+        'sources': [
+            ('Steuerverwaltung des Fürstentums Liechtenstein', '리히텐슈타인 세무청', 'https://www.llv.li/'),
+            ('Liechtensteinisches Landesgesetzblatt (LGBl.)', '리히텐슈타인 공식 관보', 'https://www.gesetze.li/'),
         ],
     },
 }

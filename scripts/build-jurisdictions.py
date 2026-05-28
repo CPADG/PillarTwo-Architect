@@ -601,7 +601,7 @@ COUNTRIES = {
         'iir':   {'date': '2024-01-01', 'qualified': True},
         'utpr':  {'date': None, 'qualified': False, 'note': '도입 미발표'},
         'qdmtt': {'date': '2024-01-01', 'qualified': True},
-        'lead': '베트남은 <strong>Nghị quyết số 107/2023/QH15</strong>(추가법인소득세 적용에 관한 국회결의)로 OECD Pillar Two의 IIR과 QDMTT를 도입했습니다. 시행일은 2024-01-01 이후 개시 사업연도입니다.',
+        'lead': '베트남은 <strong>Nghị quyết số 107/2023/QH15</strong>(추가법인소득세 적용에 관한 국회결의)로 OECD Pillar Two의 IIR과 QDMTT를 도입했습니다. 시행은 2024-01-01 이후 개시하는 사업연도부터입니다.',
         'domestic_laws': [
             ('<strong>Nghị quyết số 107/2023/QH15</strong>', 'Quốc hội (베트남 국회) 결의 — IIR + QDMTT 도입. 2023-11-29 채택, 2024-01-01 시행'),
         ],
@@ -644,7 +644,7 @@ COUNTRIES = {
         'iir':   {'date': '2025-01-01', 'qualified': True},
         'utpr':  {'date': None, 'qualified': False, 'note': '도입 미발표'},
         'qdmtt': {'date': '2025-01-01', 'qualified': True},
-        'lead': '말레이시아는 <strong>Act 851 — Finance (No. 2) Act 2023, Section 30</strong>으로 OECD Pillar Two의 IIR과 QDMTT를 도입했습니다. 시행일은 2025-01-01 이후 개시 사업연도이며, UTPR은 아직 별도로 발표되지 않은 상태입니다.',
+        'lead': '말레이시아는 <strong>Act 851 — Finance (No. 2) Act 2023, Section 30</strong>으로 OECD Pillar Two의 IIR과 QDMTT를 도입했습니다. 시행은 2025-01-01 이후 개시하는 사업연도부터이며, UTPR은 아직 별도로 발표되지 않은 상태입니다.',
         'domestic_laws': [
             ('<strong>Act 851 — Finance (No. 2) Act 2023, Section 30</strong>', 'IIR + QDMTT 도입'),
         ],
@@ -960,7 +960,7 @@ COUNTRIES = {
         'iir':   {'date': '2024-01-01', 'qualified': True},
         'utpr':  {'date': None, 'qualified': False, 'note': '도입 미발표'},
         'qdmtt': {'date': '2024-01-01', 'qualified': True},
-        'lead': '남아프리카공화국은 <strong>Global Minimum Tax Act (Act No. 46 of 2024)</strong>로 OECD Pillar Two의 IIR과 QDMTT를 도입했습니다. 시행일은 2024-01-01 이후 개시 사업연도이며, UTPR은 아직 별도로 발표되지 않은 상태입니다.',
+        'lead': '남아프리카공화국은 <strong>Global Minimum Tax Act (Act No. 46 of 2024)</strong>로 OECD Pillar Two의 IIR과 QDMTT를 도입했습니다. 시행은 2024-01-01 이후 개시하는 사업연도부터이며, UTPR은 아직 별도로 발표되지 않은 상태입니다.',
         'domestic_laws': [
             ('<strong>Global Minimum Tax Act (Act No. 46 of 2024)</strong>', 'IIR + QDMTT 도입'),
         ],
@@ -981,7 +981,7 @@ COUNTRIES = {
         'iir':   {'date': '2025-01-01', 'qualified': True},
         'utpr':  {'date': None, 'qualified': False, 'note': '도입 미발표'},
         'qdmtt': {'date': '2025-01-01', 'qualified': True},
-        'lead': '카타르는 <strong>Law No. 22 of 2024</strong>(소득세법 일부개정)로 OECD Pillar Two의 IIR과 QDMTT를 도입했습니다. 시행일은 2025-01-01 이후 개시 사업연도이며, UTPR은 아직 별도로 발표되지 않은 상태입니다.',
+        'lead': '카타르는 <strong>Law No. 22 of 2024</strong>(소득세법 일부개정)로 OECD Pillar Two의 IIR과 QDMTT를 도입했습니다. 시행은 2025-01-01 이후 개시하는 사업연도부터이며, UTPR은 아직 별도로 발표되지 않은 상태입니다.',
         'domestic_laws': [
             ('<strong>Law No. 22 of 2024</strong>', 'Amending some provisions of the Income Tax Law (Law No. 24 of 2018) — IIR + QDMTT 도입'),
         ],
@@ -1002,7 +1002,7 @@ COUNTRIES = {
         'iir':   {'date': '2024-01-01', 'qualified': True},
         'utpr':  {'date': None, 'qualified': False, 'note': '도입 미발표'},
         'qdmtt': {'date': '2024-01-01', 'qualified': True},
-        'lead': '리히텐슈타인은 <strong>GloBE-Gesetz (Gesetz vom 10. November 2023 über die Mindestbesteuerung grosser Unternehmensgruppen)</strong>로 OECD Pillar Two의 IIR과 QDMTT를 도입했습니다. 시행일은 2024-01-01 이후 개시 사업연도입니다.',
+        'lead': '리히텐슈타인은 <strong>GloBE-Gesetz (Gesetz vom 10. November 2023 über die Mindestbesteuerung grosser Unternehmensgruppen)</strong>로 OECD Pillar Two의 IIR과 QDMTT를 도입했습니다. 시행은 2024-01-01 이후 개시하는 사업연도부터입니다.',
         'domestic_laws': [
             ('<strong>Gesetz vom 10. November 2023 über die Mindestbesteuerung grosser Unternehmensgruppen (GloBE-Gesetz)</strong>', 'IIR + QDMTT 도입. EFTA·EEA 회원국으로 OECD 모델규정 자체 도입'),
         ],

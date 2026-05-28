@@ -1117,7 +1117,7 @@ T = {
         'en': 'Design a group with {country} entities together with PillarTwo Architect and see the full Pillar Two blueprint instantly.',
         'ja': '{country}の構成会社を含むグループをPillarTwo Architectと一緒に設計し、グローバル・ミニマム課税の青写真を即座に確認できます。',
     },
-    'cta.btn.start': {'en': 'Start analysing →', 'ja': '分析を開始 →'},
+    'cta.btn.start': {'en': 'Open the Architect →', 'ja': 'アーキテクトを使う →'},
     'cta.btn.overview': {'en': 'Pillar Two', 'ja': 'Pillar Two'},
     'cta.btn.about': {'en': 'About', 'ja': 'サービス紹介'},
     'cta.btn.glossary': {'en': 'Glossary', 'ja': '用語集'},
@@ -2181,7 +2181,7 @@ def render_page(cc, data):
   <section class="docs-section jr-cta-section">
     <h2>PillarTwo Architect에서 분석해 보기</h2>
     <p>{name_ko} 기업이 포함된 그룹을 아키텍처에 설계하고 글로벌최저한세 청사진을 즉시 확인하세요.</p>
-    <a href="/" class="docs-btn primary">분석 시작 →</a>
+    <a href="/" class="docs-btn primary">아키텍트 시작하기 →</a>
     <a href="/overview.html" class="docs-btn ghost" data-i18n="docs.nav.overview">Pillar Two</a>
     <a href="/about.html" class="docs-btn ghost" data-i18n="docs.nav.about">서비스 소개</a>
   </section>

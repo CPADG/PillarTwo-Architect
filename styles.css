@@ -1,4 +1,4 @@
-/* build: 2026-05-28T18:40:41.083Z */
+/* build: 2026-05-28T18:44:28.178Z */
 :root{
   --primary:#2563eb;--primary-dk:#1d4ed8;--primary-lt:#eff6ff;
   --indigo:#4f46e5;--indigo-dk:#4338ca;--indigo-lt:#eef2ff;
@@ -47,6 +47,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 .lang-btn.active{background:var(--primary);color:#fff;cursor:default}
 .ctrl-prefix{display:flex;align-items:center;justify-content:center;padding:6px 7px;color:var(--muted);border-right:1px solid var(--border);flex-shrink:0;pointer-events:none}
 .ctrl-prefix svg{width:12px;height:12px;flex-shrink:0}
+/* 클릭 가능한 globe 프리픽스 — 위치/패딩은 기존 .ctrl-prefix 그대로 유지 */
+.ctrl-prefix-link{pointer-events:auto;cursor:pointer;text-decoration:none;transition:color .12s,background .12s}
+.ctrl-prefix-link:hover{color:var(--primary)}
 .tbar-r{margin-left:auto;display:flex;align-items:center;gap:10px}
 #legend{display:flex;align-items:center;gap:14px;flex-shrink:0;flex-wrap:nowrap;white-space:nowrap}
 @media (max-width:1800px){#legend,.sep:has(+#legend){display:none}}
@@ -985,8 +988,11 @@ body.globe-collapsed #side-panel.open .panel-body{margin-bottom:80px}
 .map-hd{position:absolute;top:0;left:0;right:0;height:28px;z-index:1000;display:flex;align-items:center;
   padding:0 8px;gap:6px;background:rgba(255,255,255,.88);backdrop-filter:blur(4px);
   border-bottom:1px solid rgba(0,0,0,.07);font-size:10px;font-weight:700;color:#334155;letter-spacing:.2px}
-.map-hd-icon{width:11px;height:11px;opacity:.5;flex-shrink:0}
-.map-hd-label{font-size:11.5px;letter-spacing:.1px;flex-shrink:0}
+.map-hd-icon{width:11px;height:11px;opacity:.5;flex-shrink:0;display:block}
+/* 클릭 가능한 미니맵 헤더 globe — /jurisdictions/로 진입. 원래 svg와 동일한 inline 동작 유지 */
+.map-hd-icon-link{display:inline-flex;align-items:center;cursor:pointer;text-decoration:none;color:inherit;line-height:0;flex-shrink:0;transition:opacity .12s}
+.map-hd-icon-link:hover .map-hd-icon{opacity:1}
+.map-hd-label{font-size:11.5px;letter-spacing:.5px;flex-shrink:0;text-transform:uppercase}
 /* Globe 제목과 contextual info 사이 세로 구분선 — info가 있을 때만 표시 */
 .map-hd:has(#map-hd-country:not(:empty)) .map-hd-label{
   padding-right:8px;margin-right:2px;border-right:1px solid rgba(15,23,42,.12)}

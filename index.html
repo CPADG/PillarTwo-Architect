@@ -224,7 +224,7 @@ window.sentryOnLoad = function () {
       <button class="zoom-ctrl-btn" id="btn-zi" data-i18n-tip="zoom.in.title" data-i18n-aria="zoom.in.title" data-pe-tip="확대" aria-label="확대"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></button>
     </div>
     <div class="lang-sel">
-      <span class="ctrl-prefix" style="border-right:1px solid var(--border)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></span>
+      <a class="ctrl-prefix ctrl-prefix-link" href="/jurisdictions/" data-i18n-tip="docs.nav.jurisdictions" data-pe-tip="국가별 현황" aria-label="국가별 현황" style="border-right:1px solid var(--border)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></a>
       <button class="lang-btn" id="lang-en" data-pe-tip="English">EN</button>
       <button class="lang-btn active" id="lang-ko" data-pe-tip="한국어">KR</button>
       <button class="lang-btn" id="lang-ja" data-pe-tip="日本語">JP</button>
@@ -331,7 +331,7 @@ window.sentryOnLoad = function () {
 <!-- 세계지도 미니맵 -->
 <div id="globe-minimap-wrap" class="map-pip-clear">
   <div class="map-hd">
-    <svg class="map-hd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+    <a class="map-hd-icon-link" href="/jurisdictions/" data-i18n-tip="docs.nav.jurisdictions" data-pe-tip="국가별 현황" aria-label="국가별 현황"><svg class="map-hd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></a>
     <span class="map-hd-label" data-i18n="minimap.title">Globe</span>
     <span id="map-hd-country"></span>
     <button id="globe-collapse-btn" aria-label="Collapse/Expand globe view" type="button">

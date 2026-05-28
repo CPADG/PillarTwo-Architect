@@ -1,5 +1,12 @@
 # PillarTwo Architect
 
+[![Live](https://img.shields.io/website?url=https%3A%2F%2Fpillartwo.app&label=pillartwo.app&style=flat-square)](https://pillartwo.app)
+[![i18n](https://img.shields.io/badge/i18n-한국어%20·%20English%20·%20日本語-2563eb?style=flat-square)](https://pillartwo.app)
+[![OECD](https://img.shields.io/badge/OECD-GloBE%20Model%20Rules-4f46e5?style=flat-square)](https://www.oecd.org/tax/beps/)
+[![Privacy](https://img.shields.io/badge/data-100%25%20client--side-16a34a?style=flat-square)](https://pillartwo.app/about)
+
+![PillarTwo Architect — MNE group structure with IIR/UTPR/QDMTT obligation mapping](og-image.png)
+
 A browser-based workspace for designing multinational group structures and analysing Pillar Two (Global Minimum Tax) outcomes — IIR, UTPR, and QDMTT obligations — in real time.
 
 🌐 **Live:** [pillartwo.app](https://pillartwo.app)
@@ -74,7 +81,7 @@ See the in-app **Privacy Policy** for the full data-handling notice.
 
 - Static single-page app on Cloudflare Pages
 - Vanilla JavaScript / DOM — no framework, no build pipeline
-- Leaflet + world-atlas TopoJSON for the in-canvas world map
+- Leaflet for the in-canvas world map; D3-geo + world-atlas TopoJSON for the orthographic minimap
 - Client-side AES-GCM encryption (Web Crypto API) for `.p2a` files
 
 ---

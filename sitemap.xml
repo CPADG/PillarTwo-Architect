@@ -3,24 +3,50 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://pillartwo.app/</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/?lang=ja"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/?lang=ko</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/?lang=en</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/?lang=ja</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pillartwo.app/about</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/about?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/about?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/about?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/about"/>
   </url>
   <url>
     <loc>https://pillartwo.app/overview</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/overview?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/overview?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/overview?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/overview"/>
   </url>
 </urlset>

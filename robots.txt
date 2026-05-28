@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+# Encrypted user save files — never index (privacy)
+Disallow: /*.p2a$
+
 Sitemap: https://pillartwo.app/sitemap.xml

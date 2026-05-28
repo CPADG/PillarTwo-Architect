@@ -16,3 +16,9 @@ node_modules/
 # Python cache
 __pycache__/
 scripts/__pycache__/
+
+# Agent skills (skills / mdskills CLI로 설치한 외부 skill 패키지 — 제품 repo 비포함, 로컬 전용)
+.agents/
+.claude/skills/
+skills-lock.json
+*-main.zip

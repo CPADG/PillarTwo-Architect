@@ -216,6 +216,16 @@ function buildLangPage(page, lang) {
   // 9) toggle navigate
   html = replaceToggle(html, slug, lang);
 
+  // 10) 경로 보정 — /en/·/ja/ 깊이에서 상대경로가 깨지는 것 방지 (CSS/JS 404 → 스타일 전무 버그 수정).
+  //     자산(styles.css·docs.css·translations.min.js)은 루트 절대경로로, doc 내부링크는 같은 언어 URL로.
+  const REL_FIX = { 'styles.css': '/styles.css', 'docs.css': '/docs.css', 'translations.min.js': '/translations.min.js', './': '/' };
+  html = html.replace(/(href|src)="([^"]+)"/g, (m, attr, val) => {
+    if (REL_FIX[val]) return `${attr}="${REL_FIX[val]}"`;
+    const dm = val.match(/^(overview|about|glossary)\.html$/);
+    if (dm) return `${attr}="/${lang}/${dm[1]}"`;
+    return m;
+  });
+
   const outDir = path.join(ROOT, lang);
   fs.mkdirSync(outDir, { recursive: true });
   fs.writeFileSync(path.join(outDir, `${slug}.html`), html);

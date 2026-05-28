@@ -1,0 +1,35 @@
+name: Verify SEO Integrity
+
+# main 브랜치 콘텐츠 push 또는 PR 시 정합성 검증.
+# hreflang 클러스터 정합성 + JSON-LD 구조 무결성 자동 점검.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**/*.html'
+      - 'translations.js'
+      - 'translations.min.js'
+      - 'scripts/verify-*.js'
+  pull_request:
+    branches: [main]
+    paths:
+      - '**/*.html'
+      - 'translations.js'
+      - 'translations.min.js'
+      - 'scripts/verify-*.js'
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - name: Verify hreflang clusters
+        run: npm run verify:hreflang
+      - name: Verify JSON-LD blocks
+        run: npm run verify:jsonld

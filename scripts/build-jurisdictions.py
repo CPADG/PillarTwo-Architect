@@ -1732,6 +1732,8 @@ def render_page_intl(cc, data, lang):
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="{og_locale}">
+<meta property="og:locale:alternate" content="ko_KR">
+<meta property="og:locale:alternate" content="{'ja_JP' if lang == 'en' else 'en_US'}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{og_title}">
 <meta name="twitter:description" content="{og_desc}">
@@ -2032,7 +2034,7 @@ def render_page(cc, data):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pillar Two in {name_ko} — {name_en} | PillarTwo Architect</title>
+<title>{name_ko} 글로벌최저한세 도입 현황 — IIR·UTPR·QDMTT 시행일 | PillarTwo Architect</title>
 <meta name="description" content="{name_ko}의 Pillar Two(글로벌최저한세) 도입 현황. IIR · UTPR · QDMTT 시행일, 도입 법령, 실무 시사점 정리.">
 <meta name="robots" content="index, follow">
 <meta name="google-site-verification" content="rQYKQnmBYz8AMGRPY_z3f3-J4WnsK9coA5uGdNlwqM0" />
@@ -2077,6 +2079,9 @@ def render_page(cc, data):
 }}
 </script>
 <meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ja_JP">
 <meta property="og:title" content="Pillar Two in {name_ko} — {name_en}">
 <meta property="og:description" content="{name_ko}의 Pillar Two 시행일·도입 법령·실무 시사점.">
 <meta property="og:url" content="https://pillartwo.app/jurisdictions/{slug}">
@@ -2397,6 +2402,9 @@ def build_index(lang='ko'):
 }}
 </script>
 <meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ja_JP">
 <meta property="og:title" content="국가별 Pillar Two 도입 현황 — 40개국">
 <meta property="og:description" content="OECD Pillar Two 도입국 40개국의 IIR · UTPR · QDMTT 시행일·도입 법령·OECD 적격 상태를 한눈에.">
 <meta property="og:url" content="https://pillartwo.app/jurisdictions/">

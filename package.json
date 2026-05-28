@@ -12,7 +12,10 @@
     "sitemap": "node scripts/update-sitemap.js",
     "indexnow": "node scripts/indexnow-ping.js",
     "verify:hreflang": "node scripts/verify-hreflang.js",
-    "cf-build": "npm run sitemap && npm run stamp"
+    "verify:jsonld": "node scripts/verify-jsonld.js",
+    "verify": "npm run verify:hreflang && npm run verify:jsonld",
+    "refresh-dates": "node scripts/refresh-dates.js",
+    "cf-build": "npm run refresh-dates && npm run sitemap && npm run stamp"
   },
   "devDependencies": {
     "esbuild": "^0.24.0"

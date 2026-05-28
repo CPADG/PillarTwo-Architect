@@ -29,3 +29,19 @@
   Cache-Control: public, max-age=0, must-revalidate
 /app.min.js
   Cache-Control: public, max-age=0, must-revalidate
+
+# 정적 자원 (거의 변경 없음) — 장기 캐시로 반복 방문 속도 향상
+/favicon.svg
+  Cache-Control: public, max-age=31536000, immutable
+/favicon-32.png
+  Cache-Control: public, max-age=31536000, immutable
+/favicon-48.png
+  Cache-Control: public, max-age=31536000, immutable
+/icon-192.png
+  Cache-Control: public, max-age=31536000, immutable
+/apple-touch-icon.png
+  Cache-Control: public, max-age=31536000, immutable
+/og-image.png
+  Cache-Control: public, max-age=604800
+/manifest.json
+  Cache-Control: public, max-age=604800

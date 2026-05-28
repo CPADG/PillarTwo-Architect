@@ -1128,10 +1128,11 @@ window.minimapReset = function() {
       const feat = ccToFeature[cc];
       if (feat) setActivated(feat, cc);
     };
-    if (_pendingAction) {
-      _d3Forward(_pendingAction.action, _pendingAction.cc);
-      _pendingAction = null;
-    }
+    // _pendingAction 처리는 모든 const/let/function 선언이 끝난 후 (이 블록 맨 아래)
+    // 로 이동. _d3Forward → setActivated → showCountryHeader 경로가 tFn (L1168)
+    // 과 hdSlot (L1154)을 참조하는데, 여기서 즉시 호출하면 TDZ 에러 발생 →
+    // try-catch가 throw를 잡으면 그 뒤 let _lastRot0 (이 줄 아래) 도 미실행
+    // → 이미 등록된 rAF(step)이 다음 프레임에 발화해 _lastRot0 TDZ 2차 에러.
     // 변경 감지 — rot 동일하면 path d 재할당 skip. 사이즈 변경 시엔 force=true로 강제 렌더
     let _lastRot0 = NaN, _lastRot1 = NaN;
     function render(force) {
@@ -1498,6 +1499,12 @@ window.minimapReset = function() {
     };
     svg.addEventListener('pointerup', endDrag);
     svg.addEventListener('pointercancel', endDrag);
+
+    // 모든 const/let/function 선언 완료 — 이제 안전하게 pending action 처리 (TDZ 방지)
+    if (_pendingAction) {
+      _d3Forward(_pendingAction.action, _pendingAction.cc);
+      _pendingAction = null;
+    }
 
     console.log('[d3-geo preview] ready,', countries.features.length, 'countries');
   } catch (err) {

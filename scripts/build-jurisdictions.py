@@ -1079,9 +1079,9 @@ T = {
     # 섹션 헤더
     'sec.timeline': {'en': 'Implementation Timeline', 'ja': '施行タイムライン'},
     'sec.quick': {'en': 'Quick reference', 'ja': 'クイックリファレンス'},
-    'sec.laws': {'en': 'Implementing legislation', 'ja': '導入根拠法'},
-    'sec.impl': {'en': 'Practical implications', 'ja': '実務上の留意点'},
-    'sec.recent': {'en': 'Recent legislative developments', 'ja': '主な立法動向'},
+    'sec.laws': {'en': 'Implementing legislation', 'ja': '根拠法令'},
+    'sec.impl': {'en': 'Practical implications', 'ja': '実務上の論点'},
+    'sec.recent': {'en': 'Recent legislative developments', 'ja': '近時の法改正動向'},
     'sec.terms': {'en': 'Related terms', 'ja': '関連用語'},
     'sec.cta': {'en': 'Try this in PillarTwo Architect', 'ja': 'PillarTwo Architectで分析する'},
     'sec.sources': {'en': 'Sources', 'ja': '出典'},
@@ -1301,8 +1301,8 @@ AUTO_TR = {
         '연방세무청': '連邦税務庁',
         '연방국세청': '連邦税務局',
         '관보': '官報',
-        '공식 관보': '公式官報',
-        '공식 법령 데이터베이스': '公式法令データベース',
+        '공식 관보': '官報',
+        '공식 법령 데이터베이스': '法令データベース',
         '법령 데이터베이스': '法令データベース',
         '국가법령정보센터': '国家法令情報センター',
         # 연결사
@@ -1448,7 +1448,7 @@ def build_lead_default(data, lang):
     law_html = laws[0][0] if laws else ''
     iir_d = iir.get('date'); utpr_d = utpr.get('date'); qdmtt_d = qdmtt.get('date')
     if lang == 'en':
-        parts = [f"{country} has adopted OECD Pillar Two through {law_html}."]
+        parts = [f"{country} has implemented OECD Pillar Two through {law_html}."]
         rules = []
         if iir_d: rules.append(f"the IIR from {iir_d}")
         if qdmtt_d: rules.append(f"the QDMTT from {qdmtt_d}")
@@ -1478,7 +1478,7 @@ def build_insights_default(data, lang):
         if iir.get('date'):
             paras.append(f"<strong>MNE groups parented in {country}</strong> are subject to the IIR for fiscal years beginning on or after {iir['date']}. Where a subsidiary's jurisdictional effective tax rate (ETR) falls below 15%, top-up tax is computed and paid in {country} (as the jurisdiction of the parent entities), and the group must also file the GloBE Information Return (GIR).")
         if qdmtt.get('date'):
-            paras.append(f"<strong>MNE groups with constituent entities in {country}</strong> are subject to {country}'s QDMTT for fiscal years beginning on or after {qdmtt['date']}. Where the QDMTT Safe Harbour conditions are met, the IIR/UTPR computation at the parent jurisdictions may be exempted, reducing the compliance overhead of double computation.")
+            paras.append(f"<strong>MNE groups with constituent entities in {country}</strong> are subject to {country}'s QDMTT for fiscal years beginning on or after {qdmtt['date']}. Where the conditions of the QDMTT Safe Harbour are met, the IIR/UTPR computation at the parent jurisdictions may be exempted, reducing the burden of dual computation.")
     if lang == 'ja':
         if iir.get('date'):
             paras.append(f"<strong>{country}に親会社を置く多国籍企業グループ</strong>は、{iir['date']}以降開始する会計年度からIIRの対象となります。子会社所在地国の国別実効税率(ETR)が15%未満の場合、親会社等の所在地国（{country}）でIIRに基づき追加税額を申告・納付する必要があり、GloBE情報申告書(GIR)の提出義務も併せて発生します。")

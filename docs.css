@@ -126,7 +126,7 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
 
 /* Feature cards */
 .docs-cards{
-  display:grid; gap:24px 14px; margin:8px 0 32px;
+  display:grid; gap:24px 14px; margin:8px 0 20px;
   grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
 }
 .docs-card{

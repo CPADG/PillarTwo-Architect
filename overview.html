@@ -20,6 +20,35 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#2563eb">
+<!-- Sentry Error Monitoring (Loader Script — async, no LCP impact) -->
+<script src="https://js.sentry-cdn.com/ee4401caad2ce32f342a8993779fdf33.min.js" crossorigin="anonymous"></script>
+<script>
+window.sentryOnLoad = function () {
+  var opts = {
+    tracesSampleRate: 0,
+    replaysSessionSampleRate: 0,
+    replaysOnErrorSampleRate: 0,
+    sendDefaultPii: false,
+    environment: location.hostname === 'pillartwo.app' ? 'production' : 'development',
+    ignoreErrors: [
+      'ResizeObserver loop completed',
+      'ResizeObserver loop limit exceeded',
+      'Non-Error promise rejection captured',
+      'Script error.',
+      'Load failed'
+    ],
+    denyUrls: [
+      /chrome-extension:\/\//i, /moz-extension:\/\//i, /safari-extension:\/\//i, /^chrome:\/\//i,
+      /googletagmanager\.com/i, /googlesyndication\.com/i, /clarity\.ms/i,
+      /google-analytics\.com/i, /adsbygoogle/i, /unpkg\.com/i, /jsdelivr\.net/i
+    ]
+  };
+  if (typeof Sentry.captureConsoleIntegration === 'function') {
+    opts.integrations = [Sentry.captureConsoleIntegration({ levels: ['error'] })];
+  }
+  Sentry.init(opts);
+};
+</script>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="docs.css">
 </head>

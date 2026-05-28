@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PillarTwo Architect — 글로벌최저한세 솔루션 · Pillar Two Solution · グローバル・ミニマム課税ソリューション</title>
+<title>PillarTwo Architect — Pillar Two Solution · 글로벌최저한세 솔루션 · グローバル・ミニマム課税ソリューション</title>
 <meta name="description" content="다국적기업그룹의 Pillar Two 상세정보와 IIR·UTPR·QDMTT 납부의무를 체계적으로 분석 및 시각화하는 웹 서비스. Web service for systematic analysis and visualization of Pillar Two structures and IIR · UTPR · QDMTT obligations for multinational enterprise groups. 多国籍企業グループのPillar Two詳細情報とIIR・UTPR・QDMTT納税義務を体系的に分析・可視化するウェブサービスです。 All data is processed entirely on the client side (your browser).">
 <meta name="keywords" content="PillarTwo Architect, Pillar Two, Pillar 2, Pillar2, 필라투, 필라2, 글로벌최저한세, 글최, GloBE, GloBE Rules, Global Minimum Tax, Global Tax, Top-up Tax, 내국추가세, IIR, UTPR, QDMTT, DMTT, Income Inclusion Rule, Undertaxed Profits Rule, Qualified Domestic Minimum Top-up Tax, Domestic Minimum Tax, Effective Tax Rate, ETR, Substance-based Income Exclusion, SBIE, Safe Harbour, CbCR, Transitional Safe Harbour, OECD, BEPS, BEPS 2.0, Model Rules, Pillar Two simulator, Pillar 2 calculator, Pillar Two analysis, Pillar Two visualization, multinational enterprise, multinational group, MNE, MNE Group, Tax, Minimum Tax, Corporate Tax, International Taxation, Tax Compliance, 다국적기업그룹, 세무, 국제조세, 第2の柱, 第二の柱, グローバル・ミニマム課税, グローバルミニマム課税, 国際最低課税, 国内ミニマム課税, 多国籍企業グループ, 追加税額, 国際課税, 所得算入規則, 軽課税所得規則, 適格国内ミニマム課税">
 <meta name="author" content="PillarTwo Architect">
@@ -12,7 +12,7 @@
 <link rel="canonical" href="https://pillartwo.app/">
 <!-- Open Graph (Facebook/카카오톡/슬랙 미리보기) -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="PillarTwo Architect — 글로벌최저한세 솔루션 · Pillar Two Solution · グローバル・ミニマム課税ソリューション">
+<meta property="og:title" content="PillarTwo Architect — Pillar Two Solution · 글로벌최저한세 솔루션 · グローバル・ミニマム課税ソリューション">
 <meta property="og:description" content="다국적기업그룹의 Pillar Two 상세정보와 IIR·UTPR·QDMTT 납부의무를 체계적으로 분석 및 시각화하는 웹 서비스. Web service for systematic analysis and visualization of Pillar Two structures and IIR · UTPR · QDMTT obligations for multinational enterprise groups. 多国籍企業グループのPillar Two詳細情報とIIR・UTPR・QDMTT納税義務を体系的に分析・可視化するウェブサービスです。">
 <meta property="og:url" content="https://pillartwo.app/">
 <meta property="og:site_name" content="PillarTwo Architect">
@@ -26,7 +26,7 @@
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://pillartwo.app/og-image.png">
-<meta name="twitter:title" content="PillarTwo Architect — 글로벌최저한세 솔루션 · Pillar Two Solution · グローバル・ミニマム課税ソリューション">
+<meta name="twitter:title" content="PillarTwo Architect — Pillar Two Solution · 글로벌최저한세 솔루션 · グローバル・ミニマム課税ソリューション">
 <meta name="twitter:description" content="다국적기업그룹의 Pillar Two 상세정보와 IIR·UTPR·QDMTT 납부의무를 체계적으로 분석 및 시각화하는 웹 서비스. Web service for analyzing and visualizing Pillar Two structures across multinational enterprise groups. 多国籍企業グループのPillar Two構造を分析・可視化するウェブサービス。">
 <!-- 구조화 데이터 (Google Rich Result) -->
 <script type="application/ld+json">
@@ -52,6 +52,36 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#2563eb">
+<!-- Sentry Error Monitoring (Loader Script — async, no LCP impact) -->
+<script src="https://js.sentry-cdn.com/ee4401caad2ce32f342a8993779fdf33.min.js" crossorigin="anonymous"></script>
+<script>
+window.sentryOnLoad = function () {
+  var opts = {
+    // Errors only — tracing/replay off (privacy: .p2a inputs must never leak)
+    tracesSampleRate: 0,
+    replaysSessionSampleRate: 0,
+    replaysOnErrorSampleRate: 0,
+    sendDefaultPii: false,
+    environment: location.hostname === 'pillartwo.app' ? 'production' : 'development',
+    ignoreErrors: [
+      'ResizeObserver loop completed',
+      'ResizeObserver loop limit exceeded',
+      'Non-Error promise rejection captured',
+      'Script error.',
+      'Load failed'
+    ],
+    denyUrls: [
+      /chrome-extension:\/\//i, /moz-extension:\/\//i, /safari-extension:\/\//i, /^chrome:\/\//i,
+      /googletagmanager\.com/i, /googlesyndication\.com/i, /clarity\.ms/i,
+      /google-analytics\.com/i, /adsbygoogle/i, /unpkg\.com/i, /jsdelivr\.net/i
+    ]
+  };
+  if (typeof Sentry.captureConsoleIntegration === 'function') {
+    opts.integrations = [Sentry.captureConsoleIntegration({ levels: ['error'] })];
+  }
+  Sentry.init(opts);
+};
+</script>
 <link rel="stylesheet" href="styles.css">
 <!-- Leaflet CSS — 비차단 로드 (print/onload swap 트릭) -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'"/>

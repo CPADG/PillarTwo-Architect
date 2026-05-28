@@ -397,3 +397,11 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
   .gloss-toolbar{position:static; padding:12px}
   .gloss-cat-tabs{width:100%}
 }
+
+/* FAQ — lang-specific 항목 자동 숨김 (Q3 한국/일본 분기) */
+html[lang="ko"] [data-lang-only="ja"],
+html[lang="en"] [data-lang-only="ko"],
+html[lang="en"] [data-lang-only="ja"],
+html[lang="ja"] [data-lang-only="ko"] {
+  display: none;
+}

@@ -2451,10 +2451,9 @@ def build_index(lang='ko'):
   </section>
 
   <section class="docs-section docs-cta">
-    <a href="/" class="docs-btn primary">아키텍트 사용하기 →</a>
+    <a href="/" class="docs-btn primary" data-i18n="docs.cta.tool">아키텍트 시작하기 →</a>
     <a href="/overview.html" class="docs-btn ghost" data-i18n="docs.nav.overview">Pillar Two</a>
     <a href="/about.html" class="docs-btn ghost" data-i18n="docs.nav.about">서비스 소개</a>
-    <a href="/glossary" class="docs-btn ghost" data-i18n="docs.nav.glossary">용어 사전</a>
   </section>
 
   <section class="docs-section jr-disclaimer-section">

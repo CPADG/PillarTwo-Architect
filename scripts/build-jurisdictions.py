@@ -1684,6 +1684,7 @@ def render_page_intl(cc, data, lang):
 <meta name="robots" content="index, follow">
 <meta name="naver-site-verification" content="03dcd7169d0affc69d6ebf2e0a2af01dd5694073" />
 <meta name="naver-site-verification" content="b15c8fd7be4aab298a81448b4c4e346fc613d30a" />
+<meta name="msvalidate.01" content="6A8E8C5200BA75B1CA538C9A34736338" />
 <link rel="canonical" href="{canonical}">
 <link rel="alternate" hreflang="ko" href="{hreflang_ko}">
 <link rel="alternate" hreflang="en" href="{hreflang_en}">
@@ -2035,6 +2036,7 @@ def render_page(cc, data):
 <meta name="robots" content="index, follow">
 <meta name="naver-site-verification" content="03dcd7169d0affc69d6ebf2e0a2af01dd5694073" />
 <meta name="naver-site-verification" content="b15c8fd7be4aab298a81448b4c4e346fc613d30a" />
+<meta name="msvalidate.01" content="6A8E8C5200BA75B1CA538C9A34736338" />
 <link rel="canonical" href="https://pillartwo.app/jurisdictions/{slug}">
 <link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/{slug}?lang=ko">
 <link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/{slug}?lang=en">
@@ -2363,6 +2365,7 @@ def build_index(lang='ko'):
 <meta name="robots" content="index, follow">
 <meta name="naver-site-verification" content="03dcd7169d0affc69d6ebf2e0a2af01dd5694073" />
 <meta name="naver-site-verification" content="b15c8fd7be4aab298a81448b4c4e346fc613d30a" />
+<meta name="msvalidate.01" content="6A8E8C5200BA75B1CA538C9A34736338" />
 <link rel="canonical" href="https://pillartwo.app/jurisdictions/">
 <link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/?lang=ko">
 <link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/?lang=en">

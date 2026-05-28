@@ -12,18 +12,90 @@
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/en/about"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/ja/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/about"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/en/about</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/en/about"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/ja/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/about"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/ja/about</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/en/about"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/ja/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/about"/>
   </url>
   <url>
     <loc>https://pillartwo.app/overview</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/overview"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/en/overview"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/ja/overview"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/overview"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/en/overview</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/overview"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/en/overview"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/ja/overview"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/overview"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/ja/overview</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/overview"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/en/overview"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/ja/overview"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/overview"/>
   </url>
   <url>
     <loc>https://pillartwo.app/glossary</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/glossary"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/en/glossary"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/ja/glossary"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/glossary"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/en/glossary</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/glossary"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/en/glossary"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/ja/glossary"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/glossary"/>
+  </url>
+  <url>
+    <loc>https://pillartwo.app/ja/glossary</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pillartwo.app/glossary"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pillartwo.app/en/glossary"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://pillartwo.app/ja/glossary"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pillartwo.app/glossary"/>
   </url>
   <url>
     <loc>https://pillartwo.app/jurisdictions/</loc>

@@ -1644,11 +1644,11 @@ def render_page_intl(cc, data, lang):
     # Page title
     law_short = data.get('law_short')
     if lang == 'en':
-        title = f'Pillar Two in {country} — {law_short} | PillarTwo Architect' if law_short else f'Pillar Two in {country} | PillarTwo Architect'
+        title = f'Pillar Two in {country} — IIR, UTPR & QDMTT Effective Dates | PillarTwo Architect'
         og_title = f'Pillar Two in {country}' + (f' — {law_short}' if law_short else '')
     else:
         law_short_ja = data.get('law_short_ja')
-        title = f'{country}のPillar Two — {law_short_ja} | PillarTwo Architect' if law_short_ja else f'{country}のPillar Two | PillarTwo Architect'
+        title = f'{country}のPillar Two — IIR・UTPR・QDMTT適用開始日 | PillarTwo Architect'
         og_title = f'{country}のPillar Two' + (f' — {law_short_ja}' if law_short_ja else '')
 
     # URL paths

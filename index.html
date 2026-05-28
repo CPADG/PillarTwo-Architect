@@ -78,8 +78,8 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#2563eb">
-<!-- Sentry Error Monitoring (Loader Script — async, no LCP impact) -->
-<script src="https://js.sentry-cdn.com/ee4401caad2ce32f342a8993779fdf33.min.js" crossorigin="anonymous"></script>
+<!-- Sentry Error Monitoring (Loader Script — deferred, no parser-block / no LCP impact) -->
+<script defer src="https://js.sentry-cdn.com/ee4401caad2ce32f342a8993779fdf33.min.js" crossorigin="anonymous"></script>
 <script>
 window.sentryOnLoad = function () {
   var opts = {
@@ -155,25 +155,18 @@ window.sentryOnLoad = function () {
   if(document.readyState==='complete'){ setTimeout(_injectAds,600); }
   else { window.addEventListener('load', ()=>setTimeout(_injectAds,600), {once:true}); }
 </script>
-<!-- preconnect: Cobe (글로브 미니맵) CDN — 첫 인터랙션 시 import 핸드셰이크 절감 -->
+<!-- preconnect: jsDelivr CDN — D3-geo 미니맵 모듈(d3-geo·topojson·world-atlas) 핸드셰이크 절감 -->
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 </head>
 <!-- head script들: defer로 HTML 파싱과 병렬 다운로드 + DOMContentLoaded 후 순서대로 실행 → 초기 렌더 차단 제거 -->
 <script defer src="translations.min.js"></script>
 <script defer src="globe-engine.min.js"></script>
 <script defer src="iir-db.min.js"></script>
-<!-- Cobe (도트 패턴 회전 글로브) 미니맵 — LCP 보호를 위해 페이지 load 후 동적 import.
-     dynamic import()는 자동으로 모듈 컨텍스트에서 평가됨. -->
+<!-- 미니맵: D3-geo orthographic globe가 자체 렌더(body 하단 모듈에서 즉시 초기화).
+     이전 Cobe(WebGL 도트 글로브) 동적 import는 제거됨 — D3가 무력화해 다운로드만 낭비했음. -->
 <script>
-  window._loadMinimapDeps=function(){
-    if(window._minimapDepsLoaded) return; window._minimapDepsLoaded=true;
-    import('https://cdn.jsdelivr.net/npm/cobe@0.6.4/+esm')
-      .then(m=>{
-        window.createGlobe = m.default || m;
-        if(typeof initMinimap==='function') initMinimap();
-      })
-      .catch(()=>{ window._minimapDepsLoaded=false; });
-  };
+  // app.js 하단이 호출하는 진입점 — Cobe 제거 후 no-op (D3 미니맵은 독립 초기화).
+  window._loadMinimapDeps=function(){};
 </script>
 <body>
 
@@ -310,7 +303,7 @@ window.sentryOnLoad = function () {
 <aside id="side-panel">
   <div class="panel-header">
     <span class="panel-title" id="panel-title" data-i18n="panel.entity_title">기업 정보</span>
-    <button class="panel-close" id="panel-close" data-i18n-tip="panel.close.title" data-pe-tip="닫기">✕</button>
+    <button class="panel-close" id="panel-close" data-i18n-tip="panel.close.title" data-pe-tip="닫기" data-i18n-aria="panel.close.title" aria-label="닫기">✕</button>
   </div>
   <div class="panel-body" id="panel-body">
     <div class="panel-empty" data-i18n-html="panel.empty_html">기업을 클릭하면<br>상세 정보가 표시됩니다.</div>
@@ -361,7 +354,7 @@ window.sentryOnLoad = function () {
 
 <!-- 새로 만들기 확인 -->
 <div class="overlay" id="modal-new-confirm" style="display:none">
-  <div class="modal" style="width:360px">
+  <div class="modal" role="dialog" aria-modal="true" data-i18n-aria="modal.new.title" aria-label="새로 만들기" style="width:360px">
     <h3 data-i18n="modal.new.title">새로 만들기</h3>
     <p class="msub" data-i18n-html="modal.new.sub">현재 작업 내용이 모두 삭제됩니다.<br>저장하지 않은 내용은 복구할 수 없습니다.</p>
     <div class="mfooter">
@@ -373,15 +366,15 @@ window.sentryOnLoad = function () {
 
 <!-- Entity modal (create / edit) -->
 <div class="overlay" id="modal-entity" style="display:none">
-  <div class="modal">
+  <div class="modal" role="dialog" aria-modal="true" data-i18n-aria="modal.entity.title_add" aria-label="기업 정보 입력">
     <h3 id="entity-title" data-i18n="modal.entity.title_add">기업 정보 입력</h3>
     <div class="msub" id="entity-sub"></div>
     <div class="fl" data-i18n="fl.name">기업명</div>
-    <div class="inp-wrap"><input type="text" id="inp-ename" data-i18n-ph="inp.name.ph" placeholder="기업명을 입력하세요" autocomplete="off"><button class="inp-clear" id="clear-ename" type="button">✕</button></div>
+    <div class="inp-wrap"><input type="text" id="inp-ename" data-i18n-ph="inp.name.ph" placeholder="기업명을 입력하세요" autocomplete="off"><button class="inp-clear" id="clear-ename" type="button" data-i18n-aria="inp.clear" aria-label="지우기">✕</button></div>
     <div class="fl" data-i18n="fl.country">국가</div>
     <div class="cw" id="country-wrap">
       <input type="text" id="inp-country" data-i18n-ph="inp.country.ph" placeholder="국가를 입력하세요 (예: 한국, Korea, KR)…" autocomplete="off">
-      <button class="inp-clear" id="clear-country" type="button">✕</button>
+      <button class="inp-clear" id="clear-country" type="button" data-i18n-aria="inp.clear" aria-label="지우기">✕</button>
       <div class="stateless-hint" id="stateless-hint" data-i18n="stateless.hint">무국적(Stateless)인가요?</div>
       <div class="country-lock-notice" id="country-lock-notice" style="display:none" data-i18n="country.lock">역혼성기업은 무국적으로 자동 지정됩니다. 국가를 변경하려면 역혼성기업 설정을 해제하세요.</div>
       <div class="cdd" id="cdd"></div>
@@ -407,7 +400,7 @@ window.sentryOnLoad = function () {
 
 <!-- Connection modal -->
 <div class="overlay" id="modal-conn" style="display:none">
-  <div class="modal">
+  <div class="modal" role="dialog" aria-modal="true" data-i18n-aria="modal.conn.title" aria-label="소유지분 설정">
     <h3 data-i18n="modal.conn.title">소유지분 설정</h3>
     <div class="msub" id="conn-sub"></div>
     <div class="fl" data-i18n="fl.pct">소유지분비율 (%)</div>
@@ -425,7 +418,7 @@ window.sentryOnLoad = function () {
 
 <!-- Treasury modal -->
 <div class="overlay" id="modal-treasury" style="display:none">
-  <div class="modal">
+  <div class="modal" role="dialog" aria-modal="true" data-i18n-aria="modal.treasury.title" aria-label="자기주식 설정">
     <h3 data-i18n="modal.treasury.title">자기주식 설정</h3>
     <div class="msub" id="treasury-sub"></div>
     <div class="fl" data-i18n="fl.treasury.pct">자기주식 비율 (%)</div>
@@ -437,7 +430,7 @@ window.sentryOnLoad = function () {
 
 <!-- Edit edge modal -->
 <div class="overlay" id="modal-eedge" style="display:none">
-  <div class="modal">
+  <div class="modal" role="dialog" aria-modal="true" data-i18n-aria="modal.eedge.title" aria-label="소유지분 수정">
     <h3 data-i18n="modal.eedge.title">소유지분 수정</h3>
     <div class="msub" id="eedge-sub"></div>
     <div class="fl" data-i18n="fl.pct">소유지분비율 (%)</div>
@@ -455,7 +448,7 @@ window.sentryOnLoad = function () {
 
 <!-- 저장 옵션 모달 — 모던 카드 + 토글 + 자물쇠 아이콘 -->
 <div class="overlay" id="modal-save-options" style="display:none">
-  <div class="modal sv-modal">
+  <div class="modal sv-modal" role="dialog" aria-modal="true" data-i18n-aria="modal.save_opt.title" aria-label="파일 저장">
     <h3 data-i18n="modal.save_opt.title">파일 저장</h3>
     <div class="msub" data-i18n="modal.save_opt.sub">파일을 다운로드합니다. 필요 시 비밀번호로 보호할 수 있습니다.</div>
     <label class="sv-card" for="sv-encrypt">
@@ -483,7 +476,7 @@ window.sentryOnLoad = function () {
 
 <!-- 암호화 파일 로드 시 비밀번호 입력 모달 — 저장 모달과 동일 톤 (자물쇠 hero + 모던 input) -->
 <div class="overlay" id="modal-load-pw" style="display:none">
-  <div class="modal lp-modal">
+  <div class="modal lp-modal" role="dialog" aria-modal="true" data-i18n-aria="modal.load_pw.title" aria-label="암호화된 파일">
     <div class="lp-hero">
       <div class="lp-hero-ic">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
@@ -518,7 +511,7 @@ window.sentryOnLoad = function () {
 
 <!-- 개인정보처리방침 모달 -->
 <div class="overlay" id="modal-privacy" style="display:none">
-  <div class="modal policy-modal">
+  <div class="modal policy-modal" role="dialog" aria-modal="true" data-i18n-aria="policy.privacy.title" aria-label="개인정보처리방침">
     <h3 data-i18n="policy.privacy.title">개인정보처리방침</h3>
     <div class="policy-body">
       <div class="policy-highlight" data-i18n-html="policy.privacy.highlight">
@@ -533,7 +526,7 @@ window.sentryOnLoad = function () {
 
 <!-- 이용약관 모달 -->
 <div class="overlay" id="modal-terms" style="display:none">
-  <div class="modal policy-modal">
+  <div class="modal policy-modal" role="dialog" aria-modal="true" data-i18n-aria="policy.terms.title" aria-label="이용약관">
     <h3 data-i18n="policy.terms.title">이용약관</h3>
     <div class="policy-body">
       <div class="policy-section" data-i18n-html="policy.terms.body"></div>
@@ -544,20 +537,20 @@ window.sentryOnLoad = function () {
 
 <!-- 문의 모달 — Formspree로 전송 (form ID 교체 필요) -->
 <div class="overlay" id="modal-contact" style="display:none">
-  <div class="modal contact-modal">
+  <div class="modal contact-modal" role="dialog" aria-modal="true" data-i18n-aria="contact.title" aria-label="문의하기">
     <h3 data-i18n="contact.title">문의하기</h3>
     <div class="msub" data-i18n="contact.sub">개발자에게 문의 내용을 보내실 수 있습니다.</div>
     <form id="contact-form">
       <div class="contact-field">
-        <label data-i18n="contact.name">이름</label>
+        <label for="contact-name" data-i18n="contact.name">이름</label>
         <input type="text" name="name" id="contact-name" required>
       </div>
       <div class="contact-field">
-        <label data-i18n="contact.email">이메일</label>
+        <label for="contact-email" data-i18n="contact.email">이메일</label>
         <input type="email" name="email" id="contact-email" required>
       </div>
       <div class="contact-field">
-        <label data-i18n="contact.message">메시지</label>
+        <label for="contact-message" data-i18n="contact.message">메시지</label>
         <textarea name="message" id="contact-message" rows="5" required></textarea>
       </div>
       <div class="modal-warn" id="contact-warn" style="display:none"></div>
@@ -571,7 +564,7 @@ window.sentryOnLoad = function () {
 
 <!-- 분석 전 저장 확인 모달 — 변경사항 있을 때만 표시 -->
 <div class="overlay" id="modal-save-before-analyze" style="display:none">
-  <div class="modal">
+  <div class="modal" role="dialog" aria-modal="true" data-i18n-aria="modal.save_before.title" aria-label="변경사항 저장">
     <h3 data-i18n="modal.save_before.title">변경사항 저장</h3>
     <div class="msub" data-i18n="modal.save_before.sub">분석 전에 변경사항을 파일로 저장하시겠습니까?</div>
     <div class="mfooter" style="gap:8px">
@@ -597,7 +590,7 @@ window.sentryOnLoad = function () {
 </div>
 
 <div class="overlay" id="modal-analyze-err" style="display:none">
-  <div class="modal">
+  <div class="modal" role="dialog" aria-modal="true" data-i18n-aria="modal.err.title" aria-label="분석을 실행할 수 없습니다">
     <h3 data-i18n="modal.err.title">분석을 실행할 수 없습니다</h3>
     <div class="msub" id="analyze-err-sub"></div>
     <ul id="analyze-err-list"></ul>
@@ -607,7 +600,7 @@ window.sentryOnLoad = function () {
   </div>
 </div>
 <div class="overlay" id="modal-stale" style="display:none">
-  <div class="modal">
+  <div class="modal" role="dialog" aria-modal="true" data-i18n-aria="modal.stale.title" aria-label="분석 결과가 최신 상태가 아닙니다">
     <h3 data-i18n="modal.stale.title">분석 결과가 최신 상태가 아닙니다</h3>
     <div class="msub" data-i18n="modal.stale.sub">마지막 분석 이후 정보가 변경되었습니다.</div>
     <div class="mfooter" style="margin-top:16px">
@@ -618,7 +611,7 @@ window.sentryOnLoad = function () {
   </div>
 </div>
 <div class="overlay" id="modal-matrix" style="display:none">
-  <div class="modal">
+  <div class="modal" role="dialog" aria-modal="true" data-i18n-aria="modal.matrix.title" aria-label="직접소유지분행렬 (Direct Ownership Matrix)">
     <h3 data-i18n="modal.matrix.title">직접소유지분행렬 (Direct Ownership Matrix)</h3>
     <div class="msub" id="mx-sub"></div>
     <div class="mx-info" id="mx-info"></div>
@@ -633,7 +626,7 @@ window.sentryOnLoad = function () {
 
 <!-- 회계처리 확인 팝업 -->
 <div id="clarify-popup">
-  <button id="clarify-close">✕</button>
+  <button id="clarify-close" data-i18n-aria="panel.close.title" aria-label="닫기">✕</button>
   <div class="cp-head" id="cp-head"></div>
   <div class="cp-sub" id="cp-sub"></div>
   <div class="cp-choices" id="cp-choices"></div>
@@ -755,10 +748,10 @@ window.minimapReset = function() {
   const w = mini.clientWidth, h = mini.clientHeight;
   try {
     const [d3, topo] = await Promise.all([
-      import('https://cdn.jsdelivr.net/npm/d3-geo@3/+esm'),
-      import('https://cdn.jsdelivr.net/npm/topojson-client@3/+esm')
+      import('https://cdn.jsdelivr.net/npm/d3-geo@3.1.1/+esm'),
+      import('https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/+esm')
     ]);
-    const world = await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(r => r.json());
+    const world = await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json').then(r => r.json());
     const countries = topo.feature(world, world.objects.countries);
 
     const NS = 'http://www.w3.org/2000/svg';

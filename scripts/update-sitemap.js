@@ -33,10 +33,24 @@ function url(loc, priority, changefreq, alts) {
 
 let out = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
 
-// — SPA pages (single canonical URL; JS toggles lang in-place, no separate URL per lang)
+// — App shell (/) : 단일 URL, JS 인-플레이스 언어전환(캔버스 작업상태 보존 위해 navigate 안 함)
 out += url('/', '1.0', 'weekly');
-for (const slug of ['/about', '/overview', '/glossary']) {
-  out += url(slug, '0.8', 'monthly');
+
+// — Content doc pages (overview/about/glossary): 언어별 정적 URL이 있으면 hreflang 클러스터로 등록.
+//   en/<slug>.html · ja/<slug>.html 존재 여부 자동 탐지 — 미생성 페이지는 단일 ko URL 유지.
+const docEn = (slug) => fs.existsSync(path.join(ROOT, 'en', `${slug}.html`));
+const docJa = (slug) => fs.existsSync(path.join(ROOT, 'ja', `${slug}.html`));
+for (const slug of ['about', 'overview', 'glossary']) {
+  const hasEn = docEn(slug), hasJa = docJa(slug);
+  const alts = (hasEn || hasJa) ? [
+    ['ko', `/${slug}`],
+    ...(hasEn ? [['en', `/en/${slug}`]] : []),
+    ...(hasJa ? [['ja', `/ja/${slug}`]] : []),
+    ['x-default', `/${slug}`],
+  ] : null;
+  out += url(`/${slug}`, '0.8', 'monthly', alts);
+  if (hasEn) out += url(`/en/${slug}`, '0.75', 'monthly', alts);
+  if (hasJa) out += url(`/ja/${slug}`, '0.75', 'monthly', alts);
 }
 
 // — Jurisdictions indexes (ko/en/ja separate URLs)

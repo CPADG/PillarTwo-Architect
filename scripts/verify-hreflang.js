@@ -10,7 +10,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const SCAN_ROOTS = ['', 'jurisdictions', 'jurisdictions/en', 'jurisdictions/ja'];
+const SCAN_ROOTS = ['', 'jurisdictions', 'jurisdictions/en', 'jurisdictions/ja', 'en', 'ja'];
 
 const files = [];
 for (const r of SCAN_ROOTS) {

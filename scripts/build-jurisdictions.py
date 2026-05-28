@@ -2288,7 +2288,14 @@ def short_date(d):
     return f'{parts[0]}.{parts[1]}'
 
 
-def render_idx_card(cc, data):
+import unicodedata as _ud
+
+
+def _norm_keys(t):
+    return ''.join(c for c in _ud.normalize('NFD', t) if not _ud.combining(c)).lower()
+
+
+def render_idx_card(cc, data, lang='ko'):
     slug = data['slug']
     name_ko = data['name_ko']
     name_en = data['name_en']
@@ -2298,12 +2305,13 @@ def render_idx_card(cc, data):
     qdmtt = data['qdmtt']
 
     # Search keys: 한국어·영어·일본어 + cc + slug
-    keys = ' '.join([name_ko, name_en, data['name_ja'], cc, slug]).lower()
+    keys = _norm_keys(' '.join([name_ko, name_en, data['name_ja'], cc, slug, cc_to_region(cc)]))
 
+    none_label = {'ko': '미도입', 'en': 'Not adopted', 'ja': '未導入'}[lang]
     def rule_pill(label, info):
         date = info.get('date')
         if not date:
-            return f'<span class="jr-idx-rule jr-idx-rule-none"><span class="jr-idx-rl">{label}</span><span class="jr-idx-rd">미도입</span></span>'
+            return f'<span class="jr-idx-rule jr-idx-rule-none"><span class="jr-idx-rl">{label}</span><span class="jr-idx-rd">{none_label}</span></span>'
         cls = 'jr-idx-rule-ok' if info.get('qualified') else 'jr-idx-rule-pending'
         return f'<span class="jr-idx-rule {cls}"><span class="jr-idx-rl">{label}</span><span class="jr-idx-rd">{short_date(date)}</span></span>'
 
@@ -2313,20 +2321,26 @@ def render_idx_card(cc, data):
         rule_pill('QDMTT', qdmtt),
     ])
 
-    return f'''<a href="/jurisdictions/{slug}" class="jr-idx-card" data-region="{region}" data-keys="{keys}">
-        <img class="jr-idx-flag" src="https://flagcdn.com/w80/{data['flag_cc']}.png" srcset="https://flagcdn.com/w160/{data['flag_cc']}.png 2x" alt="{name_ko} 국기" loading="lazy" width="40" height="30">
+    if lang == 'ko':
+        primary, sub, href, alt = name_ko, name_en, f'/jurisdictions/{slug}', f'{name_ko} 국기'
+    elif lang == 'en':
+        primary, sub, href, alt = name_en, name_ko, f'/jurisdictions/en/{slug}', f'Flag of {name_en}'
+    else:
+        primary, sub, href, alt = data['name_ja'], name_en, f'/jurisdictions/ja/{slug}', f"{data['name_ja']}の国旗"
+
+    return f'''<a href="{href}" class="jr-idx-card" data-region="{region}" data-keys="{keys}">
+        <img class="jr-idx-flag" src="https://flagcdn.com/w80/{data['flag_cc']}.png" srcset="https://flagcdn.com/w160/{data['flag_cc']}.png 2x" alt="{alt}" loading="lazy" width="40" height="30">
         <div class="jr-idx-body">
-          <div class="jr-idx-name">{name_ko}<span class="jr-idx-name-en">{name_en}</span></div>
+          <div class="jr-idx-name">{primary}<span class="jr-idx-name-en">{sub}</span></div>
           <div class="jr-idx-rules">{pills}</div>
         </div>
       </a>'''
 
 
-def build_index():
+def build_index(lang='ko'):
     cards = []
-    # 알파벳 순 (cc) — 보기에 안정적
     for cc in sorted(COUNTRIES.keys()):
-        cards.append(render_idx_card(cc, COUNTRIES[cc]))
+        cards.append(render_idx_card(cc, COUNTRIES[cc], lang=lang))
     cards_html = '\n      '.join(cards)
 
     chips = ''.join([
@@ -2484,11 +2498,13 @@ def build_index():
   const empty = document.getElementById('jr-idx-empty');
   let activeRegion = 'all';
   function apply(){{
-    const q = (search.value || '').toLowerCase().trim();
+    const q = (search.value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+    const terms = q ? q.split(/\s+/).filter(Boolean) : [];
     let visible = 0;
     cards.forEach(c => {{
       const matchRegion = activeRegion === 'all' || c.dataset.region === activeRegion;
-      const matchQ = !q || (c.dataset.keys || '').includes(q);
+      const keys = c.dataset.keys || '';
+      const matchQ = !terms.length || terms.every(t => keys.includes(t));
       const show = matchRegion && matchQ;
       c.style.display = show ? '' : 'none';
       if (show) visible++;
@@ -2532,10 +2548,11 @@ def main():
                 path.write_text(html, encoding='utf-8')
                 print(f'wrote {path.relative_to(ROOT)} ({len(html)} chars)')
     if build_idx:
-        idx_html = build_index()
-        idx_path = OUT_DIR / 'index.html'
-        idx_path.write_text(idx_html, encoding='utf-8')
-        print(f'wrote {idx_path.relative_to(ROOT)} ({len(idx_html)} chars)')
+        for lg, sub in [('ko', ''), ('en', 'en'), ('ja', 'ja')]:
+            idx_html = build_index(lg)
+            idx_path = (OUT_DIR / sub / 'index.html') if sub else (OUT_DIR / 'index.html')
+            idx_path.write_text(idx_html, encoding='utf-8')
+            print(f'wrote {idx_path.relative_to(ROOT)} ({len(idx_html)} chars)')
 
 
 if __name__ == '__main__':

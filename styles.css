@@ -331,24 +331,28 @@ body.demo-advanced-mode #btn-demo-case{display:none}
 .policy-section li{margin-bottom:3px}
 .policy-section .policy-muted{color:#94a3b8;font-size:11.5px;margin-top:12px}
 /* ── 쿠키·분석 동의 배너 (하단 고정, 디스미스 후 안 보임) ── */
-#consent-banner{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:1500;
-  display:flex;align-items:center;gap:14px;padding:12px 16px;
-  background:rgba(15,23,42,.93);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  color:#e2e8f0;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.28);
-  max-width:min(680px,calc(100vw - 32px));font-size:12.5px;line-height:1.55;
-  animation:consentSlideIn .35s ease both}
-@keyframes consentSlideIn{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+#consent-banner{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:1500;
+  display:flex;align-items:center;gap:16px;padding:14px 20px;
+  background:rgba(15,23,42,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  color:#e2e8f0;border-radius:14px;
+  border:1px solid rgba(148,163,184,.18);
+  box-shadow:0 18px 50px rgba(0,0,0,.36),0 2px 8px rgba(0,0,0,.18);
+  max-width:min(700px,calc(100vw - 32px));font-size:12.5px;line-height:1.55;
+  animation:consentSlideIn .4s cubic-bezier(.16,1,.3,1) both}
+@keyframes consentSlideIn{from{opacity:0;transform:translate(-50%,16px)}to{opacity:1;transform:translate(-50%,0)}}
 #consent-banner .consent-text{flex:1;min-width:0}
-#consent-banner .consent-text > strong{display:block;color:#fff;font-size:13px;margin-bottom:3px}
+#consent-banner .consent-text > strong{display:flex;align-items:center;gap:6px;color:#fff;font-size:13px;margin-bottom:4px}
+#consent-banner .consent-text > strong::before{content:'🔒';font-size:13px;line-height:1}
 #consent-banner .consent-text > span{color:#cbd5e1}
+#consent-banner .consent-text > span strong{color:#f8fafc;font-weight:600}
 #consent-banner .consent-text .nowrap{white-space:nowrap}
 #consent-banner .consent-link{background:none;border:none;color:#93c5fd;cursor:pointer;font-size:12px;padding:0;margin-left:4px;text-decoration:underline;font-family:inherit}
 #consent-banner .consent-link:hover{color:#bfdbfe}
 #consent-banner .consent-actions{display:flex;gap:8px;flex-shrink:0}
 #consent-banner .btn.ghost{background:transparent;border:1px solid rgba(203,213,225,.45);color:#e2e8f0}
 #consent-banner .btn.ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(203,213,225,.7)}
-#consent-banner .btn.primary{background:#4f46e5;color:#fff;border:1px solid #4f46e5}
-#consent-banner .btn.primary:hover{background:#4338ca}
+#consent-banner .btn.primary{background:#4f46e5;color:#fff;border:1px solid #4f46e5;font-weight:600;box-shadow:0 4px 12px rgba(79,70,229,.32)}
+#consent-banner .btn.primary:hover{background:#4338ca;box-shadow:0 6px 16px rgba(79,70,229,.42)}
 .fl{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
 .modal input[type=text],.modal input[type=number]{width:100%;padding:8px 11px;border:1px solid var(--border);border-radius:6px;font-size:15px;color:var(--text);background:var(--bg);outline:none;transition:border-color .15s;margin-bottom:18px;font-family:inherit}
 /* Specificity fix: override margin for inputs inside wrappers so ✕ button stays vertically centered */

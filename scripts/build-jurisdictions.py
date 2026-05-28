@@ -332,6 +332,200 @@ COUNTRIES = {
         ],
     },
 
+    'CA': {
+        'slug': 'canada',
+        'name_ko': '캐나다',
+        'name_en': 'Canada',
+        'name_ja': 'カナダ',
+        'flag_cc': 'ca',
+        'iir':   {'date': '2023-12-31', 'qualified': True},
+        'utpr':  {'date': '2025-12-31', 'qualified': False},
+        'qdmtt': {'date': '2023-12-31', 'qualified': True},
+        'lead': (
+            '캐나다는 <strong>Global Minimum Tax Act</strong>(Loi sur l\'impôt minimum mondial)로 OECD '
+            'Pillar Two를 도입했습니다. IIR과 QDMTT는 2023-12-31, UTPR은 2년 지연되어 2025-12-31 이후 '
+            '개시 사업연도부터 시행되고 있습니다.'
+        ),
+        'domestic_laws': [
+            ('<strong>Global Minimum Tax Act / Loi sur l\'impôt minimum mondial</strong>', '연방 법령 — 영어·프랑스어 동시 공포'),
+            ('IIR · QDMTT', '2023-12-31 이후 개시 사업연도부터 시행'),
+            ('UTPR', '2년 지연되어 2025-12-31 이후 개시 사업연도부터 시행'),
+        ],
+        'insights': [
+            ('캐나다에 모기업', '캐나다에 모기업을 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 IIR 의무를 부담합니다.'),
+            ('캐나다에 자회사', '캐나다에 자회사를 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 캐나다 QDMTT 적용 대상입니다. QDMTT Safe Harbour 적용 요건을 충족하면 모기업 등의 소재지국에서의 IIR/UTPR 계산이 면제될 수 있습니다.'),
+        ],
+        'recent': [
+            ('2024', 'Global Minimum Tax Act 시행 — IIR · QDMTT 적용'),
+        ],
+        'sources': [
+            ('Canada Revenue Agency (CRA)', '캐나다 국세청 Pillar Two 안내', 'https://www.canada.ca/en/revenue-agency.html'),
+            ('Justice Laws Website', '캐나다 연방 법령 데이터베이스', 'https://laws-lois.justice.gc.ca/'),
+        ],
+    },
+
+    'BR': {
+        'slug': 'brazil',
+        'name_ko': '브라질',
+        'name_en': 'Brazil',
+        'name_ja': 'ブラジル',
+        'flag_cc': 'br',
+        'iir':   {'date': None, 'qualified': False, 'note': '도입 미발표'},
+        'utpr':  {'date': None, 'qualified': False, 'note': '도입 미발표'},
+        'qdmtt': {'date': '2025-01-01', 'qualified': True},
+        'lead': (
+            '브라질은 <strong>Lei n.º 15.079, de 27 de dezembro de 2024</strong>로 OECD Pillar Two의 '
+            'QDMTT를 우선 도입했습니다. QDMTT는 2025-01-01 이후 개시 사업연도부터 시행되며, IIR과 '
+            'UTPR은 아직 별도로 발표되지 않은 상태입니다.'
+        ),
+        'domestic_laws': [
+            ('<strong>Lei n.º 15.079, de 27 de dezembro de 2024</strong>', 'QDMTT 도입 법률 — 2024-12-27 공포'),
+            ('IIR · UTPR', '도입 미발표'),
+        ],
+        'insights': [
+            ('브라질에 자회사', '브라질에 자회사를 둔 다국적기업그룹은 2025-01-01 이후 개시 사업연도부터 브라질 QDMTT 적용 대상입니다. QDMTT Safe Harbour 적용 요건을 충족하면 모기업 등의 소재지국에서의 IIR/UTPR 계산이 면제될 수 있습니다.'),
+            ('IIR·UTPR 미도입', '브라질은 IIR과 UTPR을 별도로 도입하지 않은 상태로, 현재 시행 중인 Pillar Two 관련 규정은 QDMTT뿐입니다. 향후 입법 동향에 대한 모니터링이 필요합니다.'),
+        ],
+        'recent': [
+            ('2024-12-27', 'Lei n.º 15.079 공포 — QDMTT 도입 (2025-01-01 시행)'),
+        ],
+        'sources': [
+            ('Receita Federal do Brasil (RFB)', '브라질 연방국세청 Pillar Two 안내', 'https://www.gov.br/receitafederal/'),
+            ('Planalto', '브라질 공식 법령 데이터베이스', 'https://www.planalto.gov.br/'),
+        ],
+    },
+
+    'AE': {
+        'slug': 'united-arab-emirates',
+        'name_ko': '아랍에미리트',
+        'name_en': 'United Arab Emirates',
+        'name_ja': 'アラブ首長国連邦',
+        'flag_cc': 'ae',
+        'iir':   {'date': None, 'qualified': False, 'note': '도입 미발표'},
+        'utpr':  {'date': None, 'qualified': False, 'note': '도입 미발표'},
+        'qdmtt': {'date': '2025-01-01', 'qualified': True},
+        'lead': (
+            '아랍에미리트는 <strong>Cabinet Decision No. 142 of 2024</strong>(다국적기업그룹에 대한 '
+            '추가세 부과)로 OECD Pillar Two의 QDMTT를 도입했습니다. QDMTT는 2025-01-01 이후 개시 '
+            '사업연도부터 시행되며, IIR과 UTPR은 아직 별도로 발표되지 않은 상태입니다.'
+        ),
+        'domestic_laws': [
+            ('<strong>Cabinet Decision No. 142 of 2024</strong>', 'On the Imposition of Top-up Tax on Multinational Enterprises — QDMTT 도입'),
+            ('IIR · UTPR', '도입 미발표'),
+        ],
+        'insights': [
+            ('UAE에 자회사', 'UAE에 자회사를 둔 다국적기업그룹은 2025-01-01 이후 개시 사업연도부터 UAE QDMTT 적용 대상입니다. QDMTT Safe Harbour 적용 요건을 충족하면 모기업 등의 소재지국에서의 IIR/UTPR 계산이 면제될 수 있습니다. UAE 표준 법인세율(9%)이 글로벌최저한세율(15%) 미만이므로 자회사 ETR이 임계치 하회하는 사례가 많아 사전 모델링이 특히 중요합니다.'),
+            ('중동 hub 특성', 'UAE는 중동 지역의 본부·금융·물류 hub로 활용되며 Free Zone(자유무역지대) 인센티브가 광범위하게 적용됩니다. Pillar Two 분석 시 Free Zone qualifying entity 여부, Free Zone 인센티브와의 상호작용을 별도로 검토할 필요가 있습니다.'),
+        ],
+        'recent': [
+            ('2024', 'Cabinet Decision No. 142 of 2024 공포 — QDMTT 도입 (2025-01-01 시행)'),
+        ],
+        'sources': [
+            ('Federal Tax Authority (FTA)', 'UAE 연방세무청 Pillar Two 안내', 'https://tax.gov.ae/'),
+            ('UAE Ministry of Finance', '재무부 발표', 'https://mof.gov.ae/'),
+        ],
+    },
+
+    'SE': {
+        'slug': 'sweden',
+        'name_ko': '스웨덴',
+        'name_en': 'Sweden',
+        'name_ja': 'スウェーデン',
+        'flag_cc': 'se',
+        'iir':   {'date': '2023-12-31', 'qualified': True},
+        'utpr':  {'date': '2024-12-31', 'qualified': False},
+        'qdmtt': {'date': '2023-12-31', 'qualified': True},
+        'lead': (
+            '스웨덴은 <strong>Lag (2023:875) om tilläggsskatt</strong>(추가세에 관한 법률)로 EU '
+            'Directive 2022/2523을 자국 법령으로 도입했습니다. IIR과 QDMTT는 2023-12-31, UTPR은 '
+            '2024-12-31 이후 개시 사업연도부터 시행되고 있습니다.'
+        ),
+        'domestic_laws': [
+            ('<strong>Lag (2023:875) om tilläggsskatt</strong>', '추가세에 관한 법률 — EU Directive 2022/2523 transposition'),
+            ('IIR · QDMTT', '2023-12-31 이후 개시 사업연도부터 시행'),
+            ('UTPR', '2024-12-31 이후 개시 사업연도부터 시행'),
+        ],
+        'insights': [
+            ('스웨덴에 모기업', '스웨덴에 모기업을 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 IIR 의무를 부담합니다.'),
+            ('스웨덴에 자회사', '스웨덴에 자회사를 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 스웨덴 QDMTT 적용 대상입니다. QDMTT Safe Harbour 적용 요건을 충족하면 모기업 등의 소재지국에서의 IIR/UTPR 계산이 면제될 수 있습니다.'),
+        ],
+        'recent': [
+            ('2023', 'Lag (2023:875) om tilläggsskatt 공포 — IIR · QDMTT 시행'),
+        ],
+        'sources': [
+            ('Skatteverket (스웨덴 국세청)', 'Pillar Two 안내', 'https://www.skatteverket.se/'),
+            ('Riksdagen', '스웨덴 공식 법령 데이터베이스', 'https://www.riksdagen.se/'),
+        ],
+    },
+
+    'ES': {
+        'slug': 'spain',
+        'name_ko': '스페인',
+        'name_en': 'Spain',
+        'name_ja': 'スペイン',
+        'flag_cc': 'es',
+        'iir':   {'date': '2023-12-31', 'qualified': True},
+        'utpr':  {'date': '2024-12-31', 'qualified': False},
+        'qdmtt': {'date': '2023-12-31', 'qualified': True},
+        'lead': (
+            '스페인은 <strong>Ley 7/2024, de 20 de diciembre</strong>(다국적기업그룹·대규모 국내그룹의 '
+            '글로벌최저한세 보충세에 관한 법률)로 EU Directive 2022/2523을 자국 법령으로 도입했습니다. '
+            'IIR과 QDMTT는 2023-12-31, UTPR은 2024-12-31 이후 개시 사업연도부터 시행되고 있습니다.'
+        ),
+        'domestic_laws': [
+            ('<strong>Ley 7/2024, de 20 de diciembre</strong>', '다국적기업그룹·대규모 국내그룹 대상 보충세 도입 — EU Directive 2022/2523 transposition'),
+            ('IIR · QDMTT', '2023-12-31 이후 개시 사업연도부터 시행'),
+            ('UTPR', '2024-12-31 이후 개시 사업연도부터 시행'),
+        ],
+        'insights': [
+            ('스페인에 모기업', '스페인에 모기업을 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 IIR 의무를 부담합니다.'),
+            ('스페인에 자회사', '스페인에 자회사를 둔 다국적기업그룹은 2023-12-31 이후 개시 사업연도부터 스페인 QDMTT 적용 대상입니다. QDMTT Safe Harbour 적용 요건을 충족하면 모기업 등의 소재지국에서의 IIR/UTPR 계산이 면제될 수 있습니다.'),
+        ],
+        'recent': [
+            ('2024-12-20', 'Ley 7/2024 공포 — IIR · QDMTT 시행'),
+        ],
+        'sources': [
+            ('Agencia Tributaria (AEAT, 스페인 국세청)', 'Pillar Two 안내', 'https://sede.agenciatributaria.gob.es/'),
+            ('Boletín Oficial del Estado (BOE)', '스페인 공식 관보', 'https://www.boe.es/'),
+        ],
+    },
+
+    'CH': {
+        'slug': 'switzerland',
+        'name_ko': '스위스',
+        'name_en': 'Switzerland',
+        'name_ja': 'スイス',
+        'flag_cc': 'ch',
+        'iir':   {'date': '2025-01-01', 'qualified': True},
+        'utpr':  {'date': None, 'qualified': False, 'note': '도입 미발표'},
+        'qdmtt': {'date': '2024-01-01', 'qualified': True},
+        'lead': (
+            '스위스는 <strong>Ordonnance sur l\'imposition minimale des grands groupes d\'entreprises '
+            '(RS 642.161)</strong>로 OECD Pillar Two를 도입했습니다. QDMTT는 2024-01-01부터 우선 시행되었고, '
+            'IIR은 2025-01-01 이후 개시 사업연도부터 시행됩니다. UTPR은 아직 별도로 발표되지 않은 상태입니다.'
+        ),
+        'domestic_laws': [
+            ('<strong>Ordonnance sur l\'imposition minimale des grands groupes d\'entreprises (RS 642.161)</strong>', '2023-12-22 채택. 프랑스어·독일어·이탈리아어 동시 공포'),
+            ('QDMTT', '2024-01-01 시행 (선행 도입)'),
+            ('IIR', '2025-01-01 이후 개시 사업연도부터 시행'),
+            ('UTPR', '도입 미발표'),
+        ],
+        'insights': [
+            ('스위스에 모기업', '스위스에 모기업을 둔 다국적기업그룹은 2025-01-01 이후 개시 사업연도부터 IIR 의무를 부담합니다.'),
+            ('스위스에 자회사', '스위스에 자회사를 둔 다국적기업그룹은 이미 2024-01-01 이후 개시 사업연도부터 스위스 QDMTT 적용 대상입니다. QDMTT Safe Harbour 적용 요건을 충족하면 모기업 등의 소재지국에서의 IIR/UTPR 계산이 면제될 수 있습니다.'),
+            ('QDMTT 선행 도입', '스위스는 QDMTT를 IIR보다 1년 앞서 도입했습니다. 자국 세수 확보를 우선 위한 입법 순서로, 그룹 분석 시 동일 사업연도에 두 규정이 서로 다른 시점에 적용되는 점을 유의할 필요가 있습니다.'),
+            ('헤드쿼터·금융 hub 특성', '스위스는 글로벌 본부·금융·연구 기능이 집중된 관할권으로, 칸톤(주)별로 차등화된 법인세율과 특별 인센티브 영향으로 자회사 ETR이 임계치 하회하는 사례가 발생할 수 있습니다.'),
+        ],
+        'recent': [
+            ('2023-12-22', 'RS 642.161 채택 — QDMTT 우선 시행 (2024-01-01)'),
+            ('2024', 'IIR 시행 시점 확정 (2025-01-01)'),
+        ],
+        'sources': [
+            ('Eidgenössische Steuerverwaltung (ESTV, 스위스 연방세무청)', 'Pillar Two 안내', 'https://www.estv.admin.ch/'),
+            ('Fedlex', '스위스 공식 법령 데이터베이스 — RS 642.161', 'https://www.fedlex.admin.ch/'),
+        ],
+    },
+
     'SG': {
         'slug': 'singapore',
         'name_ko': '싱가포르',
@@ -431,30 +625,21 @@ def render_page(cc, data):
     if qdmtt['date']:
         rules.append((qdmtt['date'], 'QDMTT', '적격소재국추가세', qdmtt.get('domestic_name')))
 
-    # latest = 가장 늦은 날짜
-    if rules:
-        max_date = max(r[0] for r in rules)
+    # Timeline 3 카드 IIR/UTPR/QDMTT 순서 일관. None인 경우 미도입 카드.
+    items = [
+        ('IIR',   iir['date'],   '소득산입규칙',     iir.get('domestic_name')),
+        ('UTPR',  utpr['date'],  '소득산입보완규칙', utpr.get('domestic_name')),
+        ('QDMTT', qdmtt['date'], '적격소재국추가세', qdmtt.get('domestic_name')),
+    ]
+    dated_only = [it for it in items if it[1]]
+    max_date = max(it[1] for it in dated_only) if dated_only else None
     tl_html_parts = []
-    for i, (date, label, detail, sub) in enumerate(rules):
-        is_latest = (date == max_date)
+    for i, (label, date, detail, sub) in enumerate(items):
         if i > 0:
             tl_html_parts.append('<div class="jr-tl-connector" aria-hidden="true"></div>')
+        is_latest = (date is not None and date == max_date)
         sub_text = f'국내 도입명: {sub}' if sub else None
         tl_html_parts.append(render_tl_box(label, date, detail, sub_text, latest=is_latest))
-    # UTPR이 None인 경우 (예: SG) — 미도입 카드 표시
-    if utpr['date'] is None:
-        # IIR, UTPR(미도입), QDMTT 순서로 재구성
-        tl_html_parts = []
-        items = [
-            (iir['date'], 'IIR', '소득산입규칙', iir.get('domestic_name'), iir['date'] == max_date),
-            (None, 'UTPR', '소득산입보완규칙', None, False),
-            (qdmtt['date'], 'QDMTT', '적격소재국추가세', qdmtt.get('domestic_name'), qdmtt['date'] == max_date),
-        ]
-        for i, (date, label, detail, sub, is_latest) in enumerate(items):
-            if i > 0:
-                tl_html_parts.append('<div class="jr-tl-connector" aria-hidden="true"></div>')
-            sub_text = f'국내 도입명: {sub}' if sub else None
-            tl_html_parts.append(render_tl_box(label, date, detail, sub_text, latest=is_latest))
 
     tl_html = '\n      '.join(tl_html_parts)
 
@@ -468,13 +653,19 @@ def render_page(cc, data):
 
     rows = []
     # IIR
-    rows.append(render_quick_row(
-        'iir', 'IIR', '소득산입규칙',
-        iir.get('domestic_name_subline'),
-        f"{iir['date']} 이후 개시 사업연도" if iir['date'] else '—',
-        badge_ok() if iir['date'] else badge_none(),
-        tag_qual() if iir.get('qualified') else (tag_pending() if iir['date'] else None),
-    ))
+    if iir['date']:
+        rows.append(render_quick_row(
+            'iir', 'IIR', '소득산입규칙',
+            f"국내 도입명: {iir['domestic_name']}" if iir.get('domestic_name') else None,
+            f"{iir['date']} 이후 개시 사업연도",
+            badge_ok(),
+            tag_qual() if iir.get('qualified') else tag_pending(),
+        ))
+    else:
+        rows.append(render_quick_row(
+            'iir', 'IIR', '소득산입규칙', None,
+            '—', badge_none(iir.get('note', '도입 미발표')), None,
+        ))
     # UTPR
     if utpr['date']:
         rows.append(render_quick_row(
@@ -484,19 +675,24 @@ def render_page(cc, data):
             tag_qual() if utpr.get('qualified') else tag_pending(),
         ))
     else:
-        note = utpr.get('note', '도입 미발표')
         rows.append(render_quick_row(
             'utpr', 'UTPR', '소득산입보완규칙', None,
-            '—', badge_none(note), None,
+            '—', badge_none(utpr.get('note', '도입 미발표')), None,
         ))
     # QDMTT
-    rows.append(render_quick_row(
-        'qdmtt', 'QDMTT', '적격소재국추가세',
-        qdmtt.get('domestic_name_subline'),
-        f"{qdmtt['date']} 이후 개시 사업연도" if qdmtt['date'] else '—',
-        badge_ok() if qdmtt['date'] else badge_none(),
-        tag_qual() if qdmtt.get('qualified') else (tag_pending() if qdmtt['date'] else None),
-    ))
+    if qdmtt['date']:
+        rows.append(render_quick_row(
+            'qdmtt', 'QDMTT', '적격소재국추가세',
+            f"국내 도입명: {qdmtt['domestic_name']}" if qdmtt.get('domestic_name') else None,
+            f"{qdmtt['date']} 이후 개시 사업연도",
+            badge_ok(),
+            tag_qual() if qdmtt.get('qualified') else tag_pending(),
+        ))
+    else:
+        rows.append(render_quick_row(
+            'qdmtt', 'QDMTT', '적격소재국추가세', None,
+            '—', badge_none(qdmtt.get('note', '도입 미발표')), None,
+        ))
     # QDMTT Safe Harbour — 일률
     rows.append('''        <tr>
           <td><a href="/glossary#qdmttsh"><strong>QDMTT Safe Harbour</strong></a></td>

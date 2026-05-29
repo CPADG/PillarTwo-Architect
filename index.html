@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title data-i18n="meta.title">PillarTwo Architect — 글로벌최저한세 솔루션</title>
+<title data-i18n="meta.title">Pillar Two 분석·시각화 — PillarTwo Architect</title>
 <meta name="description" data-i18n-content="meta.desc" content="Pillar Two 분석, 몇 분이면 끝. 그룹 구조도를 그려 IIR·UTPR·QDMTT 결과를 즉시 확인하는 웹 기반 워크스페이스.">
 <meta name="keywords" content="PillarTwo Architect, Pillar Two, Pillar 2, Pillar2, 필라투, 필라2, 글로벌최저한세, 글최, GloBE, GloBE Rules, Global Minimum Tax, Global Tax, Top-up Tax, 내국추가세, IIR, UTPR, QDMTT, DMTT, Income Inclusion Rule, Undertaxed Profits Rule, Qualified Domestic Minimum Top-up Tax, Domestic Minimum Tax, Effective Tax Rate, ETR, Substance-based Income Exclusion, SBIE, Safe Harbour, CbCR, Transitional Safe Harbour, OECD, BEPS, BEPS 2.0, Model Rules, Pillar Two simulator, Pillar 2 calculator, Pillar Two analysis, Pillar Two visualization, multinational enterprise, multinational group, MNE, MNE Group, Tax, Minimum Tax, Corporate Tax, International Taxation, Tax Compliance, 다국적기업그룹, 세무, 국제조세, 第2の柱, 第二の柱, グローバル・ミニマム課税, グローバルミニマム課税, 国際最低課税, 国内ミニマム課税, 多国籍企業グループ, 追加税額, 国際課税, 所得算入規則, 軽課税所得規則, 適格国内ミニマム課税">
 <meta name="author" content="PillarTwo Architect">
@@ -18,7 +18,7 @@
 <meta property="og:locale" content="ko_KR">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:locale:alternate" content="ja_JP">
-<meta property="og:title" content="PillarTwo Architect — 글로벌최저한세 솔루션">
+<meta property="og:title" content="Pillar Two 글로벌최저한세 분석·시각화 — PillarTwo Architect">
 <meta property="og:description" content="Pillar Two 분석, 몇 분이면 끝. 그룹 구조도를 그려 IIR·UTPR·QDMTT 결과를 즉시 확인하는 웹 기반 워크스페이스.">
 <meta property="og:url" content="https://pillartwo.app/">
 <meta property="og:site_name" content="PillarTwo Architect">
@@ -31,7 +31,7 @@
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://pillartwo.app/og-image.png">
-<meta name="twitter:title" content="PillarTwo Architect — 글로벌최저한세 솔루션">
+<meta name="twitter:title" content="Pillar Two 글로벌최저한세 분석·시각화 — PillarTwo Architect">
 <meta name="twitter:description" content="Pillar Two 분석, 몇 분이면 끝. 그룹 구조도를 그려 IIR·UTPR·QDMTT 결과를 즉시 확인하는 웹 기반 워크스페이스.">
 <!-- 구조화 데이터 (Google Rich Result) -->
 <script type="application/ld+json">
@@ -40,7 +40,7 @@
   "@type": "WebSite",
   "url": "https://pillartwo.app/",
   "name": "PillarTwo Architect",
-  "alternateName": ["글로벌최저한세 솔루션", "Pillar Two Solution", "グローバル・ミニマム課税ソリューション"],
+  "alternateName": ["Pillar Two", "Pillar 2", "글로벌최저한세", "글로벌최저한세 솔루션", "Pillar Two Solution", "Global Minimum Tax", "グローバル・ミニマム課税ソリューション"],
   "inLanguage": ["ko", "en", "ja"],
   "potentialAction": {
     "@type": "SearchAction",
@@ -78,6 +78,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#2563eb">
+<script>try{if(localStorage.getItem('p2a.theme')==='dark')document.documentElement.classList.add('theme-dark');}catch(e){}</script>
 <!-- Sentry Error Monitoring (Loader Script — deferred, no parser-block / no LCP impact) -->
 <script defer src="https://js.sentry-cdn.com/ee4401caad2ce32f342a8993779fdf33.min.js" crossorigin="anonymous"></script>
 <script>
@@ -169,6 +170,7 @@ window.sentryOnLoad = function () {
   window._loadMinimapDeps=function(){};
 </script>
 <body>
+<h1 class="sr-only">Pillar Two 글로벌최저한세 그룹 구조 분석·시각화 — IIR·UTPR·QDMTT 납부의무 워크스페이스 (Global Minimum Tax · Pillar 2)</h1>
 
 <header id="toolbar">
   <div class="logo">
@@ -229,9 +231,9 @@ window.sentryOnLoad = function () {
   <div id="canvas">
     <svg id="svg-layer" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <marker id="arr-consolidated" markerWidth="8" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4.5 L0,9" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
-        <marker id="arr-equity"       markerWidth="8" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4.5 L0,9" fill="none" stroke="#7c3aed" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
-        <marker id="arr-other"        markerWidth="8" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4.5 L0,9" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+        <marker id="arr-consolidated" markerWidth="8" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4.5 L0,9" fill="none" stroke="context-stroke" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+        <marker id="arr-equity"       markerWidth="8" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4.5 L0,9" fill="none" stroke="context-stroke" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+        <marker id="arr-other"        markerWidth="8" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4.5 L0,9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
         <marker id="arr-treasury"     markerWidth="6" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L6,3.5 L0,7" fill="none" stroke="#d97706" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
       </defs>
     </svg>
@@ -333,6 +335,10 @@ window.sentryOnLoad = function () {
   <div id="globe-minimap">
     <canvas id="globe-minimap-canvas"></canvas>
     <div id="globe-tooltip" class="globe-tooltip"></div>
+    <button id="theme-toggle" type="button" aria-label="다크 모드 전환" data-pe-tip="다크 모드">
+      <svg class="tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.4"/><path d="M12 2v2.4M12 19.6V22M3.5 12H6M18 12h2.5M5.7 5.7l1.7 1.7M16.6 16.6l1.7 1.7M5.7 18.3l1.7-1.7M16.6 7.4l1.7-1.7"/></svg>
+      <svg class="tt-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.6 6.6 0 0 0 9.8 9.8z"/></svg>
+    </button>
   </div>
   <div id="map-footer">
     <div class="mf-row mf-row-nav">
@@ -1178,9 +1184,9 @@ window.minimapReset = function() {
       const ccChip = _ccChip(nd.country);
       setHeader(`${pinIcon}${ccChip}<span class="map-hd-name">${name}</span>`);
     }
-    // GloBE 맥락 — computeAggregationUnits가 이미 isExcludedEntity 필터를 적용하고,
-    // 분석 후엔 nonGloBESet까지 반영해 aggregateUnits를 재구성하므로
-    // aggregateUnits의 country별 AU 수와 members 합계를 그대로 사용 = 단일 진실 소스.
+    // GloBE 맥락 — 분석 후 buildAggregateUnitsFromResult가 isExcludedEntity·nonGloBESet를
+    // 반영해 aggregateUnits를 구성하므로, country별 AU 수와 members 합계를
+    // 그대로 사용 = 단일 진실 소스.
     function _countsForCc(cc) {
       const au = window.aggregateUnits;
       if (!au) return { auCnt: 0, ndCnt: 0 };

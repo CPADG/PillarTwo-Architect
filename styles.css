@@ -1,10 +1,13 @@
-/* build: 2026-05-28T19:11:15.589Z */
+/* build: 2026-05-29T17:46:11.761Z */
 :root{
   --primary:#2563eb;--primary-dk:#1d4ed8;--primary-lt:#eff6ff;
   --indigo:#4f46e5;--indigo-dk:#4338ca;--indigo-lt:#eef2ff;
   --surface:#fff;--bg:#f1f5f9;--border:#e2e8f0;
   --text:#1e293b;--muted:#64748b;
   --red:#ef4444;--red-lt:#fef2f2;--amber:#d97706;
+  /* 캔버스 그래픽 토큰 (라이트=현행값). .theme-dark에서만 오버라이드 — 전역 --bg/--surface는 안 건드림 */
+  --canvas-bg:#f1f5f9;--canvas-dot:#cbd5e1;--canvas-cover:var(--canvas-bg);
+  --edge-consolidated:#2563eb;--edge-equity:#7c3aed;--edge-other:#94a3b8;
   --sh-sm:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06);
   --sh-md:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.06);
   --sh-lg:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.05);
@@ -13,7 +16,14 @@
   --ease-out:cubic-bezier(.16,1,.3,1);            /* 진입·슬라이드 */
   --ease-back:cubic-bezier(.175,.885,.32,1.275);  /* 체크·뱃지 살짝 오버슈트 */
 }
+/* 다크 모드 — 1단계: 캔버스/엣지/브릿지 그래픽만 (패널·툴바 등 전면 테마는 후속). */
+:root.theme-dark{
+  --canvas-bg:#0f172a;--canvas-dot:#1e293b;
+  --edge-consolidated:#60a5fa;--edge-equity:#a78bfa;--edge-other:#a8b6c8;
+}
 *{box-sizing:border-box;margin:0;padding:0}
+/* 스크린리더/SEO 전용 — 시각적으로 숨기되 크롤러·보조기술엔 노출(홈 H1 등) */
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);height:100vh;overflow:hidden;display:flex;flex-direction:column}
 
 /* ── TOOLBAR ── */
@@ -26,6 +36,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 .sep{width:1px;height:22px;background:var(--border)}
 .btn{display:inline-flex;align-items:center;gap:5px;padding:6px 13px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:14px;font-weight:500;cursor:pointer;transition:background-color .15s,border-color .15s,color .15s,box-shadow .15s,transform .1s ease-out;white-space:nowrap;line-height:1}
 .btn:hover{background:var(--bg);border-color:#cbd5e1}
+/* emil: 누르면 즉각 반응(scale, 기존 transform 트랜지션 활용) + 키보드 포커스 가시화 */
+.btn:active{transform:scale(.97)}
+.btn:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
 .btn.primary{background:var(--primary);color:#fff;border-color:var(--primary)}
 .btn.primary:hover{background:var(--primary-dk)}
 .btn svg{width:15px;height:15px;flex-shrink:0}
@@ -65,7 +78,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 .leg-line.other{background:#94a3b8}
 
 /* ── VIEWPORT ── */
-#viewport{flex:1;overflow:hidden;position:relative;background:var(--bg);background-image:radial-gradient(circle,#cbd5e1 1px,transparent 1px);background-size:24px 24px;cursor:grab}
+#viewport{flex:1;overflow:hidden;position:relative;background:var(--canvas-bg);background-image:radial-gradient(circle,var(--canvas-dot) 1px,transparent 1px);background-size:24px 24px;cursor:grab;transition:background-color .25s}
 /* 모던 가로 스크롤바 — 캔버스 폭이 뷰포트 초과 시 자동 표시.
    회색 track + 파란 핸들 모두 10px 두께, 클릭 hit area는 위아래 8px씩 추가 확장(총 26px). */
 #canvas-hscroll{position:absolute;bottom:8px;left:17px;right:17px;height:10px;
@@ -93,9 +106,29 @@ body.has-hscroll #globe-minimap-wrap.map-pip-panel{bottom:26px}
 #svg-labels{position:absolute;top:0;left:0;width:8000px;height:8000px;overflow:visible;pointer-events:none;z-index:25}
 .edge-hit{fill:none;stroke:transparent;stroke-width:14;stroke-linecap:round;pointer-events:stroke;cursor:pointer}
 .edge-path{fill:none;pointer-events:none}
-.edge-path.consolidated{stroke:#2563eb;stroke-width:2}
-.edge-path.equity{stroke:#7c3aed;stroke-width:2;stroke-dasharray:8 4}
-.edge-path.other{stroke:#94a3b8;stroke-width:1.5}
+.edge-path.consolidated{stroke:var(--edge-consolidated);stroke-width:2}
+.edge-path.equity{stroke:var(--edge-equity);stroke-width:2;stroke-dasharray:8 4}
+.edge-path.other{stroke:var(--edge-other);stroke-width:1.5}
+/* ── 브릿지(직교 교차 hop) — 색·점선·선폭·다크 전부 토큰/클래스로 처리 ── */
+.bridge-cover{fill:var(--canvas-cover);pointer-events:none}                 /* hop선 직선부 지우기 */
+.bridge-halo{fill:none;stroke:var(--canvas-cover);stroke-width:5.5;stroke-linecap:round;pointer-events:none} /* 돔-온리 배경색 분리밴드 */
+.bridge-arch,.bridge-restore{fill:none;pointer-events:none}                 /* 아치=hop곡선, restore=중요선 연속복원 */
+.bridge-arch{stroke-linecap:round}  /* 끝을 반원으로 연장 → 직선과의 44° 접합부 미세 틈 제거(확대 시 끊김 방지) */
+.bridge-arch.consolidated,.bridge-restore.consolidated{stroke:var(--edge-consolidated);stroke-width:2}
+.bridge-arch.equity,.bridge-restore.equity{stroke:var(--edge-equity);stroke-width:2;stroke-dasharray:8 4}
+.bridge-arch.other,.bridge-restore.other{stroke:var(--edge-other);stroke-width:1.5}
+/* 다크 토글 버튼 — 지구본(미니맵) 영역 우하단 */
+#theme-toggle{position:absolute;right:8px;bottom:8px;z-index:6;width:30px;height:30px;border-radius:50%;
+  border:1px solid var(--border);background:var(--surface);color:#64748b;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;box-shadow:var(--sh-sm);transition:background-color .2s,color .2s,transform .12s var(--ease-out)}
+#theme-toggle:hover{transform:scale(1.08)}
+#theme-toggle:active{transform:scale(.93)}
+#theme-toggle svg{width:16px;height:16px}
+#theme-toggle .tt-sun{color:#f59e0b}
+#theme-toggle .tt-moon{display:none}
+:root.theme-dark #theme-toggle{background:#1e293b;border-color:#334155}
+:root.theme-dark #theme-toggle .tt-sun{display:none}
+:root.theme-dark #theme-toggle .tt-moon{display:block;color:#cbd5e1}
 .edge-label{font-size:11.5px;font-weight:600;font-family:inherit;font-variant-numeric:tabular-nums;letter-spacing:.1px}
 .temp-edge{fill:none;stroke:var(--primary);stroke-width:2;stroke-dasharray:6 3;pointer-events:none}
 .self-loop{fill:none;stroke:var(--amber);stroke-width:2;pointer-events:none}
@@ -267,8 +300,11 @@ body.demo-advanced-mode #btn-demo-case{display:none}
 #btn-demo-advanced.is-active svg{opacity:1;color:#16a34a}
 
 /* ── MODAL ── */
-.overlay{position:fixed;inset:0;background:rgba(15,23,42,.45);display:flex;align-items:center;justify-content:center;z-index:1000;backdrop-filter:blur(2px)}
-.modal{background:var(--surface);border-radius:12px;padding:24px;width:400px;box-shadow:var(--sh-lg);border:1px solid var(--border);overflow:visible}
+.overlay{position:fixed;inset:0;background:rgba(15,23,42,.45);display:flex;align-items:center;justify-content:center;z-index:1000;backdrop-filter:blur(2px);animation:overlayIn .18s ease}
+/* emil: 모달 진입 — 중앙 scale .96→1 + 페이드(scale(0) 금지), ease-out. 모달은 origin-aware 예외(중앙 유지) */
+.modal{background:var(--surface);border-radius:12px;padding:24px;width:400px;box-shadow:var(--sh-lg);border:1px solid var(--border);overflow:visible;animation:modalIn .22s var(--ease-out)}
+@keyframes overlayIn{from{opacity:0}to{opacity:1}}
+@keyframes modalIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
 .modal h3{font-size:16px;font-weight:700;margin-bottom:6px}
 .modal .msub{font-size:13px;color:var(--muted);margin-bottom:22px;min-height:0;line-height:1.65}
 /* ── 저장 옵션 모달 (모던 카드 + 토글) ── */
@@ -477,13 +513,13 @@ body.demo-advanced-mode #btn-demo-case{display:none}
 /* opacity는 SVG <animate>가 제어 (CSS에 opacity 두면 animate를 오버라이드함) */
 .energy-spirit{
   fill:rgba(199,210,254,.85);
-  filter:drop-shadow(0 0 2px rgba(79,70,229,.7)) drop-shadow(0 0 5px rgba(79,70,229,.4)) drop-shadow(0 0 10px rgba(79,70,229,.22));
+  filter:drop-shadow(0 0 4px rgba(79,70,229,.55));
   pointer-events:none;
 }
 body.no-flow-spirits .energy-spirit{ display:none }
 /* IIR 정령 — CSS offset-path 기반 (HTML div, GPU 합성) */
 #iir-spirit-layer{position:absolute;top:0;left:0;width:8000px;height:8000px;pointer-events:none;z-index:50;overflow:visible}
-.iir-spirit{position:absolute;top:0;left:0;width:3.6px;height:3.6px;border-radius:50%;background:rgba(199,210,254,.85);filter:drop-shadow(0 0 2px rgba(79,70,229,.7)) drop-shadow(0 0 5px rgba(79,70,229,.4)) drop-shadow(0 0 10px rgba(79,70,229,.22));opacity:0;pointer-events:none;offset-rotate:0deg;offset-anchor:center;will-change:offset-distance,transform,opacity}
+.iir-spirit{position:absolute;top:0;left:0;width:3.6px;height:3.6px;border-radius:50%;background:rgba(199,210,254,.85);box-shadow:0 0 5px .5px rgba(79,70,229,.55);opacity:0;pointer-events:none;offset-rotate:0deg;offset-anchor:center;will-change:offset-distance,transform,opacity}
 body.no-flow-spirits .iir-spirit{display:none}
 @keyframes iirSpiritMotion{from{offset-distance:0%}to{offset-distance:100%}}
 @keyframes iirSpiritPulse{0%,100%{transform:scale(.7)}50%{transform:scale(1.9)}}
@@ -519,7 +555,7 @@ body.no-flow-spirits .iir-spirit{display:none}
 /* ── TOAST ── */
 #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(15,23,42,.88);color:#fff;padding:9px 18px;border-radius:20px;font-size:13px;z-index:2000;pointer-events:none;transition:opacity .4s;backdrop-filter:blur(4px);opacity:0;max-width:500px;text-align:center}
 #toast.warn{background:rgba(153,27,27,.9)}
-#analyze-spinner{position:fixed;inset:0;background:rgba(241,245,249,.7);display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:46px;z-index:800;backdrop-filter:blur(2px);opacity:0;transition:opacity .18s;pointer-events:none}
+#analyze-spinner{position:fixed;inset:0;background:rgba(241,245,249,.7);display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:46px;z-index:800;backdrop-filter:blur(2px);opacity:0;transition:opacity .28s;pointer-events:none}
 #analyze-spinner.visible{opacity:1;pointer-events:all}
 .spinner-ring{width:38px;height:38px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -548,6 +584,58 @@ body.no-flow-spirits .iir-spirit{display:none}
 .spinner-check.has-pending{background:#f59e0b}
 .spinner-check svg{width:22px;height:22px}
 .spinner-sub-warn{font-size:11.5px;color:#92400e;background:#fef3c7;border:1px solid #fcd34d;border-radius:6px;padding:6px 10px;margin:6px auto 0;max-width:260px;text-align:center;line-height:1.5}
+/* ── 분석 완료 리빌 v2 — Tonal Strata (분류=두 톤 색면, 연결=겹침대+엣지 직조) ──
+   #viewport(position:relative) 자식 z0 → 엣지(z1)·노드(z2)·라벨(z25)·칩 뒤. 화면고정이라 오버뷰 어떤 줌이든 캔버스를 꽉 채움.
+   솔리드 톤(음영)만 — 블러·테두리·링·장식그라데이션 0. clip-path+opacity=GPU. reduced-motion 가드는 JS _reduceMotion()(전역 * 가드가 CSS 폴백을 덮으므로 CSS 폴백 미작성). */
+.analysis-ripple{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.ar-field{position:absolute;inset:0;clip-path:circle(0% at var(--cx,50%) var(--cy,50%));transform:translateZ(0);will-change:clip-path,opacity}
+/* A(첫 원)=블루(#2563eb, 필라2 primary), 왼위 원점 / B(둘째 원)=인디고(#4f46e5), 오른아래 원점 → 가운데서 겹쳐 제3음영(=접합) */
+.ar-field.fa{background:rgba(37,99,235,.15);--cx:43%;--cy:46%;animation:arFieldA 1.4s cubic-bezier(.33,.6,.45,1) forwards}
+.ar-field.fb{background:rgba(79,70,229,.13);--cx:57%;--cy:55%;animation:arFieldB 1.4s cubic-bezier(.33,.6,.45,1) .08s forwards}
+/* 정지 구간 제거 튜닝: 완만한 ease-out(.33,.6,.45,1)로 가장자리가 끝까지(circle 88%, t=1.0에 코너 도달) 이동 + opacity가
+   펼침과 함께 12%→90%에 0으로 소멸 → '확장→정지→페이드'가 아니라 '계속 퍼지며 사그라듦' = 심리스. (앞쏠린 .16,1,.3,1은 ~40%에 정지) */
+@keyframes arFieldA{0%{clip-path:circle(0% at var(--cx) var(--cy));opacity:0}12%{opacity:.9}90%{opacity:0}100%{clip-path:circle(88% at var(--cx) var(--cy));opacity:0}}
+@keyframes arFieldB{0%{clip-path:circle(0% at var(--cx) var(--cy));opacity:0}12%{opacity:.88}90%{opacity:0}100%{clip-path:circle(86% at var(--cx) var(--cy));opacity:0}}
+/* 도트그리드 라이트 리플 — 베이스 24px 점격자(#viewport)와 동일 패턴/원점을 브랜드색으로 한 겹.
+   점은 제자리 고정, 링(annulus) 마스크 크기를 0→300%로 키워 '점등 띠'를 중앙→바깥으로 이동 = 빛이 리플처럼 퍼짐.
+   마스크 미지원 시 점 전체가 살짝 보였다 페이드(우아한 강등). 뷰포트 크기 레이어 1회 리페인트라 부하 허용. */
+.ar-grid{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(37,99,235,.55) 1px,transparent 1px);background-size:24px 24px;background-position:0 0;
+  -webkit-mask:radial-gradient(circle at 50% 50%,transparent 0 50%,#000 68%,transparent 84%) center/0% 0% no-repeat;
+  mask:radial-gradient(circle at 50% 50%,transparent 0 50%,#000 68%,transparent 84%) center/0% 0% no-repeat;
+  opacity:0;will-change:-webkit-mask-size,mask-size,opacity;animation:arGrid 1.6s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes arGrid{0%{-webkit-mask-size:0% 0%;mask-size:0% 0%;opacity:0}12%{opacity:.95}85%{opacity:.6}100%{-webkit-mask-size:300% 300%;mask-size:300% 300%;opacity:0}}
+/* ── 첫 진입 튜토리얼 노드 스태거 등장 — scale(.94)+상승 페이드(아무것도 없는 데서 튀어나오지 않게), 지수 ease-out ── */
+@keyframes tutNodeIn{from{opacity:0;transform:translateY(10px) scale(.94)}to{opacity:1;transform:none}}
+.node.tut-enter{animation:tutNodeIn .55s cubic-bezier(.16,1,.3,1) both}
+/* ── 불러오기/샘플/공유복원 그래프 등장 — 규모별 차등. 적당 규모=노드 제자리 fade+scale 스태거, 대규모=단일 레이어 페이드(경량). ── */
+@keyframes graphEnter{from{opacity:0}to{opacity:1}}
+.graph-enter{animation:graphEnter .5s cubic-bezier(.16,1,.3,1) both}
+/* 소규모 로드 온보딩 — 노드 top-down 스태거 scale-in(few nodes라 GPU 부담 없음). 대규모는 .graph-enter 단일 페이드만. */
+@keyframes graphNodeIn{0%{opacity:0;transform:translateY(10px) scale(.9)}to{opacity:1;transform:none}}
+.node.graph-enter-node{animation:graphNodeIn .5s cubic-bezier(.16,1,.3,1) both}
+/* 분석 완료: 새로 부여된 합산단위(우상)·납부주체(좌하) 칩 강조 pop(transform/opacity GPU, 가시 칩만 JS에서 적용) */
+@keyframes chipPop{0%{transform:scale(.55);opacity:0}55%{opacity:1}100%{transform:scale(1);opacity:1}}
+.au-type-chips.chip-pop,.pe-chip.chip-pop{animation:chipPop .45s cubic-bezier(.16,1,.3,1) both}
+/* IIR 소득산입비율 라벨(보라 pill) — 화살표 표시 중 강조: 약간의 글로우 펄스(모기업칩 핀과 유사). 라벨 소수개·정적 장면이라 filter 펄스 허용. */
+.iir-ratio-pill{animation:iirRatioGlow 1.7s ease-in-out infinite;pointer-events:all;cursor:help}
+@keyframes iirRatioGlow{0%,100%{filter:drop-shadow(0 0 3px rgba(124,58,237,.7))}50%{filter:drop-shadow(0 0 8px rgba(124,58,237,1))}}
+/* IIR 소득산입비율 안내 툴팁(#coin-tooltip 재사용) — 다른 툴팁과 동일 베이스(다크) + 보라 강조(IIR 색 일관성). */
+.tt-iir{border-left:2px solid #a78bfa;padding-left:7px}
+.tt-hl{color:#c4b5fd;font-weight:800}
+/* ── 모바일 접속 안내(웹/데스크톱 최적화) — 1회성 모달, emil/impeccable 톤(ease-out·scale.95·:active scale.97·브랜드틴트) ── */
+#mobile-notice{position:fixed;inset:0;z-index:3000;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(15,23,42,.5);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);animation:mnIn .26s ease}
+#mobile-notice.mn-hide{opacity:0;transition:opacity .26s ease}
+#mobile-notice .mn-card{background:var(--surface,#fff);border:1px solid var(--border,#e2e8f0);border-radius:14px;max-width:340px;padding:22px 22px 18px;box-shadow:0 12px 40px rgba(0,0,0,.28);text-align:center;animation:mnCardIn .3s cubic-bezier(.16,1,.3,1)}
+#mobile-notice .mn-title{font-size:16px;font-weight:800;color:var(--text,#0f172a);letter-spacing:-.2px;margin-bottom:8px}
+#mobile-notice .mn-body{font-size:13px;line-height:1.6;color:var(--muted,#64748b);margin-bottom:16px}
+#mobile-notice .mn-ok{width:100%;padding:11px;border:0;border-radius:9px;background:var(--primary,#2563eb);color:#fff;font-size:14px;font-weight:700;cursor:pointer;transition:transform .16s ease,filter .15s}
+#mobile-notice .mn-ok:hover{filter:brightness(1.06)}
+#mobile-notice .mn-ok:active{transform:scale(.97)}
+@keyframes mnIn{from{opacity:0}to{opacity:1}}
+@keyframes mnCardIn{from{opacity:0;transform:scale(.95) translateY(8px)}to{opacity:1;transform:none}}
+/* ── 분석 완료: 분절된 기업들이 유기적으로 이어지는 듯 엣지·라벨이 옅음→선명으로 직조(단일 레이어 opacity=GPU 컴포지팅) ── */
+@keyframes weaveIn{from{opacity:.12}to{opacity:1}}
+.analysis-weave{animation:weaveIn 1s cubic-bezier(.16,1,.3,1) both}
 #edge-tooltip{position:fixed;z-index:1000;background:rgba(15,23,42,.92);color:#fff;padding:5px 10px;border-radius:5px;font-size:12px;font-weight:500;pointer-events:none;opacity:0;transition:opacity .12s;white-space:nowrap;letter-spacing:.2px;box-shadow:0 2px 10px rgba(0,0,0,.25);font-variant-numeric:tabular-nums}
 #edge-tooltip.visible{opacity:1}
 #edge-tooltip .tt-arrow{color:#94a3b8;margin:0 5px;font-weight:400}
@@ -712,6 +800,7 @@ body.globe-collapsed #side-panel.open .panel-body{margin-bottom:80px}
 .pb-section-hd{display:flex;align-items:center;gap:7px;padding:0 0 7px;border-bottom:2px solid var(--border);margin-bottom:10px}
 .pb-section-title{font-size:13px;font-weight:800;color:var(--text);letter-spacing:.05px}
 .pb-section-sub{font-size:11px;color:var(--muted);font-weight:400}
+.pb-section-hd-text{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1}
 .pb-section-empty{font-size:12px;color:var(--muted);padding:8px 2px;font-style:italic}
 .pb-sub-hd{font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin:10px 0 5px;padding:0 1px}
 .pb-utpr-cc-chips{display:flex;flex-wrap:wrap;gap:5px 8px;padding:2px 0 4px}
@@ -722,9 +811,23 @@ body.globe-collapsed #side-panel.open .panel-body{margin-bottom:80px}
 .pb-parent:hover .pb-parent-hd{background:var(--primary-lt)}
 .pb-parent.pinned{border-color:var(--primary);box-shadow:0 0 0 2px rgba(37,99,235,.12)}
 .pb-parent.pinned .pb-parent-hd{background:var(--primary-lt)}
-.pb-parent-hd{display:flex;align-items:center;gap:6px;padding:7px 11px;background:var(--bg);border-bottom:1px solid var(--border);transition:background .12s}
-.pb-parent-name{font-size:13px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pb-ce-list{padding:5px 11px 7px}
+.pb-parent-hd{display:flex;align-items:center;gap:6px;padding:7px 11px;background:var(--bg);border-bottom:1px solid var(--border);transition:background .12s,border-color .2s;position:relative;overflow:hidden}
+/* 모기업 소재지국 국기 배경 힌트 — 합산단위 국가 영역(.au-country-sidebar)과 동일 방식. JS가 헤더에 --flag-bg 지정. */
+.pb-parent-hd::before{content:'';position:absolute;inset:0;background-image:var(--flag-bg,none);background-size:cover;background-position:center;background-repeat:no-repeat;opacity:.06;filter:saturate(.55);pointer-events:none;z-index:0}
+.pb-parent-hd>*{position:relative;z-index:1}
+.pb-parent.collapsed .pb-parent-hd{border-bottom-color:transparent}
+/* flex:0 1 auto — 기업명은 글자 폭만 차지(빈 공간은 카드=납부주체 핀 클릭영역). min-width:0+ellipsis로 긴 이름 축약 */
+.pb-parent-name{font-size:14px;font-weight:600;color:var(--text);flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* 콜랩스: JS 측정 max-height 아코디언(_animateCollapse) — content↔0 정확 트랜지션 = 잔여 여백 0 + 부드러움. IIR 카드(data-parent-id)에만. */
+.pb-parent[data-parent-id] .pb-ce-list{overflow:hidden;transition:max-height .28s cubic-bezier(.16,1,.3,1)}
+.pb-ce-inner{padding:5px 11px 7px}
+.pb-parent-chevron{margin-left:auto;flex-shrink:0;background:none;border:0;color:var(--muted);cursor:pointer;padding:5px;display:flex;align-items:center;border-radius:6px;transition:background .15s,color .15s}
+.pb-parent-chevron:hover{background:rgba(15,23,42,.06);color:var(--text)}
+.pb-parent-chevron svg{width:15px;height:15px;transition:transform .2s}
+.pb-parent.collapsed .pb-parent-chevron svg{transform:rotate(-90deg)}
+.pb-section-hd-sticky{position:sticky;top:0;background:var(--surface);z-index:5}
+.payer-collapse-all-btn{margin-left:auto;background:none;border:1px solid var(--border);color:var(--muted);font-size:10.5px;font-weight:600;cursor:pointer;padding:3px 8px;border-radius:4px;white-space:nowrap;transition:background .15s,border-color .15s,color .15s}
+.payer-collapse-all-btn:hover{background:var(--bg);border-color:#cbd5e1;color:var(--text)}
 .pb-ce-row{display:flex;align-items:center;font-size:13px;padding:2px 4px;margin:0 -4px;gap:4px;border-radius:4px;transition:background .12s;cursor:default}
 .pb-ce-row:hover{background:var(--primary-lt)}
 .pb-ce-name{color:var(--text);font-size:13px}
@@ -896,7 +999,11 @@ body.globe-collapsed #side-panel.open .panel-body{margin-bottom:80px}
 .rdw-status-btn{background:none;border:none;padding:0;font-size:12px;font-weight:600;color:var(--primary);cursor:pointer;text-align:left;letter-spacing:.05px;transition:opacity .12s;display:block;width:100%}
 .rdw-status-btn:hover{opacity:.72}
 /* 과세규정 시행 현황 패널 */
-#globe-status-panel{background:var(--surface);border:1px solid var(--border);border-radius:8px;box-shadow:var(--sh-md);display:flex;flex-direction:column;overflow:hidden;max-height:440px;width:320px}
+#globe-status-panel{background:var(--surface);border:1px solid var(--border);border-radius:8px;box-shadow:var(--sh-md);display:flex;flex-direction:column;overflow:hidden;max-height:440px;width:320px;transform-origin:bottom center;animation:gspIn .2s cubic-bezier(.16,1,.3,1)}
+/* 시행현황 패널 열기/닫기 부드러운 모션(다른 모달/팝오버와 일관). display 토글이라 열 때 gspIn 재생 + 닫을 때 JS가 .gsp-closing로 gspOut. */
+#globe-status-panel.gsp-closing{animation:gspOut .16s ease forwards}
+@keyframes gspIn{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes gspOut{to{opacity:0;transform:translateY(6px) scale(.97)}}
 .gsp-header{display:flex;align-items:center;justify-content:space-between;padding:8px 12px 7px;border-bottom:1px solid var(--border);flex-shrink:0}
 .gsp-title{font-size:12px;font-weight:700;color:var(--text);letter-spacing:.1px}
 .gsp-close{background:none;border:none;cursor:pointer;color:var(--muted);font-size:16px;padding:0 3px;line-height:1;border-radius:3px;transition:background .12s,transform .1s ease-out}
@@ -914,8 +1021,9 @@ body.globe-collapsed #side-panel.open .panel-body{margin-bottom:80px}
 .rdw-cal-btn:hover,.rdw-cal-btn.active{background:var(--primary-lt);color:var(--primary);border-color:var(--primary)}
 .rdw-cal-btn svg{width:14px;height:14px}
 /* popup */
-.rdw-popup{position:absolute;bottom:calc(100% + 8px);left:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:var(--sh-lg);width:236px;padding:12px;display:none;z-index:201}
-.rdw-popup.open{display:block}
+/* 달력 팝업 — .open 토글에 opacity+transform 트랜지션(다른 팝오버와 일관, origin-aware). visibility로 닫힐 때 비표시. */
+.rdw-popup{position:absolute;bottom:calc(100% + 8px);left:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:var(--sh-lg);width:236px;padding:12px;z-index:201;opacity:0;visibility:hidden;transform:translateY(6px) scale(.97);transform-origin:bottom left;transition:opacity .18s ease,transform .18s cubic-bezier(.16,1,.3,1),visibility .18s}
+.rdw-popup.open{opacity:1;visibility:visible;transform:none}
 .rdp-header{display:flex;align-items:center;gap:5px;margin-bottom:10px}
 .rdp-selects{display:flex;gap:4px;flex:1;justify-content:center}
 .rdp-sel{border:1px solid var(--border);border-radius:4px;padding:3px 5px;font-size:13px;font-family:inherit;color:var(--text);background:var(--bg);cursor:pointer;outline:none;transition:border-color .12s}
@@ -957,6 +1065,10 @@ body.globe-collapsed #side-panel.open .panel-body{margin-bottom:80px}
 #globe-collapse-btn:hover{background:rgba(15,23,42,.06);color:#1e293b}
 #globe-collapse-btn svg{width:14px;height:14px}
 #globe-minimap-wrap.is-collapsed #globe-collapse-btn{transform:rotate(180deg)}
+/* 지구본(D3 SVG)은 CDN import+world fetch 후 비동기로 append되어 완성형으로 '빡' 등장 →
+   append 시 부드럽게 페이드+스케일 인(중심 기준). 1회. reduced-motion은 전역 * 가드가 즉시 처리. */
+#d3-globe-preview{transform-origin:center;animation:globeIn .55s cubic-bezier(.16,1,.3,1) both}
+@keyframes globeIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
 /* 컨테이너 배경은 흰색만 — 그래디언트는 ::after의 box-shadow로 sphere 가장자리에 집중시킴 */
 #globe-minimap{position:absolute;top:28px;left:0;right:0;bottom:52px;background:#fff}
 /* 글로브 가장자리 강조 — 얇은 ring + symmetric soft glow (참고 이미지 스타일) */

@@ -19,7 +19,7 @@
     "verify:jsonld": "node scripts/verify-jsonld.js",
     "verify": "npm run verify:hreflang && npm run verify:jsonld",
     "refresh-dates": "node scripts/refresh-dates.js",
-    "cf-build": "npm run refresh-dates && npm run sitemap && npm run stamp"
+    "cf-build": "npm run refresh-dates && npm run sitemap && npm run stamp && (npm run indexnow || true)"
   },
   "devDependencies": {
     "esbuild": "^0.24.0"

@@ -1,4 +1,4 @@
-/* build: 2026-05-28T19:11:15.589Z */
+/* build: 2026-05-29T17:46:11.761Z */
 /* ── 문서 페이지 공통 (about / glossary) ── */
 /* styles.css의 body 기본값(height:100vh; overflow:hidden; display:flex;)이 문서 페이지에선 스크롤을 막으므로 override */
 html,body.docs-body{height:auto; overflow:auto; display:block}
@@ -33,6 +33,7 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
 }
 .docs-nav-links a:hover{background:rgba(99,102,241,.08); color:#4338ca}
 .docs-nav-links a.active{background:rgba(99,102,241,.12); color:#3730a3; font-weight:600}
+.docs-nav-links a:focus-visible,.gloss-cat-tab:focus-visible,.docs-lang-btn:focus-visible,.gloss-search:focus-visible{outline:2px solid #4f46e5; outline-offset:2px}
 
 /* Main container */
 .docs-main{max-width:880px; margin:0 auto; padding:48px 28px 80px}
@@ -168,7 +169,24 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
 .docs-highlight strong{color:#3730a3}
 
 /* CTA section */
-.docs-cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:48px; padding-top:32px; border-top:1px solid rgba(99,102,241,.18)}
+/* CTA 3버튼 — 하단 고정 플로팅 바 (글 읽으며 언제든 클릭). .docs-cta 보유 모든 문서 페이지 공통 */
+.docs-cta{position:fixed; left:50%; bottom:26px; transform:translateX(-50%); z-index:50;
+  display:flex; gap:10px; flex-wrap:nowrap; margin:0; padding:8px 10px;
+  background:rgba(255,255,255,.85); -webkit-backdrop-filter:blur(12px) saturate(1.2); backdrop-filter:blur(12px) saturate(1.2);
+  border:1px solid rgba(99,102,241,.22); border-radius:16px;
+  box-shadow:0 10px 32px rgba(79,70,229,.18), 0 3px 10px rgba(15,23,42,.10);
+  max-width:calc(100vw - 24px);
+  transition:opacity .28s ease, transform .28s cubic-bezier(.16,1,.3,1);
+  animation:docsCtaIn .45s cubic-bezier(.16,1,.3,1) backwards}
+/* 바닥(푸터) 도달 시 페이드아웃 — 하단 여백 불필요·푸터 안 가림 (JS IntersectionObserver가 토글) */
+.docs-cta--hidden{opacity:0; transform:translateX(-50%) translateY(20px); pointer-events:none}
+/* 은은한 진입 — 한 번만(자주 보는 바이므로 무한 루프 금지). ease-out·fade+상승+미세 scale */
+@keyframes docsCtaIn{from{opacity:0; transform:translateX(-50%) translateY(14px) scale(.97)}to{opacity:1; transform:translateX(-50%) translateY(0) scale(1)}}
+@media (prefers-reduced-motion:reduce){
+  .docs-cta{animation:none}
+  .docs-card,.gloss-card,.docs-faq-item,.docs-btn,.docs-nav-links a,.gloss-cat-tab,.docs-lang-btn{transition:none}
+  .docs-faq-a{animation:none}
+}
 .docs-btn{
   display:inline-flex; align-items:center; padding:11px 22px; border-radius:9px;
   font-size:14px; font-weight:600; text-decoration:none;
@@ -185,10 +203,14 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
   background:linear-gradient(135deg,#1d4ed8 0%,#4338ca 100%);
 }
 .docs-btn.ghost{background:transparent; color:#4338ca; border:1.5px solid rgba(99,102,241,.4)}
-.docs-btn.ghost:hover{background:rgba(99,102,241,.08); border-color:#4f46e5; color:#3730a3}
+.docs-btn.ghost:hover{background:rgba(99,102,241,.08); border-color:#4f46e5; color:#3730a3; transform:translateY(-1px)}
+/* emil: 누르면 즉각 반응(scale), 키보드 포커스 가시화 */
+.docs-btn:active{transform:translateY(0) scale(.97)}
+.docs-btn:focus-visible{outline:2px solid #4f46e5; outline-offset:2px}
 
 /* Footer */
-.docs-footer{margin-top:40px; padding:24px 28px; border-top:1px solid rgba(99,102,241,.14); background:rgba(255,255,255,.7)}
+/* 하단 여백: margin(빈 페이지 간격) 대신 footer 패딩으로 클리어 — 플로팅 바가 footer 위 패딩에 떠 빈 여백 없음 */
+.docs-footer{margin-top:40px; padding:24px 28px 32px; border-top:1px solid rgba(99,102,241,.14); background:rgba(255,255,255,.7)}
 .docs-footer-inner{max-width:880px; margin:0 auto; font-size:12px; color:#64748b; text-align:center}
 .docs-footer-inner a{color:#64748b; text-decoration:none; transition:color .12s}
 .docs-footer-inner a:hover{color:#4338ca}
@@ -392,8 +414,8 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
   .docs-main{padding:32px 18px 64px}
   .docs-hero h1{font-size:26px}
   .docs-lead{font-size:14.5px}
-  .docs-cta{flex-direction:column}
-  .docs-btn{justify-content:center}
+  .docs-cta{flex-wrap:wrap; gap:7px; padding:7px 8px}
+  .docs-btn{justify-content:center; padding:9px 12px; font-size:13px}
   .gloss-toolbar{position:static; padding:12px}
   .gloss-cat-tabs{width:100%}
 }

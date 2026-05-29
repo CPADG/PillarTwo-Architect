@@ -276,7 +276,7 @@ window.sentryOnLoad = function () {
     <span class="docs-brand-sub">Architect</span>
   </a>
   <div class="docs-nav-links">
-    <a href="./" data-i18n="docs.nav.home">← 아키텍트로 돌아가기</a>
+    <a href="./" data-i18n="docs.nav.home">아키텍트 시작하기 ↗</a>
     <a href="overview.html" data-i18n="docs.nav.overview">Pillar Two</a>
     <a href="/jurisdictions/" data-i18n="docs.nav.jurisdictions">국가별 현황</a>
     <a href="about.html" data-i18n="docs.nav.about">서비스 소개</a>
@@ -651,7 +651,7 @@ window.sentryOnLoad = function () {
   <div class="docs-footer-inner">
     <span data-i18n="docs.footer.copyright">© PillarTwo Architect</span>
     <span class="docs-footer-sep">·</span>
-    <a href="./" data-i18n="docs.nav.home">← 아키텍트로 돌아가기</a>
+    <a href="./" data-i18n="docs.nav.home">아키텍트 시작하기 ↗</a>
     <span class="docs-footer-sep">·</span>
     <a href="about.html" data-i18n="docs.nav.about">소개</a>
     <span class="docs-footer-sep">·</span>
@@ -720,6 +720,7 @@ window.sentryOnLoad = function () {
     }catch(e){}
   })();
 </script>
+<script>(function(){var c=document.querySelector('.docs-cta'),f=document.querySelector('.docs-footer');if(!c||!f||!('IntersectionObserver'in window))return;new IntersectionObserver(function(e){c.classList.toggle('docs-cta--hidden',e[0].isIntersecting);},{rootMargin:'0px 0px 90px 0px'}).observe(f);})();</script>
 
 </body>
 </html>

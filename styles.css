@@ -1,4 +1,4 @@
-/* build: 2026-05-29T17:46:11.761Z */
+/* build: 2026-05-29T18:09:09.959Z */
 :root{
   --primary:#2563eb;--primary-dk:#1d4ed8;--primary-lt:#eff6ff;
   --indigo:#4f46e5;--indigo-dk:#4338ca;--indigo-lt:#eef2ff;
@@ -431,7 +431,7 @@ body.demo-advanced-mode #btn-demo-case{display:none}
 @keyframes ccbPulse{0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,.7)}60%{box-shadow:0 0 0 7px rgba(245,158,11,0)}}
 .ccb.ccb-pending{animation:ccbPulse 1.5s ease-in-out infinite}
 /* ── 회계처리 확인 팝업 ──────────────────────────────── */
-#clarify-popup{position:fixed;z-index:900;background:#fff;border:1px solid #e2e8f0;border-radius:10px;box-shadow:0 8px 28px rgba(0,0,0,.16);padding:14px 16px 16px;width:248px;display:none}
+#clarify-popup{position:fixed;z-index:900;background:#fff;border:1px solid #e2e8f0;border-radius:10px;box-shadow:0 8px 28px rgba(0,0,0,.16);padding:14px 16px 16px;width:248px;display:none;animation:clarifyIn .18s cubic-bezier(.16,1,.3,1)}
 #clarify-popup .cp-head{font-size:12px;font-weight:700;color:#0f172a;margin-bottom:2px;padding-right:20px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #clarify-popup .cp-sub{font-size:11px;color:#64748b;margin-bottom:10px;line-height:1.4}
 #clarify-popup .cp-choices{display:flex;flex-direction:column;gap:12px}
@@ -456,6 +456,9 @@ body.demo-advanced-mode #btn-demo-case{display:none}
   0%,100%{box-shadow:0 0 0 3px rgba(99,102,241,.20), 0 4px 14px rgba(99,102,241,.18)}
   50%{box-shadow:0 0 0 6px rgba(99,102,241,.32), 0 6px 20px rgba(99,102,241,.32)}
 }
+/* 새 노드 추가 시 scale-in 등장(1회) — 추가 노드에만 JS가 .node-appear 부여(가상화 재렌더엔 미적용). 끝나면 제거→new-highlight 펄스 인계. */
+.node.node-appear{animation:nodeAppear .4s cubic-bezier(.16,1,.3,1)}
+@keyframes nodeAppear{from{opacity:0;transform:scale(.82)}to{opacity:1;transform:none}}
 .node.country-dim{opacity:.25;transition:opacity .2s}
 .node.name-dup-highlight,.node.non-ce.name-dup-highlight{border-color:var(--amber)!important;box-shadow:0 0 0 3px rgba(217,119,6,.22),var(--sh-md)!important;transition:border-color .15s,box-shadow .15s;z-index:15!important}
 /* treasury button — inside node, bottom-right corner */
@@ -544,7 +547,10 @@ body.no-flow-spirits .iir-spirit{display:none}
 .cone{font-size:12px;color:var(--muted);margin-left:2px}
 
 /* ── CONTEXT MENUS ── */
-.ctx{position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:4px;box-shadow:var(--sh-md);z-index:600;display:none;min-width:160px}
+.ctx{position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:4px;box-shadow:var(--sh-md);z-index:600;display:none;min-width:160px;transform-origin:top left;animation:ctxIn .14s cubic-bezier(.16,1,.3,1)}
+/* 컨텍스트 메뉴·확인 팝업 진입 모션(다른 팝오버와 일관, 커서/트리거 기준 origin). display 토글이라 표시 시 1회 재생. */
+@keyframes ctxIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+@keyframes clarifyIn{from{opacity:0;transform:translateY(5px) scale(.97)}to{opacity:1;transform:none}}
 .ci{display:flex;align-items:center;gap:8px;padding:7px 11px;border-radius:5px;font-size:14px;cursor:pointer;color:var(--text)}
 .ci:hover{background:var(--bg)}
 .ci.danger{color:var(--red)}
@@ -668,6 +674,9 @@ body.no-flow-spirits .iir-spirit{display:none}
 .panel-close{background:none;border:none;cursor:pointer;color:var(--muted);font-size:17px;line-height:1;padding:2px 5px;border-radius:3px;flex-shrink:0;transition:transform .1s ease-out}
 .panel-close:hover{background:var(--bg);color:var(--text)}
 .panel-body{flex:1;overflow-y:auto;padding:14px 14px;min-width:296px}
+/* 패널 콘텐츠 교체 시 부드러운 페이드(openSidePanel에서 재트리거). opacity만 — 스크롤/레이아웃 영향 없음. */
+.panel-body.pb-swap{animation:pbSwap .2s ease}
+@keyframes pbSwap{from{opacity:.3}to{opacity:1}}
 /* 사이드 패널 open 시: minimap이 docked로 패널 우측 하단 정확히 248px를 차지.
    margin-bottom:248px로 panel-body가 minimap 영역 직전에 끝남 →
      · scrollbar가 minimap 뒤로 안 내려감 (스크롤 ✓)

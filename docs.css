@@ -170,20 +170,22 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
 
 /* CTA section */
 /* CTA 3버튼 — 하단 고정 플로팅 바 (글 읽으며 언제든 클릭). .docs-cta 보유 모든 문서 페이지 공통 */
-.docs-cta{position:fixed; left:50%; bottom:26px; transform:translateX(-50%); z-index:50;
+/* 본문 하단 인라인 CTA — 항상 흐름 내(바닥서도 클릭 보장). 플로팅 복제는 .docs-cta-float */
+.docs-cta{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin:52px auto 4px; padding:0; max-width:880px}
+/* 플로팅 복제 — 읽는 중 하단 고정. 인라인 CTA가 화면에 들면 페이드되며 본문으로 유기적 인계(JS IntersectionObserver) */
+.docs-cta-float{position:fixed; left:50%; bottom:26px; transform:translateX(-50%); z-index:50;
   display:flex; gap:10px; flex-wrap:nowrap; margin:0; padding:8px 10px;
   background:rgba(255,255,255,.85); -webkit-backdrop-filter:blur(12px) saturate(1.2); backdrop-filter:blur(12px) saturate(1.2);
   border:1px solid rgba(99,102,241,.22); border-radius:16px;
   box-shadow:0 10px 32px rgba(79,70,229,.18), 0 3px 10px rgba(15,23,42,.10);
   max-width:calc(100vw - 24px);
-  transition:opacity .28s ease, transform .28s cubic-bezier(.16,1,.3,1);
-  animation:docsCtaIn .45s cubic-bezier(.16,1,.3,1) backwards}
+  transition:opacity .3s ease, transform .3s cubic-bezier(.16,1,.3,1)}
 /* 바닥(푸터) 도달 시 페이드아웃 — 하단 여백 불필요·푸터 안 가림 (JS IntersectionObserver가 토글) */
 .docs-cta--hidden{opacity:0; transform:translateX(-50%) translateY(20px); pointer-events:none}
 /* 은은한 진입 — 한 번만(자주 보는 바이므로 무한 루프 금지). ease-out·fade+상승+미세 scale */
 @keyframes docsCtaIn{from{opacity:0; transform:translateX(-50%) translateY(14px) scale(.97)}to{opacity:1; transform:translateX(-50%) translateY(0) scale(1)}}
 @media (prefers-reduced-motion:reduce){
-  .docs-cta{animation:none}
+  .docs-cta-float{animation:none}
   .docs-card,.gloss-card,.docs-faq-item,.docs-btn,.docs-nav-links a,.gloss-cat-tab,.docs-lang-btn{transition:none}
   .docs-faq-a{animation:none}
 }
@@ -207,6 +209,26 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
 /* emil: 누르면 즉각 반응(scale), 키보드 포커스 가시화 */
 .docs-btn:active{transform:translateY(0) scale(.97)}
 .docs-btn:focus-visible{outline:2px solid #4f46e5; outline-offset:2px}
+
+/* 상단 네비 맨 오른쪽 문의 버튼 (작은 ghost pill) */
+.docs-nav-contact{margin-left:4px; padding:5px 13px; border:1px solid rgba(99,102,241,.4); border-radius:999px; color:#4338ca !important; font-weight:600; transition:background .14s, border-color .14s, transform .12s}
+.docs-nav-contact:hover{background:rgba(99,102,241,.08); border-color:#4f46e5}
+.docs-nav-contact:active{transform:scale(.97)}
+
+/* 문의 모달 (doc 페이지 자체 포함형 — formspree, app.js 없이 동작) */
+.doc-contact-overlay{position:fixed; inset:0; z-index:1000; display:flex; align-items:center; justify-content:center; padding:20px; background:rgba(15,23,42,.45); -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px)}
+.doc-contact-card{background:#fff; border-radius:14px; padding:24px; width:100%; max-width:440px; box-shadow:0 20px 50px -12px rgba(15,23,42,.35); animation:docContactIn .2s cubic-bezier(.16,1,.3,1)}
+@keyframes docContactIn{from{opacity:0; transform:scale(.97)}to{opacity:1; transform:none}}
+.doc-contact-card h3{margin:0 0 4px; font-size:18px; color:#1e293b}
+.doc-contact-sub{font-size:13px; color:#64748b; margin-bottom:16px; line-height:1.5}
+.doc-contact-card label{display:block; font-size:12.5px; font-weight:600; color:#334155; margin:12px 0 5px}
+.doc-contact-card input,.doc-contact-card textarea{width:100%; box-sizing:border-box; padding:9px 11px; border:1px solid #cbd5e1; border-radius:8px; font:inherit; font-size:14px; color:#1e293b; background:#f8fafc; transition:border-color .15s, background .15s}
+.doc-contact-card input:focus,.doc-contact-card textarea:focus{outline:none; border-color:#4f46e5; background:#fff}
+.doc-contact-card textarea{resize:vertical; min-height:90px}
+.doc-contact-warn{margin-top:12px; font-size:12.5px; color:#dc2626; background:#fef2f2; border:1px solid #fecaca; border-radius:8px; padding:8px 11px; line-height:1.45}
+.doc-contact-warn.doc-contact-ok{color:#15803d; background:#f0fdf4; border-color:#bbf7d0}
+.doc-contact-actions{display:flex; justify-content:flex-end; gap:8px; margin-top:18px}
+@media (prefers-reduced-motion:reduce){.doc-contact-card{animation:none}}
 
 /* Footer */
 /* 하단 여백: margin(빈 페이지 간격) 대신 footer 패딩으로 클리어 — 플로팅 바가 footer 위 패딩에 떠 빈 여백 없음 */
@@ -414,7 +436,7 @@ html,body.docs-body{height:auto; overflow:auto; display:block}
   .docs-main{padding:32px 18px 64px}
   .docs-hero h1{font-size:26px}
   .docs-lead{font-size:14.5px}
-  .docs-cta{flex-wrap:wrap; gap:7px; padding:7px 8px}
+  .docs-cta-float{flex-wrap:wrap; gap:7px; padding:7px 8px}
   .docs-btn{justify-content:center; padding:9px 12px; font-size:13px}
   .gloss-toolbar{position:static; padding:12px}
   .gloss-cat-tabs{width:100%}

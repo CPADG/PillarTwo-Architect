@@ -22,7 +22,7 @@ Korea iteration 규칙 엄밀 적용:
 - '기업'·'아키텍처'·'분석해 보기'·'청사진'·'모기업 등의 소재지국'
 """
 
-import os, sys, json
+import os, sys, json, re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -1272,6 +1272,36 @@ AUTO_TR = {
         '영국': 'United Kingdom',
         '대한민국': 'Korea',
         '한국': 'Korea',
+        # ── 보강(누락 도메인 용어, 2026-05-29) — 긴 구절 먼저. 조사/문법 의존 조각(으로/에/지연되어 등)은 깨질 위험이라 제외(=per-country 정식 번역 영역).
+        #   ※한국 법령 고유명(국제조세조정에 관한 법률·시행령·시행규칙 등)은 원어 존중해 번역 안 함(독일 'Mindeststeuergesetz'와 동일 원칙) → '법률' 미치환. ──
+        '정식 명칭': 'Official name',
+        '다국적기업그룹': 'MNE group',
+        '다국적기업': 'multinational enterprise',
+        '모델규정': 'Model Rules',
+        '행정지침': 'administrative guidance',
+        '회원국': 'member state',
+        '세무청': 'Tax Authority',
+        '법령': 'legislation',
+        '연방': 'federal',
+        '후속': 'subsequent',
+        '가이드': 'guidance',
+        '공식': 'official',
+        '일괄': 'combined',
+        '현재': 'present',
+        '반영': 'reflecting',
+        '관련': 'related',
+        '대규모': 'large-scale',
+        '제정': 'enacted',
+        '가결': 'passed',
+        '통과': 'passed',
+        '정책': 'policy',
+        '규정': 'regulations',
+        '세액': 'tax amount',
+        '부과': 'levied',
+        '근거': 'basis',
+        '기술적': 'technical',
+        '사항': 'matters',
+        '소급': 'retroactive',
     },
     'ja': {
         # 시행/공포 류
@@ -1357,6 +1387,35 @@ AUTO_TR = {
         '영국': 'イギリス',
         '대한민국': '韓国',
         '한국': '韓国',
+        # ── 보강(누락 도메인 용어, 2026-05-29) — 긴 구절 먼저. 조사/문법 의존 조각 제외. 한국 법령 고유명은 원어 존중(미치환). ──
+        '정식 명칭': '正式名称',
+        '다국적기업그룹': '多国籍企業グループ',
+        '다국적기업': '多国籍企業',
+        '모델규정': 'モデルルール',
+        '행정지침': '行政指針',
+        '회원국': '加盟国',
+        '세무청': '税務当局',
+        '법령': '法令',
+        '연방': '連邦',
+        '후속': '後続',
+        '가이드': 'ガイダンス',
+        '공식': '公式',
+        '일괄': '一括',
+        '현재': '現在',
+        '반영': '反映',
+        '관련': '関連',
+        '대규모': '大規模',
+        '제정': '制定',
+        '가결': '可決',
+        '통과': '成立',
+        '정책': '政策',
+        '규정': '規定',
+        '세액': '税額',
+        '부과': '賦課',
+        '근거': '根拠',
+        '기술적': '技術的',
+        '사항': '事項',
+        '소급': '遡及',
     },
 }
 
@@ -1567,7 +1626,7 @@ def render_page_intl(cc, data, lang):
     laws_override = data.get(f'domestic_laws_{lang}')
     laws = laws_override if laws_override else data.get('domestic_laws', [])
     laws_html = '\n'.join(
-        f'      <li>{name} — {auto_tr(detail, lang) if not laws_override else detail}</li>' if detail else f'      <li>{name}</li>'
+        f'      <li>{auto_tr(name, lang) if not laws_override else name} — {auto_tr(detail, lang) if not laws_override else detail}</li>' if detail else f'      <li>{auto_tr(name, lang) if not laws_override else name}</li>'
         for name, detail in laws
     )
 
@@ -1583,7 +1642,7 @@ def render_page_intl(cc, data, lang):
     recent_override = data.get(f'recent_{lang}')
     recent = recent_override if recent_override else data.get('recent', [])
     recent_html = '\n'.join(
-        f'      <li><strong>{date}</strong>: {auto_tr(event, lang) if not recent_override else event}</li>'
+        f'      <li><strong>{auto_tr(date, lang) if not recent_override else date}</strong>: {auto_tr(event, lang) if not recent_override else event}</li>'
         for date, event in recent
     )
 
@@ -2537,6 +2596,85 @@ def build_index(lang='ko'):
 '''
 
 
+# ── 문의(Contact) 후처리 주입 — doc 페이지와 동일(formspree mojbyenv, contact.* 재사용, docs.css 모달 스타일).
+#   f-string 템플릿 brace 충돌 회피 위해 '반환된 HTML 문자열'에 후처리. index엔 CTA버튼+플로팅+푸터+모달, 국가별엔 푸터링크+모달(.docs-cta 없음). ──
+CONTACT_BTN_HTML = '<button type="button" class="docs-btn ghost doc-contact-trigger" data-i18n="contact.title">문의하기</button>'
+CONTACT_MODAL_HTML = '''
+<div class="doc-contact-overlay" id="doc-contact-modal" style="display:none" role="dialog" aria-modal="true" data-i18n-aria="contact.title" aria-label="문의하기">
+  <div class="doc-contact-card">
+    <h3 data-i18n="contact.title">문의하기</h3>
+    <div class="doc-contact-sub" data-i18n="contact.sub">개발자에게 문의 내용을 보내실 수 있습니다. 서비스 이용 중 식별하신 오류를 신고해 주시면 서비스 발전에 큰 도움이 됩니다.</div>
+    <form id="doc-contact-form" novalidate>
+      <label for="doc-contact-name" data-i18n="contact.name">이름</label>
+      <input type="text" id="doc-contact-name" autocomplete="name" required>
+      <label for="doc-contact-email" data-i18n="contact.email">이메일</label>
+      <input type="email" id="doc-contact-email" autocomplete="email" required>
+      <label for="doc-contact-message" data-i18n="contact.message">메시지</label>
+      <textarea id="doc-contact-message" rows="5" required></textarea>
+      <div class="doc-contact-warn" id="doc-contact-warn" style="display:none"></div>
+      <div class="doc-contact-actions">
+        <button type="button" class="docs-btn ghost" id="doc-contact-cancel" data-i18n="btn.cancel">취소</button>
+        <button type="submit" class="docs-btn primary" id="doc-contact-send" data-i18n="contact.send">보내기</button>
+      </div>
+    </form>
+  </div>
+</div>'''
+CONTACT_SCRIPT_HTML = '''
+<script>(function(){
+  var inline=document.querySelector('.docs-cta'), floatBar=document.querySelector('.docs-cta-float');
+  if(inline&&floatBar&&'IntersectionObserver'in window){
+    new IntersectionObserver(function(e){ floatBar.classList.toggle('docs-cta--hidden', e[0].isIntersecting); },{rootMargin:'0px 0px -36px 0px'}).observe(inline);
+  }
+  var modal=document.getElementById('doc-contact-modal'),form=document.getElementById('doc-contact-form');
+  if(!modal||!form)return;
+  var warn=document.getElementById('doc-contact-warn'),sendBtn=document.getElementById('doc-contact-send');
+  var TT=function(k,fb){try{return (typeof t==='function'&&t(k)!==k)?t(k):fb;}catch(e){return fb;}};
+  function openM(){modal.style.display='flex';warn.style.display='none';setTimeout(function(){var n=document.getElementById('doc-contact-name');if(n)n.focus();},40);}
+  function closeM(){modal.style.display='none';}
+  document.addEventListener('click',function(e){var trg=e.target.closest&&e.target.closest('.doc-contact-trigger');if(trg){e.preventDefault();openM();}});
+  document.getElementById('doc-contact-cancel').addEventListener('click',closeM);
+  modal.addEventListener('click',function(e){if(e.target===modal)closeM();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.style.display!=='none')closeM();});
+  form.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var name=document.getElementById('doc-contact-name').value.trim(),email=document.getElementById('doc-contact-email').value.trim(),message=document.getElementById('doc-contact-message').value.trim();
+    if(!name||!email||!message){warn.className='doc-contact-warn';warn.textContent=TT('contact.warn_empty','모든 항목을 입력해 주세요.');warn.style.display='block';return;}
+    sendBtn.disabled=true;warn.style.display='none';
+    fetch('https://formspree.io/f/mojbyenv',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({name:name,email:email,message:message,_subject:'Pillar Two Architect 문의'})})
+      .then(function(res){if(!res.ok)throw new Error('HTTP '+res.status);warn.className='doc-contact-warn doc-contact-ok';warn.textContent=TT('contact.toast_sent','문의가 전송되었습니다. 감사합니다!');warn.style.display='block';form.reset();setTimeout(closeM,1500);})
+      .catch(function(err){warn.className='doc-contact-warn';warn.textContent=TT('contact.warn_send_fail','전송에 실패했습니다. 잠시 후 다시 시도해 주세요.').replace('{msg}',(err&&err.message)||'');warn.style.display='block';})
+      .then(function(){sendBtn.disabled=false;});
+  });
+})();</script>'''
+
+def inject_contact(html):
+    cap = {}
+    def _cta(m):
+        inner = m.group(2)
+        if 'doc-contact-trigger' in inner:
+            cap['inner'] = inner
+            return m.group(0)
+        cap['inner'] = inner.rstrip() + '\n    ' + CONTACT_BTN_HTML + '\n  '
+        return m.group(1) + cap['inner'] + m.group(3)
+    html = re.sub(r'(<section class="docs-section docs-cta">)([\s\S]*?)(</section>)', _cta, html, count=1)
+    if 'docs-nav-contact' not in html:
+        html = re.sub(r'\n(\s*)</div>\n</nav>',
+                      lambda m: '\n      <a href="#" class="doc-contact-trigger docs-nav-contact" data-i18n="contact.title">문의하기</a>\n' + m.group(1) + '</div>\n</nav>',
+                      html, count=1)
+    if 'doc-contact-foot' not in html:
+        html = re.sub(r'\n(\s*)</div>\n</footer>',
+                      lambda m: '\n    <span class="docs-footer-sep">·</span>\n    <a href="#" class="doc-contact-trigger doc-contact-foot" data-i18n="contact.title">문의하기</a>\n' + m.group(1) + '</div>\n</footer>',
+                      html, count=1)
+    if 'id="doc-contact-modal"' not in html:
+        float_bar = ('\n<div class="docs-cta-float docs-cta--hidden" aria-hidden="true">' + cap['inner'] + '</div>') if cap.get('inner') else ''
+        html = html.replace('</body>', float_bar + CONTACT_MODAL_HTML + CONTACT_SCRIPT_HTML + '\n</body>', 1)
+        html = re.sub(r"<script>\(function\(\)\{var c=document\.querySelector\('\.docs-cta'\)[\s\S]*?</script>\s*", '', html, count=1)
+    # 모달 sub 문구 최신화(이미 모달 주입된 페이지도 갱신) — contact.sub 전체 문장("큰 도움이 됩니다" 포함)
+    html = re.sub(r'(<div class="doc-contact-sub" data-i18n="contact\.sub">)[\s\S]*?(</div>)',
+                  lambda m: m.group(1) + '개발자에게 문의 내용을 보내실 수 있습니다. 서비스 이용 중 식별하신 오류를 신고해 주시면 서비스 발전에 큰 도움이 됩니다.' + m.group(2),
+                  html, count=1)
+    return html
+
 def main():
     OUT_DIR.mkdir(exist_ok=True)
     (OUT_DIR / 'en').mkdir(exist_ok=True)
@@ -2548,20 +2686,20 @@ def main():
         data = COUNTRIES[cc]
         # 한국어 (수동 작성 4국은 스킵)
         if not data.get('index_only'):
-            html = render_page(cc, data)
+            html = inject_contact(render_page(cc, data))
             path = OUT_DIR / f'{data["slug"]}.html'
             path.write_text(html, encoding='utf-8')
             print(f'wrote {path.relative_to(ROOT)} ({len(html)} chars)')
         # English (수동 작성 4국 중 KR은 별도 manual, 나머지 JP/US/GB는 데이터 부족 시 skip)
         if not data.get('skip_intl'):
             for lang in ('en', 'ja'):
-                html = render_page_intl(cc, data, lang)
+                html = inject_contact(render_page_intl(cc, data, lang))
                 path = OUT_DIR / lang / f'{data["slug"]}.html'
                 path.write_text(html, encoding='utf-8')
                 print(f'wrote {path.relative_to(ROOT)} ({len(html)} chars)')
     if build_idx:
         for lg, sub in [('ko', ''), ('en', 'en'), ('ja', 'ja')]:
-            idx_html = build_index(lg)
+            idx_html = inject_contact(build_index(lg))
             idx_path = (OUT_DIR / sub / 'index.html') if sub else (OUT_DIR / 'index.html')
             idx_path.write_text(idx_html, encoding='utf-8')
             print(f'wrote {idx_path.relative_to(ROOT)} ({len(idx_html)} chars)')

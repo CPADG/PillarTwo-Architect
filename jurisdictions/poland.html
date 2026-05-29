@@ -11,9 +11,9 @@
 <meta name="naver-site-verification" content="b15c8fd7be4aab298a81448b4c4e346fc613d30a" />
 <meta name="msvalidate.01" content="6A8E8C5200BA75B1CA538C9A34736338" />
 <link rel="canonical" href="https://pillartwo.app/jurisdictions/poland">
-<link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/poland">
-<link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/en/poland">
-<link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/ja/poland">
+<link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/poland?lang=ko">
+<link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/poland?lang=en">
+<link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/poland?lang=ja">
 <link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/poland">
 <script type="application/ld+json">
 {
@@ -90,10 +90,11 @@ window.sentryOnLoad = function () {
     <span class="docs-brand-sub">Architect</span>
   </a>
   <div class="docs-nav-links">
-    <a href="/">아키텍트 시작하기 ↗</a>
+    <a href="/">← 아키텍트로 돌아가기</a>
     <a href="/overview.html">Pillar Two</a>
     <a href="/jurisdictions/" class="active">국가별 현황</a>
     <a href="/about.html">서비스 소개</a>
+      <a href="#" class="doc-contact-trigger docs-nav-contact" data-i18n="contact.title">문의하기</a>
   </div>
 </nav>
 
@@ -108,7 +109,7 @@ window.sentryOnLoad = function () {
       Pillar Two in 폴란드
     </h1>
     <p class="docs-lead">
-      폴란드는 <strong>Ustawa z dnia 6 listopada 2024 r.</strong>(다국적기업그룹·국내그룹의 보충세 과세에 관한 법률)로 EU Directive 2022/2523을 자국 법령으로 도입했습니다. <a href="/glossary#iir">IIR</a> · <a href="/glossary#utpr">UTPR</a> · <a href="/glossary#qdmtt">QDMTT</a> 모두 2025-01-01 이후 개시 사업연도부터 동시에 시행됩니다.
+      폴란드는 <strong>Ustawa z dnia 6 listopada 2024 r.</strong>(다국적기업그룹·국내그룹의 보충세 과세에 관한 법률)로 EU Directive 2022/2523을 자국 법령으로 도입했습니다. IIR · UTPR · QDMTT 모두 2025-01-01 이후 개시 사업연도부터 동시에 시행됩니다.
     </p>
   </header>
 
@@ -254,13 +255,15 @@ window.sentryOnLoad = function () {
   <div class="docs-footer-inner">
     <span>© PillarTwo Architect</span>
     <span class="docs-footer-sep">·</span>
-    <a href="/">아키텍트 시작하기 ↗</a>
+    <a href="/">← 아키텍트로 돌아가기</a>
     <span class="docs-footer-sep">·</span>
     <a href="/overview.html">Pillar Two</a>
     <span class="docs-footer-sep">·</span>
     <a href="/glossary">용어 사전</a>
     <span class="docs-footer-sep">·</span>
     <a href="/about.html">서비스 소개</a>
+    <span class="docs-footer-sep">·</span>
+    <a href="#" class="doc-contact-trigger doc-contact-foot" data-i18n="contact.title">문의하기</a>
   </div>
 </footer>
 
@@ -287,21 +290,52 @@ window.sentryOnLoad = function () {
     });
   })();
 </script>
-<script>
-  (function(){
-    let lang='ko';
-    try{ const saved=localStorage.getItem('p2a.lang'); if(saved==='ko'||saved==='en'||saved==='ja') lang=saved; }catch(e){}
-    setLang(lang);
-    document.querySelectorAll('.docs-lang-btn').forEach(b=>{
-      b.classList.toggle('active', b.dataset.lang===lang);
-      b.addEventListener('click',()=>{
-        setLang(b.dataset.lang);
-        try{ localStorage.setItem('p2a.lang', b.dataset.lang); }catch(e){}
-        document.querySelectorAll('.docs-lang-btn').forEach(x=>x.classList.toggle('active', x.dataset.lang===b.dataset.lang));
-      });
-    });
-  })();
-</script>
 
+
+<div class="doc-contact-overlay" id="doc-contact-modal" style="display:none" role="dialog" aria-modal="true" data-i18n-aria="contact.title" aria-label="문의하기">
+  <div class="doc-contact-card">
+    <h3 data-i18n="contact.title">문의하기</h3>
+    <div class="doc-contact-sub" data-i18n="contact.sub">개발자에게 문의 내용을 보내실 수 있습니다. 서비스 이용 중 식별하신 오류를 신고해 주시면 서비스 발전에 큰 도움이 됩니다.</div>
+    <form id="doc-contact-form" novalidate>
+      <label for="doc-contact-name" data-i18n="contact.name">이름</label>
+      <input type="text" id="doc-contact-name" autocomplete="name" required>
+      <label for="doc-contact-email" data-i18n="contact.email">이메일</label>
+      <input type="email" id="doc-contact-email" autocomplete="email" required>
+      <label for="doc-contact-message" data-i18n="contact.message">메시지</label>
+      <textarea id="doc-contact-message" rows="5" required></textarea>
+      <div class="doc-contact-warn" id="doc-contact-warn" style="display:none"></div>
+      <div class="doc-contact-actions">
+        <button type="button" class="docs-btn ghost" id="doc-contact-cancel" data-i18n="btn.cancel">취소</button>
+        <button type="submit" class="docs-btn primary" id="doc-contact-send" data-i18n="contact.send">보내기</button>
+      </div>
+    </form>
+  </div>
+</div>
+<script>(function(){
+  var inline=document.querySelector('.docs-cta'), floatBar=document.querySelector('.docs-cta-float');
+  if(inline&&floatBar&&'IntersectionObserver'in window){
+    new IntersectionObserver(function(e){ floatBar.classList.toggle('docs-cta--hidden', e[0].isIntersecting); },{rootMargin:'0px 0px -36px 0px'}).observe(inline);
+  }
+  var modal=document.getElementById('doc-contact-modal'),form=document.getElementById('doc-contact-form');
+  if(!modal||!form)return;
+  var warn=document.getElementById('doc-contact-warn'),sendBtn=document.getElementById('doc-contact-send');
+  var TT=function(k,fb){try{return (typeof t==='function'&&t(k)!==k)?t(k):fb;}catch(e){return fb;}};
+  function openM(){modal.style.display='flex';warn.style.display='none';setTimeout(function(){var n=document.getElementById('doc-contact-name');if(n)n.focus();},40);}
+  function closeM(){modal.style.display='none';}
+  document.addEventListener('click',function(e){var trg=e.target.closest&&e.target.closest('.doc-contact-trigger');if(trg){e.preventDefault();openM();}});
+  document.getElementById('doc-contact-cancel').addEventListener('click',closeM);
+  modal.addEventListener('click',function(e){if(e.target===modal)closeM();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.style.display!=='none')closeM();});
+  form.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var name=document.getElementById('doc-contact-name').value.trim(),email=document.getElementById('doc-contact-email').value.trim(),message=document.getElementById('doc-contact-message').value.trim();
+    if(!name||!email||!message){warn.className='doc-contact-warn';warn.textContent=TT('contact.warn_empty','모든 항목을 입력해 주세요.');warn.style.display='block';return;}
+    sendBtn.disabled=true;warn.style.display='none';
+    fetch('https://formspree.io/f/mojbyenv',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({name:name,email:email,message:message,_subject:'Pillar Two Architect 문의'})})
+      .then(function(res){if(!res.ok)throw new Error('HTTP '+res.status);warn.className='doc-contact-warn doc-contact-ok';warn.textContent=TT('contact.toast_sent','문의가 전송되었습니다. 감사합니다!');warn.style.display='block';form.reset();setTimeout(closeM,1500);})
+      .catch(function(err){warn.className='doc-contact-warn';warn.textContent=TT('contact.warn_send_fail','전송에 실패했습니다. 잠시 후 다시 시도해 주세요.').replace('{msg}',(err&&err.message)||'');warn.style.display='block';})
+      .then(function(){sendBtn.disabled=false;});
+  });
+})();</script>
 </body>
 </html>

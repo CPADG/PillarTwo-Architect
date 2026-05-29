@@ -153,6 +153,88 @@ function replaceToggle(html, slug, lang) {
   return html.replace(re, toggleIIFE(slug, lang));
 }
 
+// ── 문의(Contact) + 하단 CTA 인계 — doc 페이지는 app.js 미로드라 자체 포함형 ──
+// 문의 버튼을 하단 CTA에 추가. CTA = 본문 인라인(.docs-cta, 항상 흐름 내 → 바닥서도 클릭 보장)
+//  + 동일 버튼셋의 플로팅 복제(.docs-cta-float, 읽는 중 하단 고정 → 인라인 CTA가 화면에 들면 페이드=유기적 인계).
+// 메일 엔드포인트는 캔버스 우하단 버튼과 동일(mojbyenv). ko 원본·/en·/ja 모두 주입(멱등).
+const CONTACT_BTN = '<button type="button" class="docs-btn ghost doc-contact-trigger" data-i18n="contact.title">문의하기</button>';
+const CONTACT_MODAL = `
+<div class="doc-contact-overlay" id="doc-contact-modal" style="display:none" role="dialog" aria-modal="true" data-i18n-aria="contact.title" aria-label="문의하기">
+  <div class="doc-contact-card">
+    <h3 data-i18n="contact.title">문의하기</h3>
+    <div class="doc-contact-sub" data-i18n="contact.sub">개발자에게 문의 내용을 보내실 수 있습니다. 서비스 이용 중 식별하신 오류를 신고해 주시면 서비스 발전에 큰 도움이 됩니다.</div>
+    <form id="doc-contact-form" novalidate>
+      <label for="doc-contact-name" data-i18n="contact.name">이름</label>
+      <input type="text" id="doc-contact-name" autocomplete="name" required>
+      <label for="doc-contact-email" data-i18n="contact.email">이메일</label>
+      <input type="email" id="doc-contact-email" autocomplete="email" required>
+      <label for="doc-contact-message" data-i18n="contact.message">메시지</label>
+      <textarea id="doc-contact-message" rows="5" required></textarea>
+      <div class="doc-contact-warn" id="doc-contact-warn" style="display:none"></div>
+      <div class="doc-contact-actions">
+        <button type="button" class="docs-btn ghost" id="doc-contact-cancel" data-i18n="btn.cancel">취소</button>
+        <button type="submit" class="docs-btn primary" id="doc-contact-send" data-i18n="contact.send">보내기</button>
+      </div>
+    </form>
+  </div>
+</div>`;
+const CONTACT_SCRIPT = `
+<script>(function(){
+  // 본문 인라인 CTA가 보이면(=바닥 근처) 플로팅을 페이드 → 본문으로 유기적 인계. 안 보이면(=읽는 중) 플로팅 표시.
+  var inline=document.querySelector('.docs-cta'), floatBar=document.querySelector('.docs-cta-float');
+  if(inline&&floatBar&&'IntersectionObserver'in window){
+    new IntersectionObserver(function(e){ floatBar.classList.toggle('docs-cta--hidden', e[0].isIntersecting); },{rootMargin:'0px 0px -36px 0px'}).observe(inline);
+  }
+  // 문의 모달 (트리거 .doc-contact-trigger = 인라인·플로팅 양쪽 — 위임)
+  var modal=document.getElementById('doc-contact-modal'),form=document.getElementById('doc-contact-form');
+  if(!modal||!form)return;
+  var warn=document.getElementById('doc-contact-warn'),sendBtn=document.getElementById('doc-contact-send');
+  var TT=function(k,fb){try{return (typeof t==='function'&&t(k)!==k)?t(k):fb;}catch(e){return fb;}};
+  function openM(){modal.style.display='flex';warn.style.display='none';setTimeout(function(){var n=document.getElementById('doc-contact-name');if(n)n.focus();},40);}
+  function closeM(){modal.style.display='none';}
+  document.addEventListener('click',function(e){var trg=e.target.closest&&e.target.closest('.doc-contact-trigger');if(trg){e.preventDefault();openM();}});
+  document.getElementById('doc-contact-cancel').addEventListener('click',closeM);
+  modal.addEventListener('click',function(e){if(e.target===modal)closeM();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.style.display!=='none')closeM();});
+  form.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var name=document.getElementById('doc-contact-name').value.trim(),email=document.getElementById('doc-contact-email').value.trim(),message=document.getElementById('doc-contact-message').value.trim();
+    if(!name||!email||!message){warn.className='doc-contact-warn';warn.textContent=TT('contact.warn_empty','모든 항목을 입력해 주세요.');warn.style.display='block';return;}
+    sendBtn.disabled=true;warn.style.display='none';
+    fetch('https://formspree.io/f/mojbyenv',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({name:name,email:email,message:message,_subject:'Pillar Two Architect 문의'})})
+      .then(function(res){if(!res.ok)throw new Error('HTTP '+res.status);warn.className='doc-contact-warn doc-contact-ok';warn.textContent=TT('contact.toast_sent','문의가 전송되었습니다. 감사합니다!');warn.style.display='block';form.reset();setTimeout(closeM,1500);})
+      .catch(function(err){warn.className='doc-contact-warn';warn.textContent=TT('contact.warn_send_fail','전송에 실패했습니다. 잠시 후 다시 시도해 주세요.').replace('{msg}',(err&&err.message)||'');warn.style.display='block';})
+      .then(function(){sendBtn.disabled=false;});
+  });
+})();</script>`;
+function injectContact(html){
+  // 조각별 멱등 — 각 조각 존재 시 스킵(early-return 안 함 → 부분 재주입 가능: 모달은 있는데 푸터 링크만 추가 등)
+  // 1) 본문 하단 CTA(.docs-cta)에 문의 버튼 추가(이미 있으면 캡처만) + 동일 버튼셋 캡처(플로팅 복제용)
+  let ctaInner = null;
+  html = html.replace(/(<section class="docs-section docs-cta">)([\s\S]*?)(<\/section>)/, (m, open, inner, close) => {
+    if(/doc-contact-trigger/.test(inner)){ ctaInner = inner; return m; } // 이미 있음
+    ctaInner = inner.replace(/\s+$/, '') + '\n    ' + CONTACT_BTN + '\n  ';
+    return open + ctaInner + close;
+  });
+  // 1.5) 상단 네비(docs-nav-links) 맨 오른쪽에 문의 버튼 (docs-nav-contact 마커로 멱등)
+  if(!html.includes('docs-nav-contact')){
+    html = html.replace(/\n(\s*)<\/div>\n<\/nav>/, '\n      <a href="#" class="doc-contact-trigger docs-nav-contact" data-i18n="contact.title">문의하기</a>\n$1</div>\n</nav>');
+  }
+  // 2) 푸터 문의 링크 (doc-contact-foot 마커로 멱등) — 모든 doc 페이지 공통
+  if(!html.includes('doc-contact-foot')){
+    html = html.replace(/\n(\s*)<\/div>\n<\/footer>/, '\n    <span class="docs-footer-sep">·</span>\n    <a href="#" class="doc-contact-trigger doc-contact-foot" data-i18n="contact.title">문의하기</a>\n$1</div>\n</footer>');
+  }
+  // 3) 플로팅 복제 + 모달 + 스크립트 (id로 멱등) + 기존 CTA 숨김 IIFE 제거
+  if(!html.includes('id="doc-contact-modal"')){
+    const floatBar = ctaInner != null ? `\n<div class="docs-cta-float docs-cta--hidden" aria-hidden="true">${ctaInner}</div>` : '';
+    html = html.replace(/<\/body>/, floatBar + CONTACT_MODAL + CONTACT_SCRIPT + '\n</body>');
+    html = html.replace(/<script>\(function\(\)\{var c=document\.querySelector\('\.docs-cta'\)[\s\S]*?<\/script>\s*/, '');
+  }
+  // 모달 sub 문구 최신화(이미 모달이 주입된 페이지도 갱신) — contact.sub 전체 문장("큰 도움이 됩니다" 포함)
+  html = html.replace(/(<div class="doc-contact-sub" data-i18n="contact\.sub">)[\s\S]*?(<\/div>)/, '$1개발자에게 문의 내용을 보내실 수 있습니다. 서비스 이용 중 식별하신 오류를 신고해 주시면 서비스 발전에 큰 도움이 됩니다.$2');
+  return html;
+}
+
 function buildLangPage(page, lang) {
   const slug = page.slug;
   let html = fs.readFileSync(path.join(ROOT, `${slug}.html`), 'utf8');
@@ -226,6 +308,8 @@ function buildLangPage(page, lang) {
     return m;
   });
 
+  html = injectContact(html); // 문의 버튼·모달·스크립트 (path-fix 이후 — 자산 경로 영향 없음)
+
   const outDir = path.join(ROOT, lang);
   fs.mkdirSync(outDir, { recursive: true });
   fs.writeFileSync(path.join(outDir, `${slug}.html`), html);
@@ -240,8 +324,9 @@ function patchKo(page) {
   html = html.replace(/<html lang="ko"[^>]*>/, '<html lang="ko" data-lang-lock="ko">');
   html = ensureHreflang(html, slug);
   html = replaceToggle(html, slug, 'ko');
+  html = injectContact(html); // 문의 버튼·모달·스크립트 (ko 원본)
   fs.writeFileSync(p, html);
-  console.log(`patched ${slug}.html (ko: lang-lock + hreflang + navigate-toggle)`);
+  console.log(`patched ${slug}.html (ko: lang-lock + hreflang + navigate-toggle + contact)`);
 }
 
 const args = process.argv.slice(2);

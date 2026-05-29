@@ -22,3 +22,7 @@ scripts/__pycache__/
 .claude/skills/
 skills-lock.json
 *-main.zip
+
+# 대규모 렌더 성능 테스트용 생성 데이터/스크립트 (dev 전용, 비커밋)
+P2A_LOADTEST_*.p2a
+scripts/gen-loadtest.js

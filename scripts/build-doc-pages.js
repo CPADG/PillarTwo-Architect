@@ -101,6 +101,8 @@ function buildFaqJsonLd(page, lang) {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     inLanguage: lang,
+    datePublished: '2026-05-30',
+    dateModified: '2026-05-30',
     mainEntity: mainEntity.map(m => ({
       '@type': 'Question',
       name: m.qn,

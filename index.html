@@ -85,6 +85,10 @@
 <script defer src="https://js.sentry-cdn.com/ee4401caad2ce32f342a8993779fdf33.min.js" crossorigin="anonymous"></script>
 <script>
 window.sentryOnLoad = function () {
+  // 로컬/루프백(개발·테스트)에서는 Sentry 미초기화 — 로컬·테스트 오류가 팀에 알림 가지 않도록.
+  // (실제 preview 배포 등 비-loopback 호스트는 기존대로 environment 'development'로 수집.)
+  var _h = location.hostname;
+  if (_h === 'localhost' || _h === '::1' || _h === '[::1]' || /^127\./.test(_h)) return;
   var opts = {
     // Errors only — tracing/replay off (privacy: .p2a inputs must never leak)
     tracesSampleRate: 0,
@@ -569,6 +573,23 @@ window.sentryOnLoad = function () {
         <button type="submit" class="btn primary" id="contact-send" data-i18n="contact.send">보내기</button>
       </div>
     </form>
+  </div>
+</div>
+
+<!-- "문제가 발생했습니다" — 예기치 못한 코드 오류가 사용에 지장을 줄 때만 표출(전역 백스톱). 기존 .overlay/.modal 재사용. -->
+<div class="overlay sww-overlay" id="modal-sww" style="display:none">
+  <div class="modal sww-modal" role="alertdialog" aria-modal="true" data-i18n-aria="error.title" aria-label="문제가 발생했습니다" style="width:380px">
+    <div class="sww-head">
+      <span class="sww-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </span>
+      <h3 data-i18n="error.title">문제가 발생했습니다</h3>
+    </div>
+    <p class="msub" data-i18n="error.body">예기치 못한 오류로 작업이 중단됐을 수 있습니다. 페이지를 새로고침하면 대부분 해결됩니다. 문제가 계속되면 개발자에게 알려 주세요.</p>
+    <div class="mfooter" style="gap:8px;margin-top:18px">
+      <button class="btn ghost" id="sww-contact" data-i18n="error.contact">개발자 문의</button>
+      <button class="btn primary" id="sww-reload" data-i18n="error.reload">새로고침</button>
+    </div>
   </div>
 </div>
 

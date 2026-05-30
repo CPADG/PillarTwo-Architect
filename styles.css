@@ -1,4 +1,4 @@
-/* build: 2026-05-30T00:34:44.165Z */
+/* build: 2026-05-30T13:50:48.174Z */
 :root{
   --primary:#2563eb;--primary-dk:#1d4ed8;--primary-lt:#eff6ff;
   --indigo:#4f46e5;--indigo-dk:#4338ca;--indigo-lt:#eef2ff;
@@ -709,6 +709,11 @@ body.no-flow-spirits .iir-spirit{display:none}
 .modal-warn{display:none;font-size:13px;color:var(--red);background:var(--red-lt);border:1px solid rgba(239,68,68,.3);border-radius:6px;padding:7px 11px;margin-top:-10px;margin-bottom:14px;line-height:1.45}
 .modal-warn.show{display:block}
 .modal input.inp-err{border-color:var(--red)!important}
+/* "문제가 발생했습니다" 오류 모달 — .overlay/.modal 재사용, 헤더 아이콘 행만 추가. 다른 모달 위에 표출. */
+.sww-overlay{z-index:1100}
+.sww-head{display:flex;align-items:center;gap:11px;margin-bottom:10px}
+.sww-head h3{margin:0;font-size:16px}
+.sww-icon{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;flex:none;border-radius:9px;color:var(--amber);background:#fffbeb;border:1px solid rgba(217,119,6,.22)}
 
 /* ── MAIN AREA (viewport + side panel) ── */
 #main-area{flex:1;display:flex;overflow:hidden;min-height:0}

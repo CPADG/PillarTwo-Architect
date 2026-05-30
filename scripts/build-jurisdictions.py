@@ -2101,9 +2101,9 @@ def render_page(cc, data):
 <meta name="naver-site-verification" content="b15c8fd7be4aab298a81448b4c4e346fc613d30a" />
 <meta name="msvalidate.01" content="6A8E8C5200BA75B1CA538C9A34736338" />
 <link rel="canonical" href="https://pillartwo.app/jurisdictions/{slug}">
-<link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/{slug}?lang=ko">
-<link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/{slug}?lang=en">
-<link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/{slug}?lang=ja">
+<link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/{slug}">
+<link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/en/{slug}">
+<link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/ja/{slug}">
 <link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/{slug}">
 <script type="application/ld+json">
 {{
@@ -2421,6 +2421,9 @@ def build_index(lang='ko'):
         '<button class="jr-idx-chip" data-region="Other">기타</button>',
     ])
 
+    # 인덱스 페이지도 국가 페이지와 동일하게 언어별 clean-URL 자기 canonical + 상호 reciprocal hreflang.
+    idx_canonical = 'https://pillartwo.app/jurisdictions/' if lang == 'ko' else f'https://pillartwo.app/jurisdictions/{lang}/'
+
     return f'''<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -2433,10 +2436,10 @@ def build_index(lang='ko'):
 <meta name="naver-site-verification" content="03dcd7169d0affc69d6ebf2e0a2af01dd5694073" />
 <meta name="naver-site-verification" content="b15c8fd7be4aab298a81448b4c4e346fc613d30a" />
 <meta name="msvalidate.01" content="6A8E8C5200BA75B1CA538C9A34736338" />
-<link rel="canonical" href="https://pillartwo.app/jurisdictions/">
-<link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/?lang=ko">
-<link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/?lang=en">
-<link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/?lang=ja">
+<link rel="canonical" href="{idx_canonical}">
+<link rel="alternate" hreflang="ko" href="https://pillartwo.app/jurisdictions/">
+<link rel="alternate" hreflang="en" href="https://pillartwo.app/jurisdictions/en/">
+<link rel="alternate" hreflang="ja" href="https://pillartwo.app/jurisdictions/ja/">
 <link rel="alternate" hreflang="x-default" href="https://pillartwo.app/jurisdictions/">
 <script type="application/ld+json">
 {{

@@ -64,7 +64,7 @@ for (const p of pages) {
 let reciprocityViolations = 0;
 for (const [sig, members] of cluster) {
   const declaredHrefs = sig.split('|')
-    .map(p => p.split('='))
+    .map(p => { const i = p.indexOf('='); return [p.slice(0, i), p.slice(i + 1)]; }) // split on FIRST '=' only (hrefs may contain '=', e.g. query strings)
     .filter(([l]) => l !== 'x-default')
     .map(([, h]) => h);
   const memberCanon = new Set(members.map(m => m.canonical));

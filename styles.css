@@ -1,4 +1,4 @@
-/* build: 2026-05-29T23:35:14.697Z */
+/* build: 2026-05-30T00:14:51.354Z */
 :root{
   --primary:#2563eb;--primary-dk:#1d4ed8;--primary-lt:#eff6ff;
   --indigo:#4f46e5;--indigo-dk:#4338ca;--indigo-lt:#eef2ff;
@@ -659,7 +659,9 @@ body.no-flow-spirits .iir-spirit{display:none}
 .aerr-action{margin-left:-18px;text-align:center}
 /* 납부주체 카드 자회사 행: 클릭 시 그 자회사→모기업 흐름 고정 (보라 = IIR 흐름색) */
 .pb-ce-row{cursor:pointer}
-.pb-ce-row.ce-pinned{background:rgba(109,40,217,.09);border-radius:4px}
+/* IIR 의무 블록(기업 패널) CE 행도 클릭 핀 — 전용 패널과 동일 시각 */
+.ep-ce-row{cursor:pointer}
+.pb-ce-row.ce-pinned,.ep-ce-row.ce-pinned{background:rgba(109,40,217,.09);border-radius:4px}
 /* ── 첫 진입 튜토리얼 노드 스태거 등장 — scale(.94)+상승 페이드(아무것도 없는 데서 튀어나오지 않게), 지수 ease-out ── */
 @keyframes tutNodeIn{from{opacity:0;transform:translateY(10px) scale(.94)}to{opacity:1;transform:none}}
 .node.tut-enter{animation:tutNodeIn .55s cubic-bezier(.16,1,.3,1) both}

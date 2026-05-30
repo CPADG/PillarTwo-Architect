@@ -1,4 +1,4 @@
-/* build: 2026-05-30T13:50:48.174Z */
+/* build: 2026-05-30T14:23:58.716Z */
 :root{
   --primary:#2563eb;--primary-dk:#1d4ed8;--primary-lt:#eff6ff;
   --indigo:#4f46e5;--indigo-dk:#4338ca;--indigo-lt:#eef2ff;
@@ -665,6 +665,14 @@ body.no-flow-spirits .iir-spirit{display:none}
 /* ── 첫 진입 튜토리얼 노드 스태거 등장 — scale(.94)+상승 페이드(아무것도 없는 데서 튀어나오지 않게), 지수 ease-out ── */
 @keyframes tutNodeIn{from{opacity:0;transform:translateY(10px) scale(.94)}to{opacity:1;transform:none}}
 .node.tut-enter{animation:tutNodeIn .55s cubic-bezier(.16,1,.3,1) both}
+/* 첫 접속 환영 인사 "어서오세요!" — viewport(비-스케일) 레이어에 정수 좌표 배치 = 텍스트 선명(흐릿X). translateY/opacity만, blur·scale·will-change 없음. */
+.welcome-greeting{position:absolute;z-index:80;pointer-events:none;white-space:nowrap;font-size:30px;font-weight:650;letter-spacing:-.02em;color:#4f46e5;animation:welcomeGreet 1.9s both}
+@keyframes welcomeGreet{
+  0%{opacity:0;transform:translateY(14px);animation-timing-function:cubic-bezier(.22,1,.36,1)}
+  20%{opacity:1;transform:translateY(0)}
+  72%{opacity:1;transform:translateY(-3px);animation-timing-function:cubic-bezier(.45,0,.55,1)}
+  100%{opacity:0;transform:translateY(-16px)}
+}
 /* ── 불러오기/샘플/공유복원 그래프 등장 — 규모별 차등. 적당 규모=노드 제자리 fade+scale 스태거, 대규모=단일 레이어 페이드(경량). ── */
 @keyframes graphEnter{from{opacity:0}to{opacity:1}}
 .graph-enter{animation:graphEnter .5s cubic-bezier(.16,1,.3,1) both}

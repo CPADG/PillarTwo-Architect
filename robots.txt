@@ -1,7 +1,41 @@
+# PillarTwo Architect — robots.txt
+# Default: allow all crawlers. Encrypted user save/share files (.p2a) are never indexed.
 User-agent: *
 Allow: /
+Disallow: /*.p2a$
 
-# Encrypted user save files — never index (privacy)
+# ── AI answer-engine crawlers — explicitly allowed (AEO) ──
+# Note: per-agent groups override the * group, so the .p2a privacy rule is repeated in each.
+User-agent: GPTBot
+Allow: /
+Disallow: /*.p2a$
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /*.p2a$
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /*.p2a$
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /*.p2a$
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /*.p2a$
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /*.p2a$
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /*.p2a$
+
+User-agent: Google-Extended
+Allow: /
 Disallow: /*.p2a$
 
 Sitemap: https://pillartwo.app/sitemap.xml

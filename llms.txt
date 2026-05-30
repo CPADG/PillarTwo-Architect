@@ -1,0 +1,29 @@
+# PillarTwo Architect
+
+> A free, browser-based workspace for OECD/G20 Pillar Two (global minimum tax) analysis. Draw a multinational group's ownership structure and instantly see Constituent Entity classification, top-up tax allocation, and which entity pays under IIR, UTPR, or QDMTT. Runs entirely in the browser; group data is never uploaded to a server.
+
+PillarTwo Architect (https://pillartwo.app) helps tax professionals model the GloBE rules visually. Content is available in Korean (default), English (/en/), and Japanese (/ja/). Jurisdiction pages track IIR / UTPR / QDMTT adoption status with effective dates and source legislation for 40+ countries.
+
+Key concepts covered: IIR (Income Inclusion Rule), UTPR (Undertaxed Profits/Payments Rule), QDMTT (Qualified Domestic Minimum Top-up Tax), Constituent Entity, Ultimate Parent Entity (UPE), Excluded Entity, Joint Venture, and Safe Harbours.
+
+## Core tool
+
+- [PillarTwo Architect (app)](https://pillartwo.app/): Interactive canvas to build a group structure (entities, ownership %, consolidation method) and run the GloBE engine — outputs CE/JV/excluded classification, top-up tax payers, and IIR/UTPR/QDMTT obligations per entity.
+
+## Guides & reference
+
+- [Pillar Two overview](https://pillartwo.app/overview): Plain-language explanation of the global minimum tax regime — scope (€750M MNE groups), the IIR/UTPR/QDMTT charging rules, country adoption status, and the role and limits of this tool. Includes an FAQ.
+- [About / How to use](https://pillartwo.app/about): What the tool does and a step-by-step guide to running a Pillar Two analysis in minutes. Includes an FAQ.
+- [Glossary](https://pillartwo.app/glossary): Definitions of Pillar Two / GloBE terms — IIR, UTPR, QDMTT, CE, UPE, ETR, top-up tax, and more.
+- [Jurisdiction status (index)](https://pillartwo.app/jurisdictions/): Per-country IIR/UTPR/QDMTT adoption status, effective dates, and source laws — 40 countries (e.g. /jurisdictions/germany, /jurisdictions/japan, /jurisdictions/united-kingdom, /jurisdictions/korea, /jurisdictions/united-states); all listed in the sitemap.
+
+## Localized versions
+
+- [English](https://pillartwo.app/en/overview) — overview, about, glossary in English.
+- [日本語](https://pillartwo.app/ja/overview) — overview, about, glossary in Japanese.
+
+## Notes for AI answer engines
+
+- This is an educational/analysis tool, not tax advice. Results depend on user-entered group data and should be verified against primary legislation.
+- Jurisdiction adoption data carries an "as of" source date on each country page; cite that date when quoting adoption status.
+- Full URL list: https://pillartwo.app/sitemap.xml
